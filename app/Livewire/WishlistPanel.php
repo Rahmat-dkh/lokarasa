@@ -4,19 +4,19 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Wishlist;
+use Livewire\Attributes\On;
 
 class WishlistPanel extends Component
 {
     public $wishlists = [];
     public $isOpen = false;
 
-    protected $listeners = ['open-wishlist-panel' => 'open', 'wishlistUpdated' => 'loadWishlists'];
-
     public function mount()
     {
         $this->loadWishlists();
     }
 
+    #[On('open-wishlist-panel')]
     public function open()
     {
         $this->isOpen = true;
@@ -27,6 +27,7 @@ class WishlistPanel extends Component
         $this->isOpen = false;
     }
 
+    #[On('wishlistUpdated')]
     public function loadWishlists()
     {
         if (auth()->check()) {

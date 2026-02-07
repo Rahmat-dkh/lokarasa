@@ -90,7 +90,7 @@
                         </div>
                     </a>
 
-                    <a href="https://wa.me/6281234567890" target="_blank"
+                    <a href="https://wa.me/6285712966082" target="_blank"
                         class="flex flex-col md:flex-row items-center md:items-start gap-4 group/contact mt-6">
                         <div
                             class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center group-hover/contact:bg-growth transition-all">
@@ -104,7 +104,7 @@
                             <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">WhatsApp
                                 Resmi
                             </p>
-                            <p class="text-white font-bold text-sm">+62 812-3456-7890</p>
+                            <p class="text-white font-bold text-sm">+62 857 1296 6082</p>
                         </div>
                     </a>
 

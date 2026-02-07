@@ -29,15 +29,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Check if user is admin and restrict access
+        // Check if user is admin
         if (Auth::user()->isAdmin()) {
-            Auth::guard('web')->logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
+            return redirect()->route('admin.dashboard');
+        }
 
-            return redirect()->route('login')->withErrors([
-                'email' => 'Admins must login via /admin/login',
-            ]);
+        // Check if user is vendor
+        if (Auth::user()->vendor) {
+            return redirect()->route('vendor.dashboard');
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);

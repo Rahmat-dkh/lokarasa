@@ -3,18 +3,18 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class WishlistIcon extends Component
 {
     public $count = 0;
-
-    protected $listeners = ['wishlistUpdated' => 'loadCount'];
 
     public function mount()
     {
         $this->loadCount();
     }
 
+    #[On('wishlistUpdated')]
     public function loadCount()
     {
         $this->count = auth()->check()

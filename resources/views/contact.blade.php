@@ -62,7 +62,7 @@
                             <div class="min-w-0">
                                 <p class="text-xs font-black uppercase tracking-widest text-slate-400 mb-1">WhatsApp
                                     Resmi</p>
-                                <p class="text-base lg:text-lg font-bold text-slate-900 break-words">+62 812-3456-7890
+                                <p class="text-base lg:text-lg font-bold text-slate-900 break-words">+62 857 1296 6082
                                 </p>
                             </div>
                         </div>

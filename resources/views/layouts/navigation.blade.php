@@ -30,12 +30,64 @@
                             <span
                                 class="absolute bottom-1.5 left-4 right-4 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center {{ request()->routeIs('products.*') ? 'scale-x-100' : '' }}"></span>
                         </a>
-                        <a href="{{ route('categories.index') }}"
-                            class="text-xs font-bold text-white hover:text-cyan-400 transition-all duration-300 relative group px-4 py-2 rounded-full hover:bg-white/10 tracking-wide">
-                            Kategori
-                            <span
-                                class="absolute bottom-1.5 left-4 right-4 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center {{ request()->routeIs('categories.*') ? 'scale-x-100' : '' }}"></span>
-                        </a>
+                        <!-- Kategori Dropdown -->
+                        <div x-data="{ openCategory: false }" class="relative" @click.away="openCategory = false">
+                            <button @click="openCategory = !openCategory"
+                                class="text-xs font-bold text-white hover:text-cyan-400 transition-all duration-300 relative group px-4 py-2 rounded-full hover:bg-white/10 tracking-wide flex items-center gap-1">
+                                Kategori
+                                <svg class="w-3 h-3 transition-transform duration-200"
+                                    :class="{ 'rotate-180': openCategory }" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                                <span
+                                    class="absolute bottom-1.5 left-4 right-4 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center {{ request()->routeIs('categories.*') ? 'scale-x-100' : '' }}"></span>
+                            </button>
+
+                            <!-- Dropdown Menu - Clean & Simple -->
+                            <div x-show="openCategory" x-transition:enter="transition ease-out duration-200"
+                                x-transition:enter-start="opacity-0 translate-y-1"
+                                x-transition:enter-end="opacity-100 translate-y-0"
+                                x-transition:leave="transition ease-in duration-150"
+                                x-transition:leave-start="opacity-100 translate-y-0"
+                                x-transition:leave-end="opacity-0 translate-y-1"
+                                class="absolute left-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50"
+                                style="display: none;">
+
+                                <!-- Category List -->
+                                <div class="max-h-64 overflow-y-auto py-2">
+                                    @php
+                                        $categories = \App\Models\Category::withCount('products')->orderBy('name')->get();
+                                    @endphp
+
+                                    @forelse($categories as $category)
+                                        <a href="{{ route('categories.show', $category->slug) }}"
+                                            class="flex items-center justify-between px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors">
+                                            {{ $category->name }}
+                                            <span
+                                                class="text-[10px] font-bold text-gray-400">{{ $category->products_count }}</span>
+                                        </a>
+                                    @empty
+                                        <div class="px-4 py-3 text-center">
+                                            <p class="text-sm text-gray-400">Belum ada kategori</p>
+                                        </div>
+                                    @endforelse
+                                </div>
+
+                                <!-- Footer -->
+                                <div class="border-t border-gray-100 p-2">
+                                    <a href="{{ route('categories.index') }}"
+                                        class="flex items-center justify-center gap-1 w-full py-2 text-xs font-bold text-primary hover:bg-primary hover:text-white rounded-lg transition-all">
+                                        Lihat Semua
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         <a href="{{ route('about') }}"
                             class="text-xs font-bold text-white hover:text-cyan-400 transition-all duration-300 relative group px-4 py-2 rounded-full hover:bg-white/10 tracking-wide">
                             Tentang
@@ -74,10 +126,9 @@
                     </div>
 
                     <!-- Cart -->
-                    <button @click="$dispatch('open-cart-panel')"
-                        class="relative p-2 text-white hover:text-cyan-400 transition-all duration-300 hover:scale-110">
+                    <div class="block">
                         <livewire:cart-counter />
-                    </button>
+                    </div>
 
                     <!-- Auth Dropdown (Hidden on Mobile) -->
                     @auth
@@ -98,20 +149,33 @@
                                         <p class="text-[10px] font-medium text-slate-500 truncate">{{ Auth::user()->email }}
                                         </p>
                                     </div>
+                                    @if(Auth::user()->isAdmin())
+                                        <x-dropdown-link :href="route('admin.dashboard')"
+                                            class="font-bold {{ request()->routeIs('admin.dashboard') ? 'text-primary' : 'text-slate-600' }} hover:text-primary transition-colors text-xs">
+                                            Admin Panel
+                                        </x-dropdown-link>
+                                    @endif
+
+                                    @if(Auth::user()->isSeller())
+                                        <x-dropdown-link :href="route('vendor.dashboard')"
+                                            class="font-bold {{ request()->routeIs('vendor.dashboard') ? 'text-primary' : 'text-slate-600' }} hover:text-primary transition-colors text-xs">
+                                            Dashboard Toko
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('shop.show', Auth::user()->vendor->slug)" target="_blank"
+                                            class="font-bold {{ request()->routeIs('shop.show') ? 'text-primary' : 'text-slate-600' }} hover:text-primary transition-colors text-xs">
+                                            Lihat Toko
+                                        </x-dropdown-link>
+                                    @else
+                                        <x-dropdown-link :href="route('dashboard')"
+                                            class="font-bold {{ request()->routeIs('dashboard') ? 'text-primary' : 'text-slate-600' }} hover:text-primary transition-colors text-xs">
+                                            Dashboard
+                                        </x-dropdown-link>
+                                    @endif
+
                                     <x-dropdown-link :href="route('profile.edit')"
                                         class="font-bold text-slate-600 hover:text-primary transition-colors text-xs">
                                         Edit Profil
                                     </x-dropdown-link>
-                                    <x-dropdown-link :href="route('dashboard')"
-                                        class="font-bold text-slate-600 hover:text-primary transition-colors text-xs">
-                                        Dashboard
-                                    </x-dropdown-link>
-                                    @if(Auth::user()->isAdmin())
-                                        <x-dropdown-link :href="route('admin.dashboard')"
-                                            class="font-bold text-primary hover:text-primary-dark transition-colors text-xs">
-                                            Admin Panel
-                                        </x-dropdown-link>
-                                    @endif
                                     <div class="border-t border-gray-100"></div>
                                     <form method="POST"
                                         action="{{ Auth::user()->isAdmin() ? route('admin.logout') : route('logout') }}">
@@ -186,21 +250,21 @@
             x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
             x-transition:leave="transition ease-in duration-400 transform" x-transition:leave-start="translate-x-0"
             x-transition:leave-end="translate-x-full"
-            class="fixed right-0 top-0 bottom-0 w-[70%] max-w-[260px] bg-[#111827] flex flex-col shadow-2xl z-[100] border-l border-white/5 h-full overflow-y-auto">
+            class="fixed right-0 top-0 bottom-0 w-[60%] max-w-[220px] bg-[#111827] flex flex-col shadow-2xl z-[100] border-l border-white/5 h-full overflow-y-auto">
 
             <!-- Header inside Drawer -->
             <div
-                class="relative px-6 pt-10 pb-6 flex flex-col items-start justify-center border-b border-white/5 bg-[#111827]">
+                class="relative px-5 pt-8 pb-4 flex flex-col items-start justify-center border-b border-white/5 bg-[#111827]">
                 <button @click="open = false"
-                    class="absolute top-5 right-5 w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-all">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="absolute top-4 right-4 w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                             d="M6 18L18 6M6 6l12 12">
                         </path>
                     </svg>
                 </button>
-                <h3 class="text-white font-black text-lg uppercase tracking-wider">Navigasi</h3>
-                <p class="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 mt-2">Menu Utama</p>
+                <h3 class="text-white font-black text-base uppercase tracking-wider">Navigasi</h3>
+                <p class="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500 mt-1">Menu Utama</p>
             </div>
 
             <!-- Links -->
@@ -216,11 +280,40 @@
                         <span
                             class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Produk</span>
                     </a>
-                    <a href="{{ route('categories.index') }}"
-                        class="group flex items-center px-6 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
-                        <span
-                            class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Kategori</span>
-                    </a>
+                    <!-- Kategori Dropdown Mobile -->
+                    <div x-data="{ openMobileCategory: false }" class="w-full">
+                        <button @click="openMobileCategory = !openMobileCategory"
+                            class="group flex items-center justify-between w-full px-6 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5">
+                            <span class="uppercase tracking-widest">Kategori</span>
+                            <svg class="w-4 h-4 transition-transform duration-300"
+                                :class="{ 'rotate-180': openMobileCategory }" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+
+                        <!-- Mobile Category List -->
+                        <div x-show="openMobileCategory" x-collapse
+                            class="mt-1 ml-6 space-y-0.5 border-l border-white/10 pl-4">
+                            @php
+                                $mobileCategories = \App\Models\Category::withCount('products')->orderBy('name')->get();
+                            @endphp
+                            @forelse($mobileCategories as $cat)
+                                <a href="{{ route('categories.show', $cat->slug) }}"
+                                    class="flex items-center justify-between py-2 text-xs text-slate-400 hover:text-white transition-all">
+                                    {{ $cat->name }}
+                                    <span class="text-slate-600">{{ $cat->products_count }}</span>
+                                </a>
+                            @empty
+                                <p class="py-2 text-xs text-slate-500">Belum ada kategori</p>
+                            @endforelse
+                            <a href="{{ route('categories.index') }}"
+                                class="flex items-center gap-1 py-2 text-xs font-bold text-primary transition-all">
+                                Lihat Semua →
+                            </a>
+                        </div>
+                    </div>
                     <a href="{{ route('about') }}"
                         class="group flex items-center px-6 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
                         <span
@@ -231,6 +324,37 @@
                         <span
                             class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Kontak</span>
                     </a>
+
+                    @auth
+                        @if(Auth::user()->isSeller())
+                            <div class="mt-4 pt-4 border-t border-white/5">
+                                <p class="px-6 text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Menu Vendor
+                                </p>
+                                <a href="{{ route('vendor.dashboard') }}"
+                                    class="group flex items-center px-6 py-3 text-sm font-bold {{ request()->routeIs('vendor.dashboard') ? 'text-primary' : 'text-slate-300' }} hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
+                                    <span
+                                        class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Dashboard
+                                        Toko</span>
+                                </a>
+                                <a href="{{ route('shop.show', Auth::user()->vendor->slug) }}"
+                                    class="group flex items-center px-6 py-3 text-sm font-bold {{ request()->routeIs('shop.show') ? 'text-primary' : 'text-slate-300' }} hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
+                                    <span
+                                        class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Lihat
+                                        Toko</span>
+                                </a>
+                            </div>
+                        @else
+                            <div class="mt-4 pt-4 border-t border-white/5">
+                                <p class="px-6 text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Menu Akun
+                                </p>
+                                <a href="{{ route('dashboard') }}"
+                                    class="group flex items-center px-6 py-3 text-sm font-bold {{ request()->routeIs('dashboard') ? 'text-primary' : 'text-slate-300' }} hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
+                                    <span
+                                        class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Dashboard</span>
+                                </a>
+                            </div>
+                        @endif
+                    @endauth
                 </nav>
             </div>
 
@@ -243,7 +367,7 @@
                         <div class="min-w-0">
                             <p class="text-white font-black text-xs truncate">{{ Auth::user()->name }}</p>
                             <a href="{{ route('profile.edit') }}"
-                                class="text-slate-500 text-[10px] font-bold uppercase tracking-widest hover:text-primary">Profil
+                                class="text-slate-500 text-[10px] font-bold uppercase tracking-widest hover:text-primary block">Profil
                                 Saya</a>
                         </div>
                     </div>

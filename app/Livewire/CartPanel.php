@@ -4,24 +4,25 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\On;
 
 class CartPanel extends Component
 {
     public $cart = [];
     public $isOpen = false;
 
-    protected $listeners = ['cartUpdated' => 'loadCart', 'open-cart-panel' => 'open'];
-
     public function mount()
     {
         $this->loadCart();
     }
 
+    #[On('cartUpdated')]
     public function loadCart()
     {
         $this->cart = Session::get('cart', []);
     }
 
+    #[On('open-cart-panel')]
     public function open()
     {
         $this->isOpen = true;
@@ -35,6 +36,26 @@ class CartPanel extends Component
     public function removeItem($id)
     {
         unset($this->cart[$id]);
+        Session::put('cart', $this->cart);
+        $this->dispatch('cartUpdated');
+    }
+
+    public function updateQuantity($id, $action)
+    {
+        if (!isset($this->cart[$id]))
+            return;
+
+        if ($action === 'increase') {
+            $this->cart[$id]['quantity']++;
+        } elseif ($action === 'decrease') {
+            if ($this->cart[$id]['quantity'] > 1) {
+                $this->cart[$id]['quantity']--;
+            } else {
+                $this->removeItem($id);
+                return;
+            }
+        }
+
         Session::put('cart', $this->cart);
         $this->dispatch('cartUpdated');
     }

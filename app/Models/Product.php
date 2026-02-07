@@ -17,7 +17,8 @@ class Product extends Model
         'price',
         'stock',
         'image',
-        'whatsapp_number'
+        'whatsapp_number',
+        'vendor_id',
     ];
 
     public function category()
@@ -28,5 +29,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductImage::class);
+    }
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
     }
 }

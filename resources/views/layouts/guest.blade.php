@@ -39,11 +39,11 @@
         </svg>
     </a>
 
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-24 sm:pt-0">
 
 
         <div
-            class="w-full sm:max-w-md px-6 py-8 bg-white/70 backdrop-blur-xl shadow-2xl shadow-primary/10 border border-white/50 overflow-hidden rounded-[30px] sm:rounded-[40px]">
+            class="w-[90%] sm:max-w-sm px-6 py-6 bg-white/70 backdrop-blur-xl shadow-2xl shadow-primary/10 border border-white/50 overflow-hidden rounded-[30px] sm:rounded-[40px]">
             {{ $slot }}
         </div>
     </div>

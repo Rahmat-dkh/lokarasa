@@ -1,5 +1,5 @@
 <div class="fixed bottom-4 right-4 md:bottom-10 md:right-10 z-[60] flex flex-col items-end"
-    x-data="{ isOpen: false, msgInput: '' }">
+    x-data="{ isOpen: false, msgInput: '' }" wire:ignore.self>
     <!-- Chat Window -->
     <div x-show="isOpen" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 translate-y-10 scale-90"
@@ -8,7 +8,7 @@
         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
         x-transition:leave-end="opacity-0 translate-y-10 scale-90"
         class="w-[90vw] sm:w-[350px] bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden mb-4 flex flex-col fixed sm:static bottom-20 right-4 sm:bottom-auto sm:right-auto"
-        style="display: none; height: 500px; max-height: 70vh;">
+        style="height: 500px; max-height: 70vh;">
 
         <!-- Header -->
         <div class="bg-primary p-4 flex items-center justify-between sticky top-0 z-10 shrink-0">
@@ -78,21 +78,10 @@
                     d="M12 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5.002L2.5 21.5l4.498-.838A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.476 0-2.887-.313-4.166-.882l-2.732.509.509-2.732A7.955 7.955 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z" />
             </svg>
         </span>
-        <span x-show="isOpen" style="display: none;">
+        <span x-show="isOpen" x-cloak>
             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
             </svg>
         </span>
     </button>
-
-    <script>
-        document.addEventListener('livewire:initialized', () => {
-            Livewire.on('scroll-chat', () => {
-                setTimeout(() => {
-                    const container = document.getElementById('chat-messages');
-                    if (container) container.scrollTop = container.scrollHeight;
-                }, 100);
-            });
-        });
-    </script>
 </div>

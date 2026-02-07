@@ -138,6 +138,10 @@
                     class="block w-full text-center py-3 bg-slate-50 border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-100 transition-colors">
                     Check Messages
                 </a>
+                <a href="{{ route('admin.payouts.index') }}"
+                    class="block w-full text-center py-3 bg-slate-50 border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-100 transition-colors">
+                    Manage Payouts
+                </a>
             </div>
         </div>
     </div>
