@@ -35,8 +35,10 @@
                                             $src = $imagePath;
                                         } elseif (str_starts_with($imagePath, 'products/')) {
                                             $src = asset('storage/' . $imagePath);
+                                        } elseif (file_exists(public_path($imagePath))) {
+                                            $src = asset($imagePath);
                                         } else {
-                                            $src = asset('images/' . $imagePath);
+                                            $src = asset('storage/' . $imagePath);
                                         }
                                     }
                                 @endphp

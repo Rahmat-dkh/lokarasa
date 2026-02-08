@@ -46,7 +46,7 @@
                     </a>
 
                     <div class="pt-4 pb-2">
-                        <p class="px-6 text-xs font-black text-slate-500 uppercase tracking-widest">Management</p>
+                        <p class="px-6 text-xs font-black text-slate-500 uppercase tracking-widest">Manajemen</p>
                     </div>
 
                     <a href="{{ route('admin.products.index') }}"
@@ -55,7 +55,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                         </svg>
-                        <span class="font-bold">Products</span>
+                        <span class="font-bold">Produk</span>
                     </a>
 
                     <a href="{{ route('admin.categories.index') }}"
@@ -65,11 +65,44 @@
                                 d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z">
                             </path>
                         </svg>
-                        <span class="font-bold">Categories</span>
+                        <span class="font-bold">Kategori</span>
+                    </a>
+
+                    <a href="{{ route('admin.vendors.index') }}"
+                        class="flex items-center px-6 py-4 rounded-xl transition-all group {{ request()->routeIs('admin.vendors*') ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+                        <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 012-2H9a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 012 2v4a2 2 0 01-2 2H9">
+                            </path>
+                        </svg>
+                        <span class="font-bold">UMKM / Toko</span>
                     </a>
 
                     <div class="pt-4 pb-2">
-                        <p class="px-6 text-xs font-black text-slate-500 uppercase tracking-widest">Communication</p>
+                        <p class="px-6 text-xs font-black text-slate-500 uppercase tracking-widest">Transaksi</p>
+                    </div>
+
+                    <a href="{{ route('admin.orders.index') }}"
+                        class="flex items-center px-6 py-4 rounded-xl transition-all group {{ request()->routeIs('admin.orders*') ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+                        <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        <span class="font-bold">Manajemen Pesanan</span>
+                    </a>
+
+                    <a href="{{ route('admin.payouts.index') }}"
+                        class="flex items-center px-6 py-4 rounded-xl transition-all group {{ request()->routeIs('admin.payouts*') ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:bg-slate-800 hover:text-white' }}">
+                        <svg class="w-6 h-6 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                        <span class="font-bold">Penarikan Dana</span>
+                    </a>
+
+                    <div class="pt-4 pb-2">
+                        <p class="px-6 text-xs font-black text-slate-500 uppercase tracking-widest">Komunikasi</p>
                     </div>
 
                     <a href="{{ route('admin.contacts.index') }}"
@@ -79,7 +112,7 @@
                                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                             </path>
                         </svg>
-                        <span class="font-bold">Messages</span>
+                        <span class="font-bold">Pesan Masuk</span>
                         @if (\App\Models\Contact::where('is_read', false)->count() > 0)
                             <span class="ml-auto bg-red-500 text-white text-xs font-black px-2 py-1 rounded-full">
                                 {{ \App\Models\Contact::where('is_read', false)->count() }}

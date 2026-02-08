@@ -32,6 +32,10 @@ class WalletController extends Controller
             return back()->with('error', 'Insufficient balance.');
         }
 
+        if (!$vendor->bank_name || !$vendor->bank_account_number || !$vendor->bank_account_name) {
+            return back()->with('error', 'Please complete your bank account information in Shop Settings before requesting a payout.');
+        }
+
         // Payout to Midtrans logic could go here.
         // For now, manual payout request.
 

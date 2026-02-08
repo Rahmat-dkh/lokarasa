@@ -13,27 +13,32 @@
                         class="space-y-6">
                         @csrf
 
-                        <!-- Product Image Upload -->
-                        <div class="flex flex-col items-center justify-center mb-8">
-                            <label for="image" class="relative group cursor-pointer">
-                                <div
-                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl bg-slate-50 border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden hover:border-primary transition-colors">
-                                    <div class="text-center p-4">
-                                        <svg class="w-8 h-8 text-slate-400 mx-auto mb-2 group-hover:text-primary transition-colors"
-                                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                        </svg>
-                                        <p
-                                            class="text-[10px] text-slate-500 font-bold uppercase tracking-widest group-hover:text-primary">
-                                            Upload Foto</p>
+                        <!-- Product Images Upload -->
+                        <div class="space-y-4 mb-8">
+                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Foto
+                                Produk (Bisa pilih banyak)</label>
+
+                            <div class="flex flex-wrap gap-4" id="imagePreviewContainer">
+                                <label for="images" class="relative group cursor-pointer">
+                                    <div
+                                        class="w-32 h-32 rounded-2xl bg-slate-50 border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden hover:border-primary transition-colors">
+                                        <div class="text-center p-2">
+                                            <svg class="w-6 h-6 text-slate-400 mx-auto mb-1 group-hover:text-primary transition-colors"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                            </svg>
+                                            <p
+                                                class="text-[8px] text-slate-500 font-bold uppercase tracking-widest group-hover:text-primary">
+                                                Pilih Foto</p>
+                                        </div>
                                     </div>
-                                    <img id="previewHelper" class="hidden w-full h-full object-cover">
-                                </div>
-                                <input id="image" type="file" name="image" class="hidden" accept="image/*"
-                                    onchange="previewImage(this)">
-                            </label>
-                            <x-input-error :messages="$errors->get('image')" class="mt-2 text-center" />
+                                    <input id="images" type="file" name="images[]" class="hidden" accept="image/*"
+                                        multiple onchange="previewImages(this)">
+                                </label>
+                            </div>
+                            <x-input-error :messages="$errors->get('images')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('images.*')" class="mt-2" />
                         </div>
 
                         <!-- Name -->
@@ -112,15 +117,28 @@
     </div>
 
     <script>
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('previewHelper').src = e.target.result;
-                    document.getElementById('previewHelper').classList.remove('hidden');
-                    // Hide the icon/text container if needed, or overlay
-                }
-                reader.readAsDataURL(input.files[0]);
+        function previewImages(input) {
+            const container = document.getElementById('imagePreviewContainer');
+            // Keep the label (it's the first child)
+            const label = container.querySelector('label');
+
+            // Clear existing previews (except the label)
+            const existingPreviews = container.querySelectorAll('.preview-item');
+            existingPreviews.forEach(item => item.remove());
+
+            if (input.files) {
+                Array.from(input.files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const div = document.createElement('div');
+                        div.className = 'preview-item w-32 h-32 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 relative group';
+                        div.innerHTML = `
+                            <img src="${e.target.result}" class="w-full h-full object-cover">
+                        `;
+                        container.appendChild(div);
+                    }
+                    reader.readAsDataURL(file);
+                });
             }
         }
     </script>

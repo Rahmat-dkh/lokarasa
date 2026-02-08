@@ -17,7 +17,7 @@
 
                         <!-- Name -->
                         <div>
-                            <x-input-label for="name" :value="__('Nama Lengkap')" />
+                            <x-input-label for="name" :value="__('Nama Lengkap') . ' *'" />
                             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
                                 :value="old('name')" required autofocus />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -25,7 +25,7 @@
 
                         <!-- Phone -->
                         <div class="mt-4">
-                            <x-input-label for="phone" :value="__('Nomor Telepon (WhatsApp)')" />
+                            <x-input-label for="phone" :value="__('Nomor Telepon (WhatsApp)') . ' *'" />
                             <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone"
                                 :value="old('phone')" required />
                             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
@@ -33,7 +33,7 @@
 
                         <!-- Address -->
                         <div class="mt-4">
-                            <x-input-label for="address_line" :value="__('Alamat Lengkap (Jalan, No. Rumah, RT/RW)')" />
+                            <x-input-label for="address_line" :value="__('Alamat Lengkap (Jalan, No. Rumah, RT/RW)') . ' *'" />
                             <x-text-input id="address_line" class="block mt-1 w-full" type="text" name="address_line"
                                 :value="old('address_line')" required />
                             <x-input-error :messages="$errors->get('address_line')" class="mt-2" />
@@ -41,7 +41,7 @@
 
                         <!-- City -->
                         <div class="mt-4">
-                            <x-input-label for="city" :value="__('Kota / Kabupaten')" />
+                            <x-input-label for="city" :value="__('Kota / Kabupaten') . ' *'" />
                             <x-text-input id="city" class="block mt-1 w-full" type="text" name="city"
                                 :value="old('city')" required />
                             <x-input-error :messages="$errors->get('city')" class="mt-2" />
@@ -49,7 +49,7 @@
 
                         <!-- Province -->
                         <div class="mt-4">
-                            <x-input-label for="province" :value="__('Provinsi')" />
+                            <x-input-label for="province" :value="__('Provinsi') . ' *'" />
                             <x-text-input id="province" class="block mt-1 w-full" type="text" name="province"
                                 :value="old('province')" required />
                             <x-input-error :messages="$errors->get('province')" class="mt-2" />
@@ -57,7 +57,7 @@
 
                         <!-- Postal Code -->
                         <div class="mt-4">
-                            <x-input-label for="postal_code" :value="__('Kode Pos')" />
+                            <x-input-label for="postal_code" :value="__('Kode Pos') . ' *'" />
                             <x-text-input id="postal_code" class="block mt-1 w-full" type="text" name="postal_code"
                                 :value="old('postal_code')" required />
                             <x-input-error :messages="$errors->get('postal_code')" class="mt-2" />

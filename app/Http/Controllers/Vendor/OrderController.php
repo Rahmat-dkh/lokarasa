@@ -11,7 +11,7 @@ class OrderController extends Controller
     public function index()
     {
         $vendor = auth()->user()->vendor;
-        $orders = $vendor->orders()->with(['items.product', 'user', 'address'])->latest()->get(); // Assuming relationship exists
+        $orders = $vendor->orders()->with(['items.product', 'user'])->latest()->paginate(10);
         return view('vendor.orders.index', compact('orders'));
     }
 

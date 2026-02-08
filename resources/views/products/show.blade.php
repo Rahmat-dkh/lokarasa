@@ -8,9 +8,9 @@
                         <!-- Main Image -->
                         <div
                             class="aspect-square bg-neutral-dark/5 rounded-[2.5rem] overflow-hidden relative flex items-center justify-center text-primary/10 shadow-inner group">
-                            @if($product->image)
-                                <img id="main-image" src="{{ asset($product->image) }}"
-                                    data-original-src="{{ asset($product->image) }}" alt="{{ $product->name }}"
+                            @if($product->image_url)
+                                <img id="main-image" src="{{ $product->image_url }}"
+                                    data-original-src="{{ $product->image_url }}" alt="{{ $product->name }}"
                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             @else
                                 <svg class="w-48 h-48 transition-transform duration-700 group-hover:scale-110" fill="none"
@@ -33,14 +33,14 @@
                                 <!-- Main Image Thumbnail -->
                                 <div onclick="changeImage(document.getElementById('main-image').getAttribute('data-original-src'))"
                                     class="aspect-square bg-white rounded-2xl border-2 border-transparent hover:border-primary overflow-hidden cursor-pointer transition-all shadow-sm">
-                                    <img src="{{ asset($product->image) }}" class="w-full h-full object-cover">
+                                    <img src="{{ $product->image_url }}" class="w-full h-full object-cover">
                                 </div>
 
                                 <!-- Gallery Images -->
                                 @foreach($product->images as $img)
-                                    <div onclick="changeImage('{{ asset($img->image_path) }}')"
+                                    <div onclick="changeImage('{{ $img->image_url }}')"
                                         class="aspect-square bg-white rounded-2xl border-2 border-transparent hover:border-primary overflow-hidden cursor-pointer transition-all shadow-sm">
-                                        <img src="{{ asset($img->image_path) }}" class="w-full h-full object-cover">
+                                        <img src="{{ $img->image_url }}" class="w-full h-full object-cover">
                                     </div>
                                 @endforeach
                             </div>

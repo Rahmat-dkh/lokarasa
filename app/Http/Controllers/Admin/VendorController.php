@@ -14,14 +14,23 @@ class VendorController extends Controller
         return view('admin.vendors.index', compact('vendors'));
     }
 
+    public function edit(Vendor $vendor)
+    {
+        $users = \App\Models\User::where('role', 'vendor')->get();
+        return view('admin.vendors.edit', compact('vendor', 'users'));
+    }
+
     public function update(Request $request, Vendor $vendor)
     {
         $request->validate([
+            'shop_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'status' => 'required|in:active,pending,suspended',
+            'user_id' => 'required|exists:users,id',
         ]);
 
-        $vendor->update(['status' => $request->status]);
+        $vendor->update($request->only('shop_name', 'description', 'status', 'user_id'));
 
-        return back()->with('success', 'Vendor status updated successfully.');
+        return redirect()->route('admin.vendors.index')->with('success', 'Vendor updated successfully.');
     }
 }

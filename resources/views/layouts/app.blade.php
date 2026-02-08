@@ -51,6 +51,7 @@
             easing: 'ease-out-cubic'
         });
     </script>
+    @stack('scripts')
 </body>
 
 </html>

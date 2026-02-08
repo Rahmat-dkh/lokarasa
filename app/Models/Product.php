@@ -21,6 +21,32 @@ class Product extends Model
         'vendor_id',
     ];
 
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image) {
+            return null;
+        }
+
+        if (str_starts_with($this->image, 'http')) {
+            return $this->image;
+        }
+
+        // If the path starts with products/, it's definitely in storage
+        if (str_starts_with($this->image, 'products/')) {
+            return asset('storage/' . $this->image);
+        }
+
+        // Check if it exists in public directory directly
+        if (file_exists(public_path($this->image))) {
+            return asset($this->image);
+        }
+
+        // Default to storage
+        return asset('storage/' . $this->image);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

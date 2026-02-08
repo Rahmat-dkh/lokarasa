@@ -1,29 +1,29 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <h2 class="font-black text-2xl text-slate-800 leading-tight tracking-tight">
-                {{ __('Katalog Produk Saya') }}
-            </h2>
-            <a href="{{ route('vendor.products.create') }}"
-                class="hidden sm:inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-black py-3 px-6 rounded-2xl transition-all shadow-xl shadow-primary/20 text-xs uppercase tracking-widest active:scale-95">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path>
-                </svg>
-                Tambah Produk Baru
-            </a>
-        </div>
-    </x-slot>
-
     <div class="py-6 sm:py-10 bg-slate-50 min-h-screen">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Mobile Add Button (FAB) -->
-            <a href="{{ route('vendor.products.create') }}"
-                class="sm:hidden fixed bottom-6 right-6 w-16 h-16 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center z-50 hover:scale-110 transition-transform active:scale-95 border-4 border-white">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path>
-                </svg>
-            </a>
+            <div class="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <a href="{{ route('vendor.dashboard') }}" class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 text-slate-400 hover:text-primary transition-colors lg:hidden">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        </a>
+                        <div class="text-primary font-black uppercase tracking-[0.3em] text-[10px]">Manajemen Produk</div>
+                    </div>
+                    <h1 class="text-3xl font-black text-slate-900 tracking-tighter">
+                        Katalog <span class="text-primary italic">Produk</span>.
+                    </h1>
+                </div>
+                <div class="flex items-center gap-4 w-full sm:w-auto">
+                    <a href="{{ route('vendor.dashboard') }}" class="hidden lg:inline-flex text-xs font-black text-slate-400 hover:text-primary transition-colors uppercase tracking-widest mr-4">
+                        &larr; Kembali ke Dashboard
+                    </a>
+                    <a href="{{ route('vendor.products.create') }}" class="flex-grow sm:flex-grow-0 inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-primary text-white font-black py-3.5 px-6 rounded-xl transition-all shadow-lg active:scale-95 text-[10px] uppercase tracking-widest">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
+                        Tambah Produk
+                    </a>
+                </div>
+            </div>
 
             @if($products->isEmpty())
                 <div class="bg-white rounded-[3rem] shadow-sm border border-slate-100 p-12 sm:p-20 text-center max-w-2xl mx-auto mt-10">
@@ -119,7 +119,7 @@
                 <div class="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
                     @foreach($products as $product)
                         <div class="bg-white rounded-[2rem] p-5 shadow-sm border border-slate-100 relative group">
-                            <div class="flex gap-5 mb-5">
+                            <div class="flex gap-4 mb-4">
                                 <div class="h-20 w-20 flex-shrink-0 rounded-2xl overflow-hidden border border-slate-100 bg-slate-50">
                                     @php
                                         $imagePath = $product->image;
@@ -142,26 +142,25 @@
                                         </div>
                                     @endif
                                 </div>
-                                <div class="min-w-0">
-                                    <div class="text-[10px] font-black text-primary uppercase tracking-widest mb-1">{{ $product->category->name ?? 'Uncategorized' }}</div>
-                                    <h3 class="font-black text-slate-800 truncate">{{ $product->name }}</h3>
-                                    <p class="text-[10px] font-bold text-slate-400 mt-1 uppercase">Stok: {{ $product->stock }} Item</p>
+                                <div class="min-w-0 flex-grow">
+                                    <div class="text-[9px] font-black text-primary uppercase tracking-widest mb-1">{{ $product->category->name ?? 'Uncategorized' }}</div>
+                                    <h3 class="font-black text-slate-800 text-sm leading-tight line-clamp-2">{{ $product->name }}</h3>
+                                    <div class="text-[10px] font-bold text-slate-400 mt-2 uppercase">Stok: <span class="{{ $product->stock <= 5 ? 'text-amber-500 font-black' : '' }}">{{ $product->stock }} Item</span></div>
                                 </div>
                             </div>
                             
                             <div class="flex items-center justify-between pt-4 border-t border-slate-50">
-                                <div class="text-lg font-black text-slate-800">
+                                <div class="text-base font-black text-primary italic">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </div>
                                 <div class="flex gap-2">
-                                    <a href="{{ route('vendor.products.edit', $product) }}" class="w-10 h-10 flex items-center justify-center bg-blue-50 text-blue-500 rounded-xl active:scale-90 transition-transform">
+                                    <a href="{{ route('vendor.products.edit', $product) }}" class="w-10 h-10 flex items-center justify-center bg-blue-50 text-blue-500 rounded-xl active:scale-90 transition-transform shadow-sm">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                                     </a>
-                                    <form action="{{ route('vendor.products.destroy', $product) }}" method="POST"
-                                        onsubmit="return confirm('Hapus produk ini?');">
+                                    <form action="{{ route('vendor.products.destroy', $product) }}" method="POST" onsubmit="return confirm('Hapus produk ini?');" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="w-10 h-10 flex items-center justify-center bg-red-50 text-red-500 rounded-xl active:scale-90 transition-transform">
+                                        <button type="submit" class="w-10 h-10 flex items-center justify-center bg-red-50 text-red-500 rounded-xl active:scale-90 transition-transform shadow-sm">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                         </button>
                                     </form>
@@ -171,7 +170,7 @@
                     @endforeach
                 </div>
 
-                <div class="mt-8">
+                <div class="mt-10">
                     {{ $products->links() }}
                 </div>
             @endif

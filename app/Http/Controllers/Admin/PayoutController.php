@@ -20,14 +20,28 @@ class PayoutController extends Controller
             'status' => 'required|in:pending,completed,rejected',
         ]);
 
-        $payout->update(['status' => $request->status]);
-
-        // Logic to refund wallet if rejected could go here
-        if ($request->status === 'rejected') {
-            // Credit back logic (optional for MVP)
-            // $payout->vendor->wallet->increment('balance', $payout->amount);
+        if ($payout->status !== 'pending') {
+            return back()->with('error', 'Payout status already finalized.');
         }
 
-        return back()->with('success', 'Payout status updated successfully.');
+        $payout->update(['status' => $request->status]);
+
+        if ($request->status === 'rejected') {
+            // Credit back to vendor wallet
+            $wallet = $payout->vendor->wallet;
+            if ($wallet) {
+                $wallet->increment('balance', $payout->amount);
+
+                \App\Models\WalletTransaction::create([
+                    'vendor_wallet_id' => $wallet->id,
+                    'amount' => $payout->amount,
+                    'type' => 'credit',
+                    'description' => 'Refund for rejected payout #' . $payout->id,
+                    'reference_id' => $payout->id,
+                ]);
+            }
+        }
+
+        return back()->with('success', 'Payout status updated to ' . $request->status);
     }
 }

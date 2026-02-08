@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');
     Route::post('/checkout', [App\Http\Controllers\OrderController::class, 'store'])->name('checkout.store');
     Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+    Route::get('/checkout/finish', [App\Http\Controllers\OrderController::class, 'finish'])->name('checkout.finish');
     Route::get('/orders/{order}', [App\Http\Controllers\OrderController::class, 'show'])->name('orders.show');
 });
 
@@ -62,7 +63,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
     Route::delete('/products/images/{id}', [App\Http\Controllers\Admin\ProductController::class, 'destroyImage'])->name('products.images.destroy');
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
-    Route::resource('vendors', App\Http\Controllers\Admin\VendorController::class)->only(['index', 'update']);
+    Route::resource('vendors', App\Http\Controllers\Admin\VendorController::class)->only(['index', 'edit', 'update']);
+    Route::resource('orders', App\Http\Controllers\Admin\OrderController::class)->only(['index', 'show']);
+    Route::post('/orders/{order}/confirm-payment', [App\Http\Controllers\Admin\OrderController::class, 'confirmPayment'])->name('orders.confirm-payment');
     Route::resource('payouts', App\Http\Controllers\Admin\PayoutController::class)->only(['index', 'update']);
     Route::resource('contacts', App\Http\Controllers\ContactController::class)->only(['index', 'show', 'destroy']);
     Route::patch('/contacts/{id}/read', [App\Http\Controllers\ContactController::class, 'markAsRead'])->name('contacts.read');
@@ -85,5 +88,7 @@ Route::middleware(['auth', 'vendor'])->prefix('vendor')->name('vendor.')->group(
     Route::get('/wallet', [App\Http\Controllers\Vendor\WalletController::class, 'index'])->name('wallet.index');
     Route::post('/wallet', [App\Http\Controllers\Vendor\WalletController::class, 'store'])->name('wallet.store');
 });
+
+Route::post('/payments/midtrans-notification', [App\Http\Controllers\MidtransNotificationController::class, 'handle']);
 
 require __DIR__ . '/auth.php';

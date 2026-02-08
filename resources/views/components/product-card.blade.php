@@ -36,8 +36,8 @@
         <!-- Product Image or Placeholder -->
         <div
             class="h-full w-full flex items-center justify-center text-primary/10 transition-transform duration-700 group-hover:scale-110">
-            @if($product->image)
-                <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset($product->image) }}"
+            @if($product->image_url)
+                <img src="{{ Str::startsWith($product->image_url, 'http') ? $product->image_url : $product->image_url }}"
                     alt="{{ $product->name }}" class="w-full h-full object-cover">
             @else
                 <svg class="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -17,6 +17,9 @@ class Vendor extends Model
         'flat_shipping_cost',
         'logo',
         'status',
+        'bank_name',
+        'bank_account_number',
+        'bank_account_name',
     ];
 
     public function user()

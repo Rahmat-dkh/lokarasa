@@ -65,7 +65,17 @@
                                         @elseif($order->status == 'processing') bg-blue-100 text-blue-600
                                         @elseif($order->status == 'cancelled') bg-rose-100 text-rose-600
                                         @else bg-amber-100 text-amber-600 @endif">
-                                        {{ $order->status }}
+                                        @php
+                                            $statusTranslations = [
+                                                'pending' => 'Menunggu Pembayaran',
+                                                'processing' => 'Sedang Diproses',
+                                                'shipped' => 'Dalam Pengiriman',
+                                                'delivered' => 'Selesai / Diterima',
+                                                'cancelled' => 'Dibatalkan',
+                                                'completed' => 'Selesai'
+                                            ];
+                                        @endphp
+                                        {{ $statusTranslations[$order->status] ?? $order->status }}
                                     </div>
                                 </div>
                             </div>
@@ -127,12 +137,15 @@
                                             <div class="text-primary font-black text-sm">Rp {{ number_format($order->total_amount, 0, ',', '.') }}</div>
                                         </div>
                                         <div class="flex gap-2">
-                                            <button class="px-4 py-2 bg-slate-100 text-slate-600 font-black rounded-lg hover:bg-slate-200 transition-all text-[9px] uppercase tracking-widest">
+                                            @if($order->status == 'pending')
+                                                <a href="{{ route('checkout.finish') }}?order_id={{ $order->payment_reference }}" 
+                                                    class="px-4 py-2 bg-emerald-500 text-white font-black rounded-lg hover:bg-emerald-600 transition-all text-[9px] uppercase tracking-widest shadow-lg shadow-emerald-500/20">
+                                                    Cek Pembayaran
+                                                </a>
+                                            @endif
+                                            <a href="{{ route('orders.show', $order) }}" class="px-4 py-2 bg-slate-100 text-slate-600 font-black rounded-lg hover:bg-slate-200 transition-all text-[9px] uppercase tracking-widest text-center flex items-center">
                                                 Detail
-                                            </button>
-                                            <button class="px-4 py-2 bg-primary text-white font-black rounded-lg hover:bg-primary-dark transition-all text-[9px] uppercase tracking-widest shadow-lg shadow-primary/20">
-                                                Beli Lagi
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

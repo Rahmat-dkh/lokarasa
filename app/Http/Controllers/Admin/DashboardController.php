@@ -17,7 +17,9 @@ class DashboardController extends Controller
             'total_visits' => \App\Models\Visit::count(),
             'total_messages' => \App\Models\Contact::count(),
             'unread_messages' => \App\Models\Contact::where('is_read', false)->count(),
-            'recent_orders' => \App\Models\Order::with('user')->latest()->take(5)->get(),
+            'total_pending_payouts' => \App\Models\Payout::where('status', 'pending')->count(),
+            'recent_orders' => \App\Models\Order::with(['user', 'vendor', 'items.product'])->latest()->take(5)->get(),
+            'recent_payouts' => \App\Models\Payout::with('vendor')->latest()->take(5)->get(),
         ];
 
         return view('admin.dashboard', compact('stats'));

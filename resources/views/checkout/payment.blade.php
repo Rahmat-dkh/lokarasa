@@ -37,14 +37,10 @@
                 snap.pay('{{ $snapToken }}', {
                     // Optional
                     onSuccess: function (result) {
-                        /* You may add your own implementation here */
-                        // alert("payment success!"); 
-                        window.location.href = "{{ route('orders.index') }}";
+                        window.location.href = "{{ route('checkout.finish') }}?order_id={{ $paymentReference }}";
                     },
                     onPending: function (result) {
-                        /* You may add your own implementation here */
-                        // alert("wating your payment!"); 
-                        window.location.href = "{{ route('orders.index') }}";
+                        window.location.href = "{{ route('checkout.finish') }}?order_id={{ $paymentReference }}";
                     },
                     onError: function (result) {
                         /* You may add your own implementation here */

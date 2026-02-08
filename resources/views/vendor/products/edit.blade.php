@@ -20,45 +20,45 @@
                         @csrf
                         @method('PUT')
 
-                        <!-- Product Image Upload -->
-                        <div class="flex flex-col items-center justify-center mb-8">
-                            <label for="image" class="relative group cursor-pointer">
-                                <div
-                                    class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl bg-slate-50 border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden hover:border-primary transition-colors">
-                                    @if($product->image)
-                                        <img id="previewHelper" src="{{ asset('storage/' . $product->image) }}"
-                                            class="w-full h-full object-cover">
-                                    @else
-                                        <div id="placeholderIcon" class="text-center p-4">
-                                            <svg class="w-8 h-8 text-slate-400 mx-auto mb-2 group-hover:text-primary transition-colors"
+                        <!-- Product Images Upload -->
+                        <div class="space-y-4 mb-8">
+                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Foto
+                                Produk (Tambah Baru)</label>
+
+                            <div class="flex flex-wrap gap-4" id="imagePreviewContainer">
+                                <label for="images" class="relative group cursor-pointer">
+                                    <div
+                                        class="w-32 h-32 rounded-2xl bg-slate-50 border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden hover:border-primary transition-colors">
+                                        <div class="text-center p-2">
+                                            <svg class="w-6 h-6 text-slate-400 mx-auto mb-1 group-hover:text-primary transition-colors"
                                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                             </svg>
                                             <p
-                                                class="text-[10px] text-slate-500 font-bold uppercase tracking-widest group-hover:text-primary">
-                                                Ganti Foto</p>
+                                                class="text-[8px] text-slate-500 font-bold uppercase tracking-widest group-hover:text-primary">
+                                                Tambah Foto</p>
                                         </div>
-                                        <img id="previewHelper" class="hidden w-full h-full object-cover">
-                                    @endif
-
-                                    <!-- Overlay for existing image -->
-                                    <div
-                                        class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
-                                            </path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        </svg>
                                     </div>
-                                </div>
-                                <input id="image" type="file" name="image" class="hidden" accept="image/*"
-                                    onchange="previewImage(this)">
-                            </label>
-                            <x-input-error :messages="$errors->get('image')" class="mt-2 text-center" />
+                                    <input id="images" type="file" name="images[]" class="hidden" accept="image/*"
+                                        multiple onchange="previewImages(this)">
+                                </label>
+
+                                <!-- Existing Gallery Images -->
+                                @foreach($product->images as $img)
+                                    <div
+                                        class="preview-item w-32 h-32 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 relative group">
+                                        <img src="{{ asset('storage/' . $img->image_path) }}"
+                                            class="w-full h-full object-cover">
+                                        <div
+                                            class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <!-- Potential Delete Button Placeholder -->
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <x-input-error :messages="$errors->get('images')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('images.*')" class="mt-2" />
                         </div>
 
                         <!-- Name -->
@@ -136,19 +136,21 @@
     </div>
 
     <script>
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var preview = document.getElementById('previewHelper');
-                    preview.src = e.target.result;
-                    preview.classList.remove('hidden');
-
-                    // Hide placeholder if exists
-                    var placeholder = document.getElementById('placeholderIcon');
-                    if (placeholder) placeholder.classList.add('hidden');
-                }
-                reader.readAsDataURL(input.files[0]);
+        function previewImages(input) {
+            const container = document.getElementById('imagePreviewContainer');
+            if (input.files) {
+                Array.from(input.files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const div = document.createElement('div');
+                        div.className = 'preview-item w-32 h-32 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 relative group';
+                        div.innerHTML = `
+                            <img src="${e.target.result}" class="w-full h-full object-cover">
+                        `;
+                        container.appendChild(div);
+                    }
+                    reader.readAsDataURL(file);
+                });
             }
         }
     </script>

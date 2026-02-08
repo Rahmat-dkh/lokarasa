@@ -8,10 +8,13 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
+    use \App\Traits\HandlesPaymentSuccess;
+
     public function checkout()
     {
         $cart = Session::get('cart', []);
@@ -122,10 +125,16 @@ class OrderController extends Controller
                     'payment_reference' => $paymentReference,
                     'total_amount' => $totalAmount,
                     'status' => 'pending',
-                    'shipping_address' => $address->address_line . ', ' . $address->city,
+                    'shipping_address' => $address->address_line . ', ' . $address->city . ', ' . $address->province . ' - ' . $address->postal_code,
+                    'phone' => $address->phone,
                     'service_fee' => $serviceFee,
                     'shipping_cost' => $shippingCost,
                 ]);
+
+                // Update user phone if empty
+                if (!auth()->user()->phone && $address->phone) {
+                    auth()->user()->update(['phone' => $address->phone]);
+                }
 
                 foreach ($vendorProducts as $p) {
                     OrderItem::create([
@@ -175,6 +184,38 @@ class OrderController extends Controller
             DB::rollBack();
             return back()->with('error', 'Failed to create order: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Fallback for local development or delayed webhooks.
+     * Verifies payment status with Midtrans when user returns to the site.
+     */
+    public function finish(Request $request)
+    {
+        $orderId = $request->get('order_id');
+        if (!$orderId) {
+            return redirect()->route('orders.index');
+        }
+
+        // Initialize Midtrans
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        \Midtrans\Config::$isProduction = config('midtrans.is_production');
+
+        try {
+            $status = \Midtrans\Transaction::status($orderId);
+            $orders = Order::where('payment_reference', $orderId)->get();
+
+            if ($orders->isNotEmpty()) {
+                if ($status['transaction_status'] == 'settlement' || $status['transaction_status'] == 'capture') {
+                    $this->processPaymentSuccess($orders, 'Midtrans Verification (Finish Redirect)');
+                    return redirect()->route('orders.index')->with('success', 'Pembayaran berhasil dikonfirmasi! Pesanan Anda sedang diproses.');
+                }
+            }
+        } catch (\Exception $e) {
+            Log::error('Midtrans Finish Error: ' . $e->getMessage());
+        }
+
+        return redirect()->route('orders.index')->with('info', 'Kami sedang memproses pembayaran Anda. Silakan cek status pesanan secara berkala.');
     }
 
     public function index()
