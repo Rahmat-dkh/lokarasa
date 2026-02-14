@@ -38,7 +38,7 @@ class OrderController extends Controller
 
         foreach ($grouped as $vendorId => $vendorProducts) {
             if ($vendorId === 'default') {
-                $vendorName = 'LocalGo Commerce (Official)';
+                $vendorName = 'Lokarasa (Official)';
                 $realVendorId = null;
             } else {
                 $vendorName = $vendorProducts->first()->vendor->shop_name ?? 'Unknown Vendor';

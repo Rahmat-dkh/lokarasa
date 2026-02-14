@@ -1,66 +1,113 @@
-# LocalGoCommerce
+# 🍛 Lokarasa - Marketplace Kuliner Nusantara 🇮🇩
 
-**LocalGoCommerce** is a modern, full-stack E-commerce application built with **Laravel 10** and **Livewire 3**. It features a comprehensive admin dashboard, product management, user authentication, and a responsive shopping experience.
+<p align="center">
+  <strong>Menghubungkan Kelezatan Autentik Indonesia ke Meja Makan Anda</strong>
+</p>
 
-## 🚀 Features
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-10.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
+  <img src="https://img.shields.io/badge/Livewire-3.x-FB70A9?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind">
+  <img src="https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+</p>
 
--   **User Authentication**: Secure login and registration system.
--   **Admin Dashboard**: Dedicated area for administrators to manage the store.
--   **Product Management**: CRUD operations for products and categories.
--   **Wishlist**: Real-time wishlist functionality using Livewire.
--   **Responsive Design**: Optimized for both desktop and mobile devices.
--   **Social Login**: Integration with social platforms (via Laravel Socialite).
--   **Contact Form**: Integrated contact messaging system.
+---
 
-## 🛠️ Tech Stack
+## 🌟 Tentang Lokarasa
 
--   **Backend**: Laravel 10 (PHP 8.1+)
--   **Frontend**: Blade Templates, Livewire 3
--   **Database**: MySQL
--   **Styling**: Tailwind CSS (via Vite)
+**Lokarasa** adalah platform e-commerce modern yang dirancang khusus untuk melestarikan dan memperkenalkan kekayaan kuliner Nusantara. Kami berfokus pada produk makanan khas daerah yang telah dikurasi dengan cermat, memastikan kualitas rasa yang autentik dapat dinikmati oleh masyarakat luas kapan saja dan di mana saja.
 
-## 📦 Installation
+Dengan tagline *"Melestarikan Rasa Nusantara"*, Lokarasa hadir bukan hanya sebagai tempat jual beli, tapi sebagai jembatan bagi para pelaku UMKM kuliner di seluruh Indonesia untuk menjangkau pasar nasional secara digital.
 
-Follow these steps to set up the project locally:
+---
 
-1.  **Clone the repository**
-    ```bash
-    git clone https://github.com/Rahmat-dkh/localgocommerce.git
-    cd localgocommerce
-    ```
+## 🚀 Fitur Unggulan
 
-2.  **Install Dependencies**
-    ```bash
-    composer install
-    npm install
-    ```
+### 🛍️ Pengalaman Belanja Modern
+- **Pencarian Cerdas**: Temukan kudapan favorit berdasarkan brand, produk, atau daerah asal.
+- **Multivendor/Multi-tenant**: Produk dikirim langsung dari daerah asal produsen agar tetap *fresh*.
+- **Real-time Cart & Wishlist**: Pengalaman belanja yang mulus menggunakan teknologi Livewire.
 
-3.  **Environment Setup**
-    Copy the `.env.example` file to `.env`:
-    ```bash
-    cp .env.example .env
-    ```
-    Then configure your database credentials in the `.env` file.
+### 🤖 Intelligent Features
+- **Smart Chat Assistant**: Bot asisten virtual yang siap membantu menjawab pertanyaan seputar produk, stok, dan pengiriman secara instan.
+- **Direct WhatsApp Checkout**: Hubungkan pembeli langsung dengan penjual melalui pesan personal untuk transaksi yang lebih akrab.
 
-4.  **Generate Application Key**
-    ```bash
-    php artisan key:generate
-    ```
+### 🔐 Keamanan & Kemudahan
+- **Payment Gateway**: Integrasi pembayaran aman melalui **Midtrans** (Bank Transfer, E-Wallet, QRIS).
+- **Sistem Tracking**: Pantau status pesanan mulai dari proses hingga pengiriman.
+- **Autentikasi Aman**: Login standar dan integrasi **Google Login** untuk kemudahan akses.
 
-5.  **Run Migrations & Seeders**
-    ```bash
-    php artisan migrate --seed
-    ```
+### 📊 Manajemen Bisnis (Admin & Vendor)
+- **Dashboard Admin**: Kendali penuh atas kategori, produk, pesanan, dan verifikasi tenant.
+- **Dashboard Tenant**: Ruang khusus bagi pengusaha kuliner untuk mengelola stok, profil toko, dan penarikan dana (payout).
 
-6.  **Run the Application**
-    Start the local development server:
-    ```bash
-    npm run dev
-    php artisan serve
-    ```
+---
 
-    Visit `http://127.0.0.1:8000` in your browser.
+## 🛠️ Arsitektur Teknologi
 
-## 🤝 Contributing
+Aplikasi ini dibangun dengan *cutting-edge technology stack*:
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- **Framework**: [Laravel 10](https://laravel.com) (Robust & Scalable)
+- **Frontend Interactivity**: [Livewire 3](https://livewire.laravel.com) (Fullstack Reactivity)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) (Modern & Responsive UI)
+- **Database**: MySQL (Reliable Data Management)
+- **Asset Bundling**: Vite (Fastest Development Experience)
+
+---
+
+## 📦 Panduan Instalasi
+
+Ingin menjalankan Lokarasa di server lokal Anda? Ikuti panduan ini:
+
+### 1. Persyaratan Sistem
+- PHP >= 8.1
+- Composer
+- Node.js & NPM
+- MySQL Database
+
+### 2. Langkah-langkah
+```bash
+# Clone repository
+git clone https://github.com/Rahmat-dkh/localgocommerce.git
+cd localgocommerce
+
+# Instal dependensi PHP
+composer install
+
+# Instal dependensi JavaScript & CSS
+npm install
+
+# Setup environment
+cp .env.example .env
+# Jangan lupa sesuaikan pengaturan DB_DATABASE, DB_USERNAME, dan DB_PASSWORD di .env
+
+# Generate Key
+php artisan key:generate
+
+# Jalankan migrasi dan seeder
+php artisan migrate --seed
+
+# Compiling assets
+npm run dev
+```
+
+Jalankan server pengembangan:
+```bash
+php artisan serve
+```
+Akses di `http://127.0.0.1:8000`
+
+---
+
+## 📧 Kontak & Dukungan
+
+Jika Anda memiliki pertanyaan, saran, atau ingin bekerjasama sebagai tenant:
+
+- **Email**: lokarasa@gmail.com
+- **Lokasi**: Purworejo, Jawa Tengah, Indonesia
+
+---
+
+<p align="center">
+  Dibuat dengan ❤️ untuk UMKM Indonesia oleh <strong>Lokarasa Team</strong>
+</p>

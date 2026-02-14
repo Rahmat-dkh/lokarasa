@@ -121,7 +121,7 @@
                                     <td class="py-4 text-slate-600">
                                         <div class="font-bold text-slate-800">{{ $order->user->name }}</div>
                                         <div class="text-[10px] text-slate-400">Shop:
-                                            {{ $order->vendor->shop_name ?? 'LocalGo' }}
+                                            {{ $order->vendor->shop_name ?? 'Lokarasa' }}
                                         </div>
                                     </td>
                                     <td class="py-4 text-slate-600">
@@ -184,16 +184,16 @@
                             @foreach($stats['recent_payouts'] as $payout)
                                 <tr class="border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors">
                                     <td class="py-4 font-bold text-slate-800">
-                                        {{ $payout->vendor->shop_name ?? 'LocalGo' }}
+                                        {{ $payout->vendor->shop_name ?? 'Lokarasa' }}
                                     </td>
                                     <td class="py-4 font-black text-primary italic">Rp
                                         {{ number_format($payout->amount, 0, ',', '.') }}
                                     </td>
                                     <td class="py-4">
                                         <span class="px-3 py-1 rounded-lg text-xs font-black uppercase
-                                                            @if($payout->status == 'completed') bg-emerald-100 text-emerald-600
-                                                            @elseif($payout->status == 'pending') bg-amber-100 text-amber-600
-                                                            @else bg-rose-100 text-rose-600 @endif">
+                                                                    @if($payout->status == 'completed') bg-emerald-100 text-emerald-600
+                                                                    @elseif($payout->status == 'pending') bg-amber-100 text-amber-600
+                                                                    @else bg-rose-100 text-rose-600 @endif">
                                             @php
                                                 $payoutTranslations = [
                                                     'pending' => 'Tertunda',

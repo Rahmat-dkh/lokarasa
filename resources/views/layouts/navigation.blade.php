@@ -74,10 +74,10 @@
                 <!-- Group Left: Logo -->
                 <div class="flex-none flex items-center md:w-48">
                     <a href="/" class="flex items-center gap-1.5 md:gap-2">
-                        <img src="{{ asset('images/logo_localgo.png') }}" alt="LocalGo"
+                        <img src="{{ asset('images/logo_lokarasa.png') }}" alt="Lokarasa"
                             class="h-7 md:h-9 w-auto object-contain rounded-lg">
                         <span class="text-white font-black text-lg md:text-xl tracking-tighter hidden sm:block">
-                            Local<span class="text-white/80">Go</span>
+                            Loka<span class="text-white/80">rasa</span>
                         </span>
                     </a>
                 </div>
@@ -190,7 +190,7 @@
              x-transition:enter-end="opacity-100 translate-y-0"
              class="md:hidden px-4 pb-4">
             <form action="{{ route('products.index') }}" method="GET" class="relative">
-                <input type="text" name="search" placeholder="Cari di LocalGo..."
+                <input type="text" name="search" placeholder="Cari di Lokarasa..."
                     class="w-full bg-white border-none rounded-full pl-4 pr-10 py-2 text-sm text-neutral-dark focus:ring-2 focus:ring-white/50 shadow-inner">
                 <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-primary">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

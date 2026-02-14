@@ -38,6 +38,7 @@ class CategoryController extends Controller
         $validated['slug'] = \Illuminate\Support\Str::slug($validated['name']);
 
         \App\Models\Category::create($validated);
+        cache()->forget('navbar_categories');
 
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully!');
     }
@@ -75,6 +76,7 @@ class CategoryController extends Controller
         $validated['slug'] = \Illuminate\Support\Str::slug($validated['name']);
 
         $category->update($validated);
+        cache()->forget('navbar_categories');
 
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully!');
     }
@@ -86,6 +88,7 @@ class CategoryController extends Controller
     {
         $category = \App\Models\Category::findOrFail($id);
         $category->delete();
+        cache()->forget('navbar_categories');
 
         return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully!');
     }

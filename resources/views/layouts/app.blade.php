@@ -6,41 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? config('app.name', 'LocalGo') }} - Marketplace UMKM Indonesia</title>
+    <title>{{ $title ?? config('app.name', 'Lokarasa') }} - Marketplace Kuliner Nusantara</title>
     <meta name="description"
-        content="{{ $description ?? 'LocalGo Commerce - Platform e-commerce terpercaya untuk produk UMKM lokal Indonesia. Dukung ekonomi lokal dengan belanja produk kreatif berkualitas.' }}">
-    <meta name="keywords" content="UMKM Indonesia, marketplace lokal, produk kreatif, e-commerce Indonesia, LocalGo">
+        content="{{ $description ?? 'Lokarasa - Platform e-commerce terpercaya untuk kuliner khas dan makanan lokal Indonesia. Nikmati kelezatan Nusantara langsung di rumah Anda.' }}">
+    <meta name="keywords" content="Kuliner Nusantara, makanan lokal, oleh-oleh Indonesia, jajanan pasar, Lokarasa">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo_localgo.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo_localgo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo_lokarasa.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo_lokarasa.png') }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="{{ $title ?? config('app.name', 'LocalGo') }} - Marketplace UMKM Indonesia">
+    <meta property="og:title" content="{{ $title ?? config('app.name', 'Lokarasa') }} - Marketplace Kuliner Nusantara">
     <meta property="og:description"
-        content="{{ $description ?? 'Platform e-commerce terpercaya untuk produk UMKM lokal Indonesia' }}">
-    <meta property="og:image" content="{{ asset('images/logo_localgo.png') }}">
-    <meta property="og:site_name" content="LocalGo Commerce">
+        content="{{ $description ?? 'Platform e-commerce terpercaya untuk kuliner khas dan makanan lokal Indonesia' }}">
+    <meta property="og:image" content="{{ asset('images/logo_lokarasa.png') }}">
+    <meta property="og:site_name" content="Lokarasa">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ url()->current() }}">
-    <meta name="twitter:title" content="{{ $title ?? config('app.name', 'LocalGo') }}">
+    <meta name="twitter:title" content="{{ $title ?? config('app.name', 'Lokarasa') }}">
     <meta name="twitter:description"
-        content="{{ $description ?? 'Platform e-commerce terpercaya untuk produk UMKM lokal Indonesia' }}">
-    <meta name="twitter:image" content="{{ asset('images/logo_localgo.png') }}">
+        content="{{ $description ?? 'Platform e-commerce terpercaya untuk kuliner khas dan makanan lokal Indonesia' }}">
+    <meta name="twitter:image" content="{{ asset('images/logo_lokarasa.png') }}">
 
     <!-- Structured Data for Organization & Logo -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "LocalGo Commerce",
+        "name": "Lokarasa",
         "url": "{{ config('app.url') }}",
-        "logo": "{{ asset('images/logo_localgo.png') }}",
-        "description": "Platform e-commerce terpercaya untuk produk UMKM lokal Indonesia",
+        "logo": "{{ asset('images/logo_lokarasa.png') }}",
+        "description": "Platform e-commerce terpercaya untuk kuliner khas dan makanan lokal Indonesia",
         "sameAs": [
             "https://github.com/Rahmat-dkh/localgocommerce"
         ],
@@ -48,7 +48,7 @@
             "@type": "ContactPoint",
             "telephone": "+62-857-1296-6082",
             "contactType": "Customer Service",
-            "email": "localgocommerce@gmail.com"
+            "email": "lokarasa@gmail.com"
         }
     }
     </script>

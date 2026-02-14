@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Welcome Banner -->
-            <div class="bg-white rounded-[2.5rem] p-8 sm:p-10 shadow-sm border border-slate-100 flex flex-col md:flex-row items-center gap-8 mb-8 overflow-hidden relative"
+            <div class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-sm border border-slate-100 flex flex-col md:flex-row items-center gap-8 mb-8 overflow-hidden relative"
                 data-aos="fade-down">
                 <div class="relative z-10 text-center md:text-left" data-aos="fade-right" data-aos-delay="200">
                     <h1 class="text-3xl font-black text-slate-900 mb-4 tracking-tight">Halo,
@@ -31,10 +31,10 @@
                 </div>
 
                 <div class="hidden lg:block relative z-10">
-                    <div class="relative w-64 h-64">
+                    <div class="relative w-40 h-40">
                         <div class="absolute inset-0 bg-primary/5 rounded-full animate-pulse"></div>
                         <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=0ea5e9&color=fff&size=512"
-                            class="w-full h-full rounded-full border-8 border-white shadow-2xl relative z-10 object-cover">
+                            class="w-full h-full rounded-full border-4 border-white shadow-xl relative z-10 object-cover">
                     </div>
                 </div>
 
@@ -56,9 +56,9 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-black italic tracking-tight">Kelola Toko UMKM Anda</h3>
-                                <p class="text-slate-400 text-sm font-medium">Buka menu dashboard khusus vendor untuk
-                                    mengelola produk dan pesanan toko.</p>
+                                <h3 class="text-xl font-black italic tracking-tight">Kelola Tenant Kuliner Anda</h3>
+                                <p class="text-slate-400 text-sm font-medium">Buka menu dashboard khusus tenant untuk
+                                    mengelola produk kuliner dan pesanan Anda.</p>
                             </div>
                         </div>
                         <a href="{{ route('vendor.dashboard') }}"
@@ -75,13 +75,13 @@
                 <div class="bg-blue-600 rounded-[2.5rem] p-8 mb-8 text-white relative overflow-hidden">
                     <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                         <div>
-                            <h3 class="text-xl font-black italic tracking-tight">Punya Produk UMKM?</h3>
-                            <p class="text-blue-100 text-sm font-medium">Mulai berjualan di LocalGo dan kembangkan usaha
-                                Anda hari ini!</p>
+                            <h3 class="text-xl font-black italic tracking-tight">Punya Bisnis Kuliner?</h3>
+                            <p class="text-blue-100 text-sm font-medium">Mulai berjualan di Lokarasa dan kembangkan cita
+                                rasa Anda hari ini!</p>
                         </div>
                         <a href="{{ route('vendor.register') }}"
                             class="w-full md:w-auto px-8 py-4 bg-white text-blue-600 font-black rounded-2xl shadow-lg transition-all active:scale-95 text-sm text-center">
-                            Jadi Vendor Sekarang
+                            Jadi Tenant Sekarang
                         </a>
                     </div>
                     <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
@@ -145,7 +145,7 @@
                         </svg>
                     </div>
                     <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Ulasan</p>
-                    <h4 class="text-xl font-black text-slate-800">0</h4>
+                    <h4 class="text-xl font-black text-slate-800">{{ auth()->user()->reviews()->count() }}</h4>
                 </div>
             </div>
         </div>

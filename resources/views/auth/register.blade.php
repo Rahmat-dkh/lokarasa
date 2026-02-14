@@ -1,7 +1,8 @@
 <x-guest-layout>
     <div class="text-center mb-6">
         <h1 class="text-2xl sm:text-3xl font-black text-neutral-dark tracking-tighter mb-1">Daftar Pembeli.</h1>
-        <p class="text-xs sm:text-sm text-slate-500 font-medium">Buat akun untuk mulai belanja produk UMKM terbaik.</p>
+        <p class="text-xs sm:text-sm text-slate-500 font-medium">Buat akun untuk mulai belanja produk kuliner nusantara
+            terbaik.</p>
     </div>
 
     <form method="POST" action="{{ route('register') }}">
@@ -77,14 +78,14 @@
     </form>
 
     <div class="mt-6 pt-4 border-t border-slate-100 text-center">
-        <p class="text-xs font-medium text-slate-500 mb-2">ingin berjualan di LocalGo?</p>
+        <p class="text-xs font-medium text-slate-500 mb-2">ingin berjualan di Lokarasa?</p>
         <a href="{{ route('vendor.register') }}"
             class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-neutral-dark text-white text-sm font-bold rounded-xl hover:bg-neutral-800 transition-all shadow-md shadow-neutral-dark/20 w-full sm:w-auto">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
                 </path>
             </svg>
-            Daftar Sebagai UMKM
+            Daftar Sebagai Tenant
         </a>
     </div>
 </x-guest-layout>

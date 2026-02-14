@@ -7,15 +7,15 @@
             <!-- Brand Column -->
             <div data-aos="fade-up" class="text-center md:text-left">
                 <a href="/" class="inline-flex items-center gap-4 mb-8 group">
-                    <img src="{{ asset('images/logo_localgo.png') }}" alt="LocalGo"
+                    <img src="{{ asset('images/logo_lokarasa.png') }}" alt="Lokarasa"
                         class="h-16 w-auto object-contain p-2 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10 group-hover:scale-105 transition-transform duration-300">
                     <span class="text-white font-black text-2xl tracking-tighter">
-                        Local<span class="text-primary group-hover:text-white transition-colors duration-300">Go</span>
+                        Loka<span class="text-primary group-hover:text-white transition-colors duration-300">rasa</span>
                     </span>
                 </a>
                 <p class="text-slate-400 text-sm leading-relaxed mb-8 max-w-sm mx-auto md:mx-0">
-                    Memberdayakan UMKM Indonesia melalui teknologi e-commerce startup modern. Bersama LocalGo, produk
-                    lokal beraksi di pasar global.
+                    Menghubungkan Anda dengan kelezatan autentik kuliner Nusantara. Bersama Lokarasa, cita rasa lokal
+                    siap memanjakan lidah masyarakat luas.
                 </p>
                 <div class="flex items-center justify-center md:justify-start gap-4">
                     <a href="#"
@@ -60,7 +60,7 @@
                 <ul class="space-y-4">
                     <li><a href="#"
                             class="text-slate-400 hover:text-primary transition-colors font-bold text-sm">Tentang
-                            LocalGo</a></li>
+                            Lokarasa</a></li>
                     <li><a href="#" class="text-slate-400 hover:text-primary transition-colors font-bold text-sm">Cara
                             Berjualan</a></li>
                     <li><a href="{{ route('contact') }}"
@@ -76,7 +76,7 @@
             <div data-aos="fade-up" data-aos-delay="300" class="text-center md:text-left">
                 <h4 class="text-white font-black uppercase tracking-widest text-xs mb-8">Hubungi Kami</h4>
                 <div class="space-y-6">
-                    <a href="mailto:localgocommerce@gmail.com"
+                    <a href="mailto:lokarasa@gmail.com"
                         class="flex flex-col md:flex-row items-center md:items-start gap-4 group/contact">
                         <div
                             class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center group-hover/contact:bg-primary transition-all">
@@ -89,7 +89,7 @@
                         <div class="text-center md:text-left">
                             <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Email Resmi
                             </p>
-                            <p class="text-white font-bold text-sm">localgocommerce@gmail.com</p>
+                            <p class="text-white font-bold text-sm">lokarasa@gmail.com</p>
                         </div>
                     </a>
 
@@ -129,7 +129,7 @@
 
         <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
             <p class="text-slate-500 text-xs font-bold text-center md:text-left">
-                &copy; {{ date('Y') }} LocalGo Commerce.
+                &copy; {{ date('Y') }} Lokarasa.
             </p>
             <div class="flex items-center justify-center md:justify-end gap-6 flex-wrap">
                 <!-- Payment SVGs (Clean & Professional) -->

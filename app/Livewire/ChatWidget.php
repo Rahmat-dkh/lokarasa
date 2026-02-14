@@ -15,7 +15,7 @@ class ChatWidget extends Component
         // Initial bot greeting
         $this->messages[] = [
             'type' => 'bot',
-            'text' => 'Halo! Selamat datang di LocalGo, pusat produk UMKM asli Indonesia. 🇮🇩 Ada yang bisa kami bantu?',
+            'text' => 'Halo! Selamat datang di Lokarasa, pusat kuliner nusantara dan oleh-oleh asli Indonesia. 🇮🇩 Ada yang bisa kami bantu?',
             'time' => now()->setTimezone('Asia/Jakarta')->format('H:i')
         ];
     }
@@ -72,11 +72,11 @@ class ChatWidget extends Component
 
         // Product & Price
         if (str_contains($msg, 'harga') || str_contains($msg, 'biaya') || str_contains($msg, 'mahal') || str_contains($msg, 'price')) {
-            return 'Harga kami sangat terjangkau karena langsung dari pengrajin UMKM. Range harga mulai Rp 5.000 (Jajanan) sampai Rp 500.000 (Kain Tenun/Batik Premium).';
+            return 'Harga kami sangat bersahabat karena diambil langsung dari UMKM kuliner. Range harga mulai Rp 5.000 (Snack/Cemilan) hingga paket oleh-oleh premium.';
         }
 
         if (str_contains($msg, 'produk') || str_contains($msg, 'jual') || str_contains($msg, 'barang') || str_contains($msg, 'menu') || str_contains($msg, 'katalog')) {
-            return 'Kami menjual produk loka kebanggaan Indonesia! Ada Kuliner (keripik, sambal, kue basah), Fashion (batik, kebaya), dan Kerajinan Tangan (anyaman, grabah).';
+            return 'Kami menyajikan berbagai kelezatan Nusantara! Mulai dari camilan kering (keripik, emping), sambal khas daerah, hingga kue tradisional dan bahan masakan lokal.';
         }
 
         // Shipping
@@ -86,7 +86,7 @@ class ChatWidget extends Component
 
         // Location & Contact
         if (str_contains($msg, 'lokasi') || str_contains($msg, 'alamat') || str_contains($msg, 'toko') || str_contains($msg, 'posisi') || str_contains($msg, 'kota')) {
-            return 'Mitra UMKM kami tersebar di berbagai daerah. Gudang utama LocalGo ada di Jakarta Selatan, tapi pengiriman bisa langsung dari lokasi pengrajin.';
+            return 'Mitra UMKM kuliner kami tersebar di seluruh Indonesia. Kantor utama Lokarasa berada di Purworejo, Jawa Tengah, tapi pengiriman dilakukan langsung dari daerah asal kuliner tersebut agar tetap fresh.';
         }
 
         if (str_contains($msg, 'wa') || str_contains($msg, 'whatsapp') || str_contains($msg, 'nomor') || str_contains($msg, 'hubungi') || str_contains($msg, 'telepon')) {
@@ -114,7 +114,7 @@ class ChatWidget extends Component
 
         // Greetings
         if (str_contains($msg, 'halo') || str_contains($msg, 'hai') || str_contains($msg, 'pagi') || str_contains($msg, 'siang') || str_contains($msg, 'sore') || str_contains($msg, 'malam') || str_contains($msg, 'assalamualaikum')) {
-            return 'Halo! Selamat datang di LocalGo. Mari dukung produk lokal! 🇮🇩 Ada yang ingin ditanyakan tentang produk kami?';
+            return 'Halo! Selamat datang di Lokarasa. Mari lestarikan cita rasa Nusantara! 🇮🇩 Produk kuliner apa yang sedang Anda cari?';
         }
 
         if (str_contains($msg, 'terima kasih') || str_contains($msg, 'makasih') || str_contains($msg, 'thanks') || str_contains($msg, 'ok') || str_contains($msg, 'sip') || str_contains($msg, 'mantap')) {

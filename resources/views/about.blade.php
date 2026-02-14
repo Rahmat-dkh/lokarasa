@@ -10,17 +10,18 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-24">
-                <div data-aos="fade-down" class="text-primary font-black uppercase tracking-[0.3em] text-xs mb-4">About
-                    LocalGo</div>
+                <div data-aos="fade-down" class="text-primary font-black uppercase tracking-[0.3em] text-xs mb-4">
+                    Tentang
+                    Lokarasa</div>
                 <h1 data-aos="fade-up"
                     class="text-3xl lg:text-5xl font-black text-neutral-dark tracking-tighter leading-none mb-8">
-                    Misi Kami: <span class="text-primary italic">Globalisasi</span> UMKM.
+                    Misi Kami: <span class="text-primary italic">Melestarikan</span> Rasa Nusantara.
                 </h1>
                 <p data-aos="fade-up" data-aos-delay="100"
                     class="max-w-3xl mx-auto text-base text-slate-500 font-medium leading-relaxed">
-                    LocalGo Commerce lahir dari semangat untuk memberdayakan potensi lokal Indonesia. Kami percaya bahwa
-                    produk kreatif UMKM layak mendapatkan panggung internasional melalui teknologi startup yang
-                    inklusif.
+                    Lokarasa lahir dari kecintaan terhadap ragam kuliner autentik Indonesia. Kami percaya bahwa
+                    setiap suapan menceritakan kisah daerah asalnya, dan tugas kami adalah membawa kelezatan tersebut
+                    ke meja makan Anda melalui teknologi yang memudahkan.
                 </p>
             </div>
 
@@ -33,9 +34,9 @@
                                 d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Inovasi Digital</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Menyediakan platform e-commerce tercanggih yang
-                        mudah digunakan oleh seluruh pelaku UMKM.</p>
+                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Kurasi Cermat</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Menyediakan platform yang memudahkan pencarian
+                        kuliner khas daerah yang telah dikurasi kualitas dan rasanya.</p>
                 </div>
                 <div data-aos="zoom-in" data-aos-delay="300" class="glass p-10 rounded-[40px] text-center">
                     <div
@@ -46,9 +47,9 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Ekosistem Sinergi</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Membangun komunitas yang menghubungkan produsen
-                        lokal langsung dengan konsumen global.</p>
+                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Jejaring Produsen</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Membangun ekosistem yang menghubungkan pengusaha
+                        kuliner lokal langsung dengan penikmat rasa di seluruh Indonesia.</p>
                 </div>
                 <div data-aos="zoom-in" data-aos-delay="400" class="glass p-10 rounded-[40px] text-center">
                     <div
@@ -59,9 +60,9 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Aksesibilitas Global</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Menghapus batasan geografis agar produk lokal
-                        Indonesia dapat dinikmati di mana saja.</p>
+                    <h3 class="text-lg font-bold text-neutral-dark mb-4">Aksesibilitas Rasa</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Menghapus batasan jarak agar kelezatan kuliner
+                        nusantara dapat dinikmati di mana saja dan kapan saja.</p>
                 </div>
             </div>
 
@@ -73,8 +74,8 @@
                         <h2 class="text-3xl lg:text-4xl font-black text-white mb-6 tracking-tighter leading-none">Visi
                             Kami 2030</h2>
                         <p class="text-white/70 text-base lg:text-lg font-medium mb-12">
-                            Menjadi akselerator UMKM nomor satu di Indonesia yang membawa setidaknya 100.000 brand lokal
-                            ke kancah internasional melalui ekosistem digital yang berkelanjutan.
+                            Menjadi platform kuliner nomor satu di Indonesia yang memperkenalkan kekayaan rasa Nusantara
+                            ke seluruh pelosok negeri dan mancanegara melalui ekosistem digital yang andal.
                         </p>
                         <a href="{{ route('products.index') }}"
                             class="inline-flex items-center gap-4 bg-white text-primary px-10 py-5 rounded-3xl font-black shadow-2xl hover:scale-105 transition-transform">

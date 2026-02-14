@@ -14,7 +14,8 @@
                 Hubungi <span class="text-primary">Kami.</span>
             </h1>
             <p class="max-w-2xl mx-auto text-sm text-slate-500 font-medium leading-relaxed">
-                Ada pertanyaan atau ingin bekerjasama? Kami siap membantu pertumbuhan UMKM Anda. Silakan hubungi kami
+                Ada pertanyaan atau ingin bekerjasama? Kami siap membantu pertumbuhan bisnis kuliner Anda. Silakan
+                hubungi kami
                 melalui formulir di bawah ini.
             </p>
         </div>
@@ -45,7 +46,7 @@
                                     Resmi
                                 </p>
                                 <p class="text-xs lg:text-sm font-bold text-slate-900 break-all">
-                                    localgocommerce@gmail.com</p>
+                                    lokarasa@gmail.com</p>
                             </div>
                         </div>
 
@@ -126,7 +127,7 @@
                         <div class="space-y-2">
                             <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Subjek
                                 Pesan</label>
-                            <input type="text" name="subject" placeholder="Kerjasama UMKM"
+                            <input type="text" name="subject" placeholder="Kerjasama Tenant Kuliner"
                                 class="w-full px-5 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-bold text-slate-900 text-sm placeholder:text-slate-300">
                         </div>
                         <div class="space-y-2">
