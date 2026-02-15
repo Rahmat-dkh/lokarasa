@@ -74,14 +74,14 @@
                 <!-- Group Left: Logo -->
                 <div class="flex-none flex items-center md:w-48">
                     <a href="/" class="flex items-center gap-1.5 md:gap-2">
-                        <img src="{{ asset('images/logo_lokarasa.png') }}" alt="Lokarasa"
+                        <img src="{{ asset('images/logo_lokarasa.png') }}" alt="Rasapulang"
                             class="h-7 md:h-9 w-auto object-contain rounded-lg">
                         <span class="text-white font-black text-lg md:text-xl tracking-tighter hidden sm:block">
-                            Loka<span class="text-white/80">rasa</span>
+                            Rasa<span class="text-white/80">pulang</span>
                         </span>
                     </a>
                 </div>
-
+ 
                 <!-- Group Center: Centered Search Bar (Desktop Only) -->
                 <div class="hidden md:flex flex-grow justify-center px-4">
                     <div class="w-full max-w-3xl">
@@ -100,7 +100,7 @@
                         </form>
                     </div>
                 </div>
-
+ 
                 <!-- Group Right: Auth & Mobile Controls -->
                 <div class="flex-none flex items-center justify-end md:w-48">
                     <!-- Desktop Auth -->
@@ -147,7 +147,7 @@
                             </a>
                         @endauth
                     </div>
-
+ 
                     <!-- Mobile Icons Group (Always on Right) -->
                     <div class="flex md:hidden items-center gap-0.5">
                         <!-- Search Toggle (Far Left of Group) -->
@@ -158,17 +158,17 @@
                                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                         </button>
-
+ 
                         <!-- Wishlist -->
                         <div class="relative group text-white shrink-0 scale-90">
                             <livewire:wishlist-icon />
                         </div>
-
+ 
                         <!-- Cart -->
                         <div class="relative group text-white shrink-0 scale-90">
                             <livewire:cart-counter />
                         </div>
-
+ 
                         <!-- Menu Hamburger -->
                         <button @click="open = ! open"
                             class="p-1 text-white hover:text-cyan-400 transition-all duration-300 flex items-center justify-center rounded-full shrink-0">
@@ -182,7 +182,7 @@
                     </div>
                 </div>
             </div>
-
+ 
         <!-- Mobile Search Panel -->
         <div x-show="openMobileSearch" 
              x-transition:enter="transition ease-out duration-200"
@@ -190,7 +190,7 @@
              x-transition:enter-end="opacity-100 translate-y-0"
              class="md:hidden px-4 pb-4">
             <form action="{{ route('products.index') }}" method="GET" class="relative">
-                <input type="text" name="search" placeholder="Cari di Lokarasa..."
+                <input type="text" name="search" placeholder="Cari di Rasapulang..."
                     class="w-full bg-white border-none rounded-full pl-4 pr-10 py-2 text-sm text-neutral-dark focus:ring-2 focus:ring-white/50 shadow-inner">
                 <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-primary">
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,7 +199,7 @@
                 </button>
             </form>
         </div>
-
+ 
         <!-- Row 2: Navigation Links & Icons (Desktop) -->
         <div class="hidden md:flex items-center h-14 px-4 sm:px-6 lg:px-8">
             <!-- Left: Categories -->
@@ -235,7 +235,7 @@
                     </div>
                 </div>
             </div>
-
+ 
             <!-- Center: Main Navigation -->
             <div class="flex-grow flex justify-center px-4">
                 <div class="flex items-center gap-1 lg:gap-2">
@@ -257,7 +257,7 @@
                     </a>
                 </div>
             </div>
-
+ 
             <!-- Right: Icons -->
             <div class="flex-none w-48 flex items-center justify-end gap-6">
                 <div class="relative group">

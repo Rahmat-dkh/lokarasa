@@ -12,13 +12,13 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $makanan = \App\Models\Category::where('slug', 'makanan')->first();
+        $snack = \App\Models\Category::where('slug', 'snack')->first();
         $minuman = \App\Models\Category::where('slug', 'minuman')->first();
-        $kerajinan = \App\Models\Category::where('slug', 'kerajinan')->first();
+        // $kerajinan = \App\Models\Category::where('slug', 'kerajinan')->first(); // Removed as per new category structure
 
         $products = [
             [
-                'category_id' => $makanan->id,
+                'category_id' => $snack->id ?? 1, // Fallback or ensure seed runs after CategorySeeder
                 'name' => 'Binggel/Geblek "Mbak Ndet"',
                 'slug' => 'binggel-geblek-mbak-ndet',
                 'description' => 'Camilan tradisional gurih khas Mbak Ndet.',
@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
                 'whatsapp_number' => '6285801102795',
             ],
             [
-                'category_id' => $makanan->id,
+                'category_id' => $snack->id ?? 1,
                 'name' => 'Opak Rahayu',
                 'slug' => 'opak-rahayu',
                 'description' => 'Opak singkong renyah dan gurih.',
@@ -36,7 +36,7 @@ class ProductSeeder extends Seeder
                 'whatsapp_number' => '628210774387',
             ],
             [
-                'category_id' => $minuman->id,
+                'category_id' => $minuman->id ?? 2,
                 'name' => '"JSC" Jahe Secang',
                 'slug' => 'jsc-jahe-secang',
                 'description' => 'Minuman herbal alami yang menghangatkan tubuh.',
@@ -45,7 +45,7 @@ class ProductSeeder extends Seeder
                 'whatsapp_number' => '6285866253228',
             ],
             [
-                'category_id' => $makanan->id,
+                'category_id' => $snack->id ?? 1,
                 'name' => 'Getuk Lindri Fitri',
                 'slug' => 'getuk-lindri-fitri',
                 'description' => 'Getuk lindri manis dengan taburan kelapa.',
@@ -53,15 +53,7 @@ class ProductSeeder extends Seeder
                 'stock' => 50,
                 'whatsapp_number' => '6285878426116',
             ],
-            [
-                'category_id' => $kerajinan->id,
-                'name' => 'Zanfi Craft (Kerajinan Kulit Telur)',
-                'slug' => 'zanfi-craft-kerajinan-kulit-telur',
-                'description' => 'Kerajinan unik dari kulit telur.',
-                'price' => 50000,
-                'stock' => 10,
-                'whatsapp_number' => '6289626824392',
-            ],
+            // Removed Kerajinan product as category is no longer active
         ];
 
         foreach ($products as $product) {

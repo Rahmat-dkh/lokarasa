@@ -12,14 +12,14 @@
             <div class="text-center mb-24">
                 <div data-aos="fade-down" class="text-primary font-black uppercase tracking-[0.3em] text-xs mb-4">
                     Tentang
-                    Lokarasa</div>
+                    Rasapulang</div>
                 <h1 data-aos="fade-up"
                     class="text-3xl lg:text-5xl font-black text-neutral-dark tracking-tighter leading-none mb-8">
                     Misi Kami: <span class="text-primary italic">Melestarikan</span> Rasa Nusantara.
                 </h1>
                 <p data-aos="fade-up" data-aos-delay="100"
                     class="max-w-3xl mx-auto text-base text-slate-500 font-medium leading-relaxed">
-                    Lokarasa lahir dari kecintaan terhadap ragam kuliner autentik Indonesia. Kami percaya bahwa
+                    Rasapulang lahir dari kecintaan terhadap ragam kuliner autentik Indonesia. Kami percaya bahwa
                     setiap suapan menceritakan kisah daerah asalnya, dan tugas kami adalah membawa kelezatan tersebut
                     ke meja makan Anda melalui teknologi yang memudahkan.
                 </p>

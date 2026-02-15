@@ -24,11 +24,10 @@
                         @endif
                     </a>
                     @foreach(\App\Models\Category::all() as $cat)
-                        <a href="{{ route('products.index', ['category' => $cat->id]) }}"
-                            onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
-                            class="text-sm font-bold transition-all relative pb-3 {{ request('category') == $cat->id ? 'text-primary' : 'text-gray-400 hover:text-primary' }}">
+                        <a href="{{ route('products.index', ['category' => $cat->slug]) }}"
+                            class="text-sm font-bold transition-all relative pb-3 flex-shrink-0 {{ request('category') == $cat->slug ? 'text-primary' : 'text-gray-400 hover:text-primary transition-colors' }}">
                             {{ $cat->name }}
-                            @if(request('category') == $cat->id)
+                            @if(request('category') == $cat->slug)
                                 <div class="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></div>
                             @endif
                         </a>

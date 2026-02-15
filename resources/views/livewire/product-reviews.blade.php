@@ -34,17 +34,17 @@
 
     <!-- Review Form -->
     @if($showForm)
-        <div class="glass p-6 rounded-3xl border-primary/20 bg-primary/5" data-aos="fade-down">
-            <h3 class="text-lg font-black text-neutral-dark mb-6">Berikan Penilaian Anda</h3>
-            <form wire:submit.prevent="save" class="space-y-6">
+        <div class="glass p-4 md:p-5 rounded-2xl md:rounded-3xl border-primary/20 bg-primary/5" data-aos="fade-down">
+            <h3 class="text-base md:text-lg font-black text-neutral-dark mb-4">Berikan Penilaian Anda</h3>
+            <form wire:submit.prevent="save" class="space-y-4">
                 <div>
                     <label
-                        class="block text-xs font-black uppercase text-neutral-dark/40 tracking-widest mb-3">Rating</label>
-                    <div class="flex gap-2">
+                        class="block text-[10px] md:text-xs font-black uppercase text-neutral-dark/40 tracking-widest mb-2">Rating</label>
+                    <div class="flex gap-1.5 md:gap-2">
                         @for($i = 1; $i <= 5; $i++)
                             <button type="button" wire:click="$set('rating', {{ $i }})"
                                 class="focus:outline-none transition-transform hover:scale-110">
-                                <svg class="w-10 h-10 {{ $i <= $rating ? 'text-amber-400 fill-current' : 'text-neutral-dark/10 fill-none stroke-current stroke-2' }}"
+                                <svg class="w-8 h-8 md:w-9 md:h-9 {{ $i <= $rating ? 'text-amber-400 fill-current' : 'text-neutral-dark/10 fill-none stroke-current stroke-2' }}"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.976-2.888a1 1 0 00-1.175 0l-3.976 2.888c-.784.57-1.838-.197-1.539-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.49 10.101c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
@@ -52,21 +52,21 @@
                             </button>
                         @endfor
                     </div>
-                    @error('rating') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
+                    @error('rating') <span class="text-red-500 text-[10px] mt-1">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
                     <label
-                        class="block text-xs font-black uppercase text-neutral-dark/40 tracking-widest mb-3">Komentar</label>
-                    <textarea wire:model="comment" rows="4"
-                        class="w-full bg-white/50 border-neutral-dark/10 rounded-2xl p-4 focus:ring-primary focus:border-primary transition-all text-neutral-dark font-medium"
+                        class="block text-[10px] md:text-xs font-black uppercase text-neutral-dark/40 tracking-widest mb-2">Komentar</label>
+                    <textarea wire:model="comment" rows="3"
+                        class="w-full bg-white/50 border-neutral-dark/10 rounded-xl md:rounded-2xl p-3 focus:ring-primary focus:border-primary transition-all text-neutral-dark font-medium text-sm md:text-base"
                         placeholder="Tuliskan pengalaman Anda menggunakan produk ini..."></textarea>
-                    @error('comment') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
+                    @error('comment') <span class="text-red-500 text-[10px] mt-1">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="flex justify-end">
                     <button type="submit"
-                        class="px-8 py-4 bg-growth text-white rounded-2xl font-black shadow-xl shadow-growth/20 hover:-translate-y-1 transition-all">
+                        class="px-6 py-2.5 md:py-3 bg-growth text-white rounded-xl md:rounded-2xl font-bold md:font-black shadow-lg shadow-growth/20 hover:-translate-y-1 transition-all text-sm md:text-base">
                         Kirim Ulasan Sekarang
                     </button>
                 </div>

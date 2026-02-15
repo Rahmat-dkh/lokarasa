@@ -11,7 +11,10 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $query = \App\Models\Product::with('category')->latest();
+        $query = \App\Models\Product::with('category')
+            ->withCount('reviews')
+            ->withAvg('reviews', 'rating')
+            ->latest();
 
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
@@ -19,7 +22,12 @@ class ProductController extends Controller
         }
 
         if ($request->has('category')) {
-            $query->where('category_id', $request->category);
+            $slug = $request->category;
+            $category = \App\Models\Category::where('slug', $slug)->first();
+
+            if ($category) {
+                $query->where('category_id', $category->id);
+            }
         }
 
         $products = $query->paginate(12)->withQueryString();

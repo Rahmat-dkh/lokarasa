@@ -15,7 +15,7 @@ class ChatWidget extends Component
         // Initial bot greeting
         $this->messages[] = [
             'type' => 'bot',
-            'text' => 'Halo! Selamat datang di Lokarasa, pusat kuliner nusantara dan oleh-oleh asli Indonesia. 🇮🇩 Ada yang bisa kami bantu?',
+            'text' => 'Halo! Selamat datang di Rasapulang, pusat kuliner nusantara dan oleh-oleh asli Indonesia. 🇮🇩 Ada yang bisa kami bantu?',
             'time' => now()->setTimezone('Asia/Jakarta')->format('H:i')
         ];
     }
@@ -86,7 +86,7 @@ class ChatWidget extends Component
 
         // Location & Contact
         if (str_contains($msg, 'lokasi') || str_contains($msg, 'alamat') || str_contains($msg, 'toko') || str_contains($msg, 'posisi') || str_contains($msg, 'kota')) {
-            return 'Mitra UMKM kuliner kami tersebar di seluruh Indonesia. Kantor utama Lokarasa berada di Purworejo, Jawa Tengah, tapi pengiriman dilakukan langsung dari daerah asal kuliner tersebut agar tetap fresh.';
+            return 'Mitra UMKM kuliner kami tersebar di seluruh Indonesia. Kantor utama Rasapulang berada di Purworejo, Jawa Tengah, tapi pengiriman dilakukan langsung dari daerah asal kuliner tersebut agar tetap fresh.';
         }
 
         if (str_contains($msg, 'wa') || str_contains($msg, 'whatsapp') || str_contains($msg, 'nomor') || str_contains($msg, 'hubungi') || str_contains($msg, 'telepon')) {
@@ -114,7 +114,7 @@ class ChatWidget extends Component
 
         // Greetings
         if (str_contains($msg, 'halo') || str_contains($msg, 'hai') || str_contains($msg, 'pagi') || str_contains($msg, 'siang') || str_contains($msg, 'sore') || str_contains($msg, 'malam') || str_contains($msg, 'assalamualaikum')) {
-            return 'Halo! Selamat datang di Lokarasa. Mari lestarikan cita rasa Nusantara! 🇮🇩 Produk kuliner apa yang sedang Anda cari?';
+            return 'Halo! Selamat datang di Rasapulang. Mari lestarikan cita rasa Nusantara! 🇮🇩 Produk kuliner apa yang sedang Anda cari?';
         }
 
         if (str_contains($msg, 'terima kasih') || str_contains($msg, 'makasih') || str_contains($msg, 'thanks') || str_contains($msg, 'ok') || str_contains($msg, 'sip') || str_contains($msg, 'mantap')) {

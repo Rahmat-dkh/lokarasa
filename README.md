@@ -1,4 +1,4 @@
-# 🍛 Lokarasa - Marketplace Kuliner Nusantara 🇮🇩
+# 🍛 Rasapulang - Marketplace Kuliner Nusantara 🇮🇩
 
 <p align="center">
   <strong>Menghubungkan Kelezatan Autentik Indonesia ke Meja Makan Anda</strong>
@@ -13,11 +13,11 @@
 
 ---
 
-## 🌟 Tentang Lokarasa
+## 🌟 Tentang Rasapulang
 
-**Lokarasa** adalah platform e-commerce modern yang dirancang khusus untuk melestarikan dan memperkenalkan kekayaan kuliner Nusantara. Kami berfokus pada produk makanan khas daerah yang telah dikurasi dengan cermat, memastikan kualitas rasa yang autentik dapat dinikmati oleh masyarakat luas kapan saja dan di mana saja.
+**Rasapulang** adalah platform e-commerce modern yang dirancang khusus untuk melestarikan dan memperkenalkan kekayaan kuliner Nusantara. Kami berfokus pada produk makanan khas daerah yang telah dikurasi dengan cermat, memastikan kualitas rasa yang autentik dapat dinikmati oleh masyarakat luas kapan saja dan di mana saja.
 
-Dengan tagline *"Melestarikan Rasa Nusantara"*, Lokarasa hadir bukan hanya sebagai tempat jual beli, tapi sebagai jembatan bagi para pelaku UMKM kuliner di seluruh Indonesia untuk menjangkau pasar nasional secara digital.
+Dengan tagline *"Melestarikan Rasa Nusantara"*, Rasapulang hadir bukan hanya sebagai tempat jual beli, tapi sebagai jembatan bagi para pelaku UMKM kuliner di seluruh Indonesia untuk menjangkau pasar nasional secara digital.
 
 ---
 
@@ -57,7 +57,7 @@ Aplikasi ini dibangun dengan *cutting-edge technology stack*:
 
 ## 📦 Panduan Instalasi
 
-Ingin menjalankan Lokarasa di server lokal Anda? Ikuti panduan ini:
+Ingin menjalankan Rasapulang di server lokal Anda? Ikuti panduan ini:
 
 ### 1. Persyaratan Sistem
 - PHP >= 8.1
@@ -103,11 +103,11 @@ Akses di `http://127.0.0.1:8000`
 
 Jika Anda memiliki pertanyaan, saran, atau ingin bekerjasama sebagai tenant:
 
-- **Email**: lokarasa@gmail.com
+- **Email**: rasapulang@gmail.com
 - **Lokasi**: Purworejo, Jawa Tengah, Indonesia
 
 ---
 
 <p align="center">
-  Dibuat dengan ❤️ untuk UMKM Indonesia oleh <strong>Lokarasa Team</strong>
+  Dibuat dengan ❤️ untuk UMKM Indonesia oleh <strong>Rasapulang Team</strong>
 </p>

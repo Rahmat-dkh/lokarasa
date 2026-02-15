@@ -1,68 +1,116 @@
 <x-app-layout>
     <!-- Hero Section Removed -->
 
-    <!-- Image Carousel -->
-    <div class="bg-white border-b border-gray-100">
-        <div class="max-w-screen-2xl mx-auto pt-4 pb-2 px-4 sm:px-6 lg:px-8">
-            <div x-data="{ 
-                active: 0, 
-                count: 3,
-                images: [
-                    'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&q=80&w=1600',
-                    'https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&q=80&w=1600',
-                    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600'
-                ],
-                next() { this.active = (this.active + 1) % this.count },
-                prev() { this.active = (this.active - 1 + this.count) % this.count },
-                init() { setInterval(() => this.next(), 5000) }
-            }" class="relative overflow-hidden rounded-2xl shadow-lg aspect-[21/9] md:aspect-[3.2/1]">
-                <!-- Slides -->
-                <template x-for="(img, index) in images" :key="index">
-                    <div x-show="active === index" x-transition:enter="transition ease-out duration-1000"
-                        x-transition:enter-start="opacity-0 transform scale-110"
-                        x-transition:enter-end="opacity-100 transform scale-100"
-                        x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100"
-                        x-transition:leave-end="opacity-0" class="absolute inset-0">
-                        <img :src="img" class="w-full h-full object-cover" alt="Banner">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+    <!-- Modern 3-Panel Carousel -->
+    <div class="bg-white pt-4 pb-2 md:pt-6 md:pb-6 overflow-hidden">
+        <div x-data="{ 
+            active: 1, 
+            count: 3,
+            slides: [
+                {
+                    img: '{{ asset('images/getuklindri.jpg') }}',
+                    title: 'Getuk Lindri Khas',
+                    subtitle: 'Warna warni keceriaan jajanan pasar tradisional.',
+                    tag: 'Terbaru',
+                    color: 'from-pink-600 to-purple-600'
+                },
+                {
+                    img: '{{ asset('images/bakpia-patuk.jpg') }}',
+                    title: 'Bakpia Patok Jogja',
+                    subtitle: 'Kelembutan legendaris yang selalu dirindukan.',
+                    tag: 'Favorit',
+                    color: 'from-blue-600 to-cyan-500'
+                },
+                {
+                    img: '{{ asset('images/Dodol.jpg') }}',
+                    title: 'Dodol Autentik',
+                    subtitle: 'Manis legit warisan kuliner Ibu pertiwi.',
+                    tag: 'Khas Daerah',
+                    color: 'from-orange-600 to-yellow-500'
+                }
+            ],
+            next() { this.active = (this.active + 1) % this.count },
+            prev() { this.active = (this.active - 1 + this.count) % this.count },
+            init() { 
+                setInterval(() => this.next(), 5000)
+            }
+        }" class="relative w-full">
+
+            <!-- Slides Container -->
+            <div class="relative flex items-center justify-center h-[180px] md:h-[280px]">
+                <template x-for="(slide, index) in slides" :key="index">
+                    <div class="absolute transition-all duration-700 ease-in-out cursor-pointer" :class="{
+                            'z-30 w-[80%] md:w-[60%] opacity-100 scale-100': active === index,
+                            'z-20 w-[80%] md:w-[60%] opacity-40 scale-90 -translate-x-[65%] md:-translate-x-[55%]': (active - 1 + count) % count === index,
+                            'z-20 w-[80%] md:w-[60%] opacity-40 scale-90 translate-x-[65%] md:translate-x-[55%]': (active + 1) % count === index,
+                            'z-10 opacity-0': active !== index && (active - 1 + count) % count !== index && (active + 1) % count !== index
+                        }" @click="active = index">
+                        <div
+                            class="relative h-[180px] md:h-[280px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-xl">
+                            <img :src="slide.img" class="w-full h-full object-cover" :alt="slide.title">
+
+                            <!-- Content Overlay -->
+                            <div x-show="active === index"
+                                x-transition:enter="transition ease-out delay-300 duration-500"
+                                x-transition:enter-start="opacity-0 translate-y-2"
+                                x-transition:enter-end="opacity-100 translate-y-0"
+                                class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent flex items-center px-6 md:px-12">
+                                <div class="max-w-xl text-white">
+                                    <span
+                                        class="inline-block px-3 py-1 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest bg-white/20 backdrop-blur-md mb-2 md:mb-4"
+                                        x-text="slide.tag"></span>
+                                    <h2 class="text-xl md:text-4xl font-black tracking-tighter leading-none mb-2 md:mb-4"
+                                        x-text="slide.title"></h2>
+                                    <p class="text-[10px] md:text-base text-white/70 font-medium mb-4 md:mb-8 max-w-md leading-tight md:leading-relaxed"
+                                        x-text="slide.subtitle"></p>
+                                    <a href="{{ route('products.index') }}"
+                                        class="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-2.5 bg-white text-primary font-black rounded-xl hover:bg-neutral-dark hover:text-white transition-all shadow-lg text-[10px] md:text-sm">
+                                        Mulai Belanja
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </template>
+            </div>
 
-                <!-- Navigation Dots -->
-                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-                    <template x-for="n in count" :key="n-1">
-                        <button @click="active = n-1" :class="active === n-1 ? 'bg-white w-8' : 'bg-white/50 w-2'"
-                            class="h-2 rounded-full transition-all duration-300"></button>
-                    </template>
-                </div>
-
-                <!-- Prev/Next Buttons (Desktop) -->
+            <!-- Enhanced Navigation Controls -->
+            <div
+                class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-2 md:px-32 z-40 pointer-events-none">
                 <button @click="prev()"
-                    class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 items-center justify-center rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors z-20">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    class="pointer-events-auto w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white/90 shadow-2xl text-primary hover:bg-primary hover:text-white transition-all transform active:scale-90">
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
                 <button @click="next()"
-                    class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 items-center justify-center rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors z-20">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    class="pointer-events-auto w-10 h-10 md:w-14 md:h-14 flex items-center justify-center rounded-full bg-white/90 shadow-2xl text-primary hover:bg-primary hover:text-white transition-all transform active:scale-90">
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
                     </svg>
                 </button>
+            </div>
+
+            <!-- Dot Indicators -->
+            <div class="flex justify-center gap-3 mt-8">
+                <template x-for="n in count" :key="n-1">
+                    <button @click="active = n-1" class="h-2 rounded-full transition-all duration-500"
+                        :class="active === n-1 ? 'bg-primary w-12' : 'bg-slate-200 w-2'"></button>
+                </template>
             </div>
         </div>
     </div>
 
 
-
-
-
     <!-- Kuliner Nusantara Section -->
-    <div class="py-12 bg-[#f0f9ff]/50">
+    <div class="py-2 md:py-6 bg-slate-50">
         <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Product Showcase (First Priority) -->
-            <div
-                class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-blue-100 relative overflow-hidden mb-12">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-blue-100 relative overflow-hidden">
                 <div
                     class="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
                 </div>
@@ -75,9 +123,11 @@
                         Semua</a>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 relative z-10">
-                    @foreach(\App\Models\Product::take(5)->get() as $product)
-                        <x-product-card :product="$product" />
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-8 relative z-10">
+                    @foreach(\App\Models\Product::withAvg('reviews', 'rating')->take(5)->get() as $product)
+                        <div data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                            <x-product-card :product="$product" />
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -85,110 +135,126 @@
     </div>
 
     <!-- Featured Section (Rekomendasi) -->
-    <div class="py-12 bg-slate-50">
+    <div class="py-2 md:py-6 bg-slate-50">
         <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between mb-6">
                 <div class="flex items-center gap-2">
-                    <h2 class="text-xl font-bold text-neutral-dark">Rekomendasi</h2>
-                    <span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded-md">Pilihan
-                        Terbaik</span>
+                    <h2 class="text-xl md:text-2xl font-black text-slate-900 tracking-tight">Pilihan <span
+                            class="text-primary">Terlaris</span></h2>
+                    <span
+                        class="bg-orange-100 text-orange-600 text-[10px] font-black uppercase px-2 py-1 rounded-lg shadow-sm">Paling
+                        Dicari</span>
                 </div>
                 <a href="{{ route('products.index') }}" class="text-xs font-bold text-primary hover:underline">Lihat
                     Semua</a>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                @foreach(\App\Models\Product::with('category')->take(16)->get() as $product)
-                    <x-product-card :product="$product" />
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                @foreach(\App\Models\Product::with('category')->withAvg('reviews', 'rating')->take(15)->get() as $product)
+                    <div data-aos="fade-up" data-aos-delay="{{ ($loop->index % 5) * 100 }}">
+                        <x-product-card :product="$product" />
+                    </div>
                 @endforeach
             </div>
         </div>
     </div>
 
-    <!-- Kuliner Nusantara Text & Features (Moved Below) -->
-    <div class="pb-16 pt-6 relative overflow-hidden">
+    <!-- Jelajahi Rasa Nusantara Section -->
+    <div class="pb-12 pt-8 md:pb-24 md:pt-16 relative overflow-hidden bg-white">
         <!-- Background Elements -->
         <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full">
-                <div class="absolute top-1/4 right-0 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl"></div>
-                <div class="absolute bottom-0 left-0 w-80 h-80 bg-orange-100/30 rounded-full blur-3xl"></div>
-            </div>
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-[120px]"></div>
         </div>
 
-        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- Header (Title & Text) -->
-            <div class="text-center max-w-3xl mx-auto mb-16">
+        <!-- Header (Title & Text) -->
+        <div class="text-center max-w-4xl mx-auto mb-8 md:mb-16" data-aos="fade-up">
+            <h2 class="text-2xl md:text-6xl font-black text-slate-900 mb-4 md:mb-8 tracking-tighter leading-tight">
+                Jelajahi <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-400 to-indigo-500">Rasa
+                    Nusantara</span>
+            </h2>
+            <p class="text-slate-500 text-sm md:text-xl leading-relaxed font-medium mb-8 md:mb-12 px-4">
+                Oleh-oleh otentik dari seluruh penjuru Indonesia. Dikurasi khusus
+                makanan yang <span class="text-slate-900 font-black border-b-2 border-primary/20">awet & tahan
+                    lama</span>,
+                siap dikirim dengan aman ke depan pintu rumahmu.
+            </p>
 
-                <h2 class="text-3xl md:text-5xl font-black text-neutral-dark mb-6 tracking-tight leading-tight">
-                    Jelajahi <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Rasa
-                        Nusantara</span></h2>
-                <p class="text-slate-500 text-lg leading-relaxed">
-                    Oleh-oleh otentik dari seluruh penjuru Indonesia. Dikurasi khusus
-                    makanan yang <span class="font-bold text-neutral-dark">awet & tahan lama</span>, siap dikirim
-                    dengan
-                    aman ke depan pintu rumahmu.
-                </p>
-            </div>
-
-            <!-- Features / Trust Badges -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Integrated Features Strip -->
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 pt-6 md:pt-10 border-t border-slate-100 px-4 md:px-0">
                 <!-- Feature 1 -->
-                <div
-                    class="group bg-white p-8 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center">
+                <div class="group relative p-6 md:p-8 bg-white border border-slate-200 rounded-[2rem] md:rounded-[2.5rem] hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500 hover:-translate-y-2"
+                    data-aos="fade-up" data-aos-delay="100">
                     <div
-                        class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        class="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] md:rounded-[2.5rem]">
                     </div>
-                    <div>
+
+                    <div class="relative z-10 flex flex-col items-center text-center">
+                        <div
+                            class="w-14 h-14 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 flex items-center justify-center text-primary mb-4 md:mb-6 shadow-xl shadow-slate-200/50 group-hover:scale-110 group-hover:shadow-blue-500/20 group-hover:from-primary group-hover:to-blue-600 group-hover:text-white group-hover:border-transparent transition-all duration-500">
+                            <svg class="w-7 h-7 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
                         <h3
-                            class="text-xl font-bold text-neutral-dark mb-2 group-hover:text-blue-600 transition-colors">
+                            class="text-lg md:text-xl font-black text-slate-800 mb-2 md:mb-3 group-hover:text-primary transition-colors">
                             Awet & Tahan Lama</h3>
-                        <p class="text-slate-500 leading-relaxed">Dipilih khusus untuk pengiriman jarak jauh tanpa
-                            mengurangi kualitas rasa saat sampai.</p>
+                        <p class="text-xs md:text-base text-slate-500 font-medium leading-relaxed">Khusus pengiriman
+                            jarak jauh</p>
                     </div>
                 </div>
+
                 <!-- Feature 2 -->
-                <div
-                    class="group bg-white p-8 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center">
+                <div class="group relative p-6 md:p-8 bg-white border border-slate-200 rounded-[2rem] md:rounded-[2.5rem] hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500 hover:-translate-y-2"
+                    data-aos="fade-up" data-aos-delay="200">
                     <div
-                        class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
-                            </path>
-                        </svg>
+                        class="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] md:rounded-[2.5rem]">
                     </div>
-                    <div>
+
+                    <div class="relative z-10 flex flex-col items-center text-center">
+                        <div
+                            class="w-14 h-14 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 flex items-center justify-center text-primary mb-4 md:mb-6 shadow-xl shadow-slate-200/50 group-hover:scale-110 group-hover:shadow-blue-500/20 group-hover:from-primary group-hover:to-blue-600 group-hover:text-white group-hover:border-transparent transition-all duration-500">
+                            <svg class="w-7 h-7 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
                         <h3
-                            class="text-xl font-bold text-neutral-dark mb-2 group-hover:text-blue-600 transition-colors">
+                            class="text-lg md:text-xl font-black text-slate-800 mb-2 md:mb-3 group-hover:text-primary transition-colors">
                             Kualitas Terjamin</h3>
-                        <p class="text-slate-500 leading-relaxed">Rasa otentik langsung dari daerah asalnya,
-                            melewati proses kurasi yang ketat.</p>
+                        <p class="text-xs md:text-base text-slate-500 font-medium leading-relaxed">Rasa otentik daerah
+                            asal</p>
                     </div>
                 </div>
+
                 <!-- Feature 3 -->
-                <div
-                    class="group bg-white p-8 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center">
+                <div class="group relative p-6 md:p-8 bg-white border border-slate-200 rounded-[2rem] md:rounded-[2.5rem] hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500 hover:-translate-y-2"
+                    data-aos="fade-up" data-aos-delay="300">
                     <div
-                        class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                            </path>
-                        </svg>
+                        class="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[2rem] md:rounded-[2.5rem]">
                     </div>
-                    <div>
-                        <h3
-                            class="text-xl font-bold text-neutral-dark mb-2 group-hover:text-blue-600 transition-colors">
+
+                    <div class="relative z-10 flex flex-col items-center text-center">
+                        <div
+                            class="w-14 h-14 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-gradient-to-br from-slate-50 to-white border border-slate-100 flex items-center justify-center text-primary mb-4 md:mb-6 shadow-xl shadow-slate-200/50 group-hover:scale-110 group-hover:shadow-blue-500/20 group-hover:from-primary group-hover:to-blue-600 group-hover:text-white group-hover:border-transparent transition-all duration-500">
+                            <svg class="w-7 h-7 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-black text-slate-800 mb-3 group-hover:text-primary transition-colors">
                             Asli UMKM Daerah</h3>
-                        <p class="text-slate-500 leading-relaxed">Dukung ekonomi lokal di setiap gigitan, langsung
-                            memberdayakan pengusaha kecil.</p>
+                        <p class="text-slate-500 font-medium leading-relaxed">Berdayakan pengusaha lokal</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 
     <!-- WhatsApp CTA (Compact) -->

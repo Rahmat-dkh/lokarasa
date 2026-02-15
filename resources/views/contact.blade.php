@@ -46,7 +46,7 @@
                                     Resmi
                                 </p>
                                 <p class="text-xs lg:text-sm font-bold text-slate-900 break-all">
-                                    lokarasa@gmail.com</p>
+                                    rasapulang@gmail.com</p>
                             </div>
                         </div>
 

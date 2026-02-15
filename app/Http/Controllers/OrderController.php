@@ -38,7 +38,7 @@ class OrderController extends Controller
 
         foreach ($grouped as $vendorId => $vendorProducts) {
             if ($vendorId === 'default') {
-                $vendorName = 'Lokarasa (Official)';
+                $vendorName = 'Rasapulang (Official)';
                 $realVendorId = null;
             } else {
                 $vendorName = $vendorProducts->first()->vendor->shop_name ?? 'Unknown Vendor';

@@ -76,7 +76,7 @@
                     <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                         <div>
                             <h3 class="text-xl font-black italic tracking-tight">Punya Bisnis Kuliner?</h3>
-                            <p class="text-blue-100 text-sm font-medium">Mulai berjualan di Lokarasa dan kembangkan cita
+                            <p class="text-blue-100 text-sm font-medium">Mulai berjualan di Rasapulang dan kembangkan cita
                                 rasa Anda hari ini!</p>
                         </div>
                         <a href="{{ route('vendor.register') }}"

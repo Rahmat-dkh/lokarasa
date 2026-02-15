@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? config('app.name', 'Lokarasa') }} - Marketplace Kuliner Nusantara</title>
+    <title>{{ $title ?? config('app.name', 'Rasapulang') }} - Marketplace Kuliner Nusantara</title>
     <meta name="description"
-        content="{{ $description ?? 'Lokarasa - Platform e-commerce terpercaya untuk kuliner khas dan makanan lokal Indonesia. Nikmati kelezatan Nusantara langsung di rumah Anda.' }}">
-    <meta name="keywords" content="Kuliner Nusantara, makanan lokal, oleh-oleh Indonesia, jajanan pasar, Lokarasa">
+        content="{{ $description ?? 'Rasapulang - Platform e-commerce terpercaya untuk kuliner khas dan makanan lokal Indonesia. Nikmati kelezatan Nusantara langsung di rumah Anda.' }}">
+    <meta name="keywords" content="Kuliner Nusantara, makanan lokal, oleh-oleh Indonesia, jajanan pasar, Rasapulang">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/logo_lokarasa.png') }}">
@@ -18,16 +18,17 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="{{ $title ?? config('app.name', 'Lokarasa') }} - Marketplace Kuliner Nusantara">
+    <meta property="og:title"
+        content="{{ $title ?? config('app.name', 'Rasapulang') }} - Marketplace Kuliner Nusantara">
     <meta property="og:description"
         content="{{ $description ?? 'Platform e-commerce terpercaya untuk kuliner khas dan makanan lokal Indonesia' }}">
     <meta property="og:image" content="{{ asset('images/logo_lokarasa.png') }}">
-    <meta property="og:site_name" content="Lokarasa">
+    <meta property="og:site_name" content="Rasapulang">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ url()->current() }}">
-    <meta name="twitter:title" content="{{ $title ?? config('app.name', 'Lokarasa') }}">
+    <meta name="twitter:title" content="{{ $title ?? config('app.name', 'Rasapulang') }}">
     <meta name="twitter:description"
         content="{{ $description ?? 'Platform e-commerce terpercaya untuk kuliner khas dan makanan lokal Indonesia' }}">
     <meta name="twitter:image" content="{{ asset('images/logo_lokarasa.png') }}">
@@ -37,7 +38,7 @@
     {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Lokarasa",
+        "name": "Rasapulang",
         "url": "{{ config('app.url') }}",
         "logo": "{{ asset('images/logo_lokarasa.png') }}",
         "description": "Platform e-commerce terpercaya untuk kuliner khas dan makanan lokal Indonesia",
@@ -48,7 +49,7 @@
             "@type": "ContactPoint",
             "telephone": "+62-857-1296-6082",
             "contactType": "Customer Service",
-            "email": "lokarasa@gmail.com"
+            "email": "rasapulang@gmail.com"
         }
     }
     </script>
