@@ -42,6 +42,33 @@
             <x-input-error :messages="$errors->get('shop_slug')" class="mt-1" />
         </div>
 
+        <!-- Address -->
+        <div class="mt-3">
+            <x-input-label for="address" value="Alamat Lengkap" class="text-[10px] uppercase tracking-widest mb-1.5" />
+            <textarea id="address" name="address" required
+                class="block mt-1 w-full px-4 py-3 text-sm rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm resize-none"
+                placeholder="Alamat lengkap toko untuk penjemputan paket">{{ old('address') }}</textarea>
+            <x-input-error :messages="$errors->get('address')" class="mt-1" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mt-3">
+            <!-- Postal Code -->
+            <div>
+                <x-input-label for="postal_code" value="Kode Pos"
+                    class="text-[10px] uppercase tracking-widest mb-1.5" />
+                <x-text-input id="postal_code" class="block mt-1 w-full px-4 py-3 text-sm rounded-xl" type="text"
+                    name="postal_code" :value="old('postal_code')" required />
+                <x-input-error :messages="$errors->get('postal_code')" class="mt-1" />
+            </div>
+            <!-- Shop Phone -->
+            <div>
+                <x-input-label for="phone" value="No HP Toko" class="text-[10px] uppercase tracking-widest mb-1.5" />
+                <x-text-input id="phone" class="block mt-1 w-full px-4 py-3 text-sm rounded-xl" type="text" name="phone"
+                    :value="old('phone')" required />
+                <x-input-error :messages="$errors->get('phone')" class="mt-1" />
+            </div>
+        </div>
+
         <!-- Password -->
         <div class="mt-3">
             <x-input-label for="password" value="Kata Sandi" class="text-[10px] uppercase tracking-widest mb-1.5" />

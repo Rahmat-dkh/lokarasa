@@ -26,6 +26,9 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'shop_name' => ['required', 'string', 'max:255'],
             'shop_slug' => ['required', 'string', 'max:255', 'unique:vendors,slug'],
+            'address' => ['required', 'string'],
+            'postal_code' => ['required', 'string', 'max:10'],
+            'phone' => ['required', 'string', 'max:20'],
         ]);
 
         $user = User::create([
@@ -39,6 +42,9 @@ class AuthController extends Controller
             'user_id' => $user->id,
             'shop_name' => $request->shop_name,
             'slug' => $request->shop_slug,
+            'address' => $request->address,
+            'postal_code' => $request->postal_code,
+            'phone' => $request->phone,
             'status' => 'pending', // Waiting for admin approval
         ]);
 

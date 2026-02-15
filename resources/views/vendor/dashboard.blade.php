@@ -302,6 +302,35 @@
 
                             <div class="pt-4 border-t border-slate-50">
                                 <h4 class="text-[11px] font-black text-slate-800 uppercase tracking-widest mb-4">
+                                    Informasi Lokasi & Kontak (Wajib untuk Ongkir)</h4>
+
+                                <div class="space-y-4">
+                                    <div>
+                                        <label
+                                            class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Alamat Lengkap</label>
+                                        <textarea name="address" rows="2" required
+                                            class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-xl text-slate-800 text-sm font-bold focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all resize-none">{{ $vendor->address }}</textarea>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label
+                                                class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Kode Pos</label>
+                                            <input type="text" name="postal_code" value="{{ $vendor->postal_code }}" required
+                                                class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-xl text-slate-800 text-sm font-bold focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all">
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">No HP Toko</label>
+                                            <input type="text" name="phone" value="{{ $vendor->phone }}" required
+                                                class="w-full px-4 py-3 bg-slate-50 border-transparent rounded-xl text-slate-800 text-sm font-bold focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-slate-50">
+                                <h4 class="text-[11px] font-black text-slate-800 uppercase tracking-widest mb-4">
                                     Informasi Rekening Bank</h4>
 
                                 <div class="space-y-4">

@@ -29,9 +29,12 @@ class DashboardController extends Controller
             'bank_name' => 'nullable|string|max:255',
             'bank_account_number' => 'nullable|string|max:255',
             'bank_account_name' => 'nullable|string|max:255',
+            'address' => 'required|string',
+            'postal_code' => 'required|string|max:10',
+            'phone' => 'required|string|max:20',
         ]);
 
-        $vendor->update($request->only('shop_name', 'description', 'flat_shipping_cost', 'bank_name', 'bank_account_number', 'bank_account_name'));
+        $vendor->update($request->only('shop_name', 'description', 'flat_shipping_cost', 'bank_name', 'bank_account_number', 'bank_account_name', 'address', 'postal_code', 'phone'));
 
         return back()->with('success', 'Shop settings updated successfully.');
     }

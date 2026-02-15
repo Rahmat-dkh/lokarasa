@@ -19,6 +19,7 @@ class Product extends Model
         'image',
         'whatsapp_number',
         'vendor_id',
+        'weight',
     ];
 
     protected $appends = ['image_url'];

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use App\Services\BiteshipService;
 
 class OrderController extends Controller
 {
@@ -40,8 +41,10 @@ class OrderController extends Controller
             if ($vendorId === 'default') {
                 $vendorName = 'Rasapulang (Official)';
                 $realVendorId = null;
+                $vendor = null;
             } else {
-                $vendorName = $vendorProducts->first()->vendor->shop_name ?? 'Unknown Vendor';
+                $vendor = $vendorProducts->first()->vendor;
+                $vendorName = $vendor->shop_name ?? 'Unknown Vendor';
                 $realVendorId = $vendorId;
             }
 
@@ -57,9 +60,52 @@ class OrderController extends Controller
 
             // Calculation Service Fee (Example: 2000 flat)
             $serviceFee = 2000;
-            // Get Vendor Shipping Cost or Default
-            $vendor = $vendorProducts->first()->vendor;
-            $shippingCost = $vendor ? $vendor->flat_shipping_cost : 10000;
+
+            // Calculate Shipping with Biteship
+            $rates = [];
+            $shippingCost = 10000; // Default fallback
+
+            $addressId = request('address_id');
+            if ($addressId) {
+                $userAddress = auth()->user()->addresses->find($addressId);
+            } else {
+                $userAddress = auth()->user()->addresses->where('is_primary', true)->first() ?? auth()->user()->addresses->first();
+            }
+
+            if ($vendor && $userAddress) {
+                // Use vendor postal code if available, else fallback to user address
+                $originPostalCode = $vendor->postal_code;
+                if (!$originPostalCode) {
+                    $vendorUserAddress = $vendor->user->addresses->where('is_primary', true)->first() ?? $vendor->user->addresses->first();
+                    $originPostalCode = $vendorUserAddress ? $vendorUserAddress->postal_code : null;
+                }
+
+                if ($originPostalCode && $userAddress->postal_code) {
+                    $biteship = new BiteshipService();
+                    $items = [];
+                    foreach ($vendorProducts as $prod) {
+                        $items[] = [
+                            'name' => $prod->name,
+                            'price' => $prod->price,
+                            'quantity' => $cart[$prod->id]['quantity'],
+                            'weight' => $prod->weight > 0 ? (int) $prod->weight : 1000 // Weight in grams
+                        ];
+                    }
+
+                    $rates = $biteship->getShippingRates(
+                        ['postal_code' => $originPostalCode],
+                        ['postal_code' => $userAddress->postal_code],
+                        $items
+                    );
+
+                    if (!empty($rates)) {
+                        // Pick cheapest
+                        $shippingCost = collect($rates)->min('price');
+                    }
+                }
+            } elseif ($vendor) {
+                $shippingCost = $vendor->flat_shipping_cost;
+            }
 
             $total = $subtotal + $serviceFee + $shippingCost;
 
@@ -70,6 +116,7 @@ class OrderController extends Controller
                 'subtotal' => $subtotal,
                 'service_fee' => $serviceFee,
                 'shipping_cost' => $shippingCost,
+                'available_rates' => $rates ?? [],
                 'total' => $total
             ];
 
@@ -78,13 +125,14 @@ class OrderController extends Controller
 
         $addresses = auth()->user()->addresses;
 
-        return view('checkout.index', compact('orderGroups', 'addresses', 'grandTotal'));
+        return view('checkout.index', compact('orderGroups', 'addresses', 'grandTotal', 'userAddress'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'address_id' => 'required|exists:addresses,id',
+            'shipping_service' => 'nullable|array',
         ]);
 
         $cart = Session::get('cart', []);
@@ -113,9 +161,58 @@ class OrderController extends Controller
                 }
 
                 $serviceFee = 2000;
-                // Get Vendor Shipping Cost or Default
+
+                // Calculate Shipping with Biteship (Re-calculate for safety)
+                $shippingCost = 10000;
                 $vendor = $vendorProducts->first()->vendor;
-                $shippingCost = $vendor ? $vendor->flat_shipping_cost : 10000;
+
+                if ($vendor && $address) {
+                    $originPostalCode = $vendor->postal_code;
+                    if (!$originPostalCode) {
+                        $vendorUserAddress = $vendor->user->addresses->where('is_primary', true)->first() ?? $vendor->user->addresses->first();
+                        $originPostalCode = $vendorUserAddress ? $vendorUserAddress->postal_code : null;
+                    }
+
+                    if ($originPostalCode && $address->postal_code) {
+                        $biteship = new BiteshipService();
+                        $items = [];
+                        foreach ($vendorProducts as $prod) {
+                            $items[] = [
+                                'name' => $prod->name,
+                                'price' => $prod->price,
+                                'quantity' => $cart[$prod->id]['quantity'],
+                                'weight' => $prod->weight > 0 ? (int) $prod->weight : 1000
+                            ];
+                        }
+
+                        $rates = $biteship->getShippingRates(
+                            ['postal_code' => $originPostalCode],
+                            ['postal_code' => $address->postal_code],
+                            $items
+                        );
+
+                        if (!empty($rates)) {
+                            // Check if user selected a specific service
+                            $selectedService = $request->input("shipping_service.$vendorId");
+                            if ($selectedService) {
+                                // Format: courier_code|courier_service_code|price
+                                $parts = explode('|', $selectedService);
+                                if (count($parts) === 3) {
+                                    $shippingCost = (int) $parts[2];
+                                } else {
+                                    $shippingCost = collect($rates)->min('price');
+                                }
+                            } else {
+                                $shippingCost = collect($rates)->min('price');
+                            }
+                        }
+                    } else {
+                        $shippingCost = $vendor->flat_shipping_cost;
+                    }
+                } elseif ($vendor) {
+                    $shippingCost = $vendor->flat_shipping_cost;
+                }
+
                 $totalAmount = $subtotal + $serviceFee + $shippingCost;
                 $grandTotal += $totalAmount;
 
@@ -222,5 +319,16 @@ class OrderController extends Controller
     {
         $orders = auth()->user()->orders()->with(['items.product', 'vendor'])->orderBy('created_at', 'desc')->get();
         return view('orders.index', compact('orders'));
+    }
+
+    public function show(Order $order)
+    {
+        // Security check: only the owner can view
+        if ($order->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $order->load(['items.product', 'vendor']);
+        return view('orders.show', compact('order'));
     }
 }

@@ -20,6 +20,9 @@ class Vendor extends Model
         'bank_name',
         'bank_account_number',
         'bank_account_name',
+        'address',
+        'postal_code',
+        'phone',
     ];
 
     public function user()

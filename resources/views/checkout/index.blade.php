@@ -62,8 +62,9 @@
                                     @foreach($addresses as $addr)
                                         <label
                                             class="relative flex flex-col p-4 sm:p-6 bg-white border-2 rounded-[1.5rem] sm:rounded-[2rem] cursor-pointer hover:border-primary/20 transition-all group has-[:checked]:border-primary has-[:checked]:bg-primary/5 shadow-sm">
-                                            <input type="radio" name="address_id" value="{{ $addr->id }}" {{ $loop->first ? 'checked' : '' }}
-                                                class="absolute top-4 sm:top-6 right-4 sm:right-6 h-4 w-4 sm:h-5 sm:w-5 text-primary border-slate-200 focus:ring-primary/20 transition-all">
+                                            <input type="radio" name="address_id" value="{{ $addr->id }}"
+                                                {{ $userAddress && $userAddress->id == $addr->id ? 'checked' : '' }}
+                                                class="address-selector absolute top-4 sm:top-6 right-4 sm:right-6 h-4 w-4 sm:h-5 sm:w-5 text-primary border-slate-200 focus:ring-primary/20 transition-all">
                                             <div class="pr-6 sm:pr-8">
                                                 <div
                                                     class="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">
@@ -146,6 +147,24 @@
                                         </div>
                                     @endforeach
 
+                                    @if(!empty($group['available_rates']))
+                                        <div class="mt-4 pt-4 border-t border-slate-50">
+                                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Pilih Kurir Pengiriman</label>
+                                            <select name="shipping_service[{{ $group['vendor_id'] ?? 'default' }}]" 
+                                                class="shipping-selector w-full px-4 py-2.5 bg-slate-50 border-transparent rounded-xl text-xs font-bold text-slate-700 focus:bg-white focus:border-primary transition-all"
+                                                data-vendor="{{ $group['vendor_id'] ?? 'default' }}"
+                                                data-subtotal="{{ $group['subtotal'] }}"
+                                                data-service="{{ $group['service_fee'] }}">
+                                                @foreach($group['available_rates'] as $rate)
+                                                    <option value="{{ $rate['courier_code'] }}|{{ $rate['courier_service_code'] }}|{{ $rate['price'] }}" 
+                                                        {{ $rate['price'] == $group['shipping_cost'] ? 'selected' : '' }}>
+                                                        {{ strtoupper($rate['courier_name']) }} - {{ $rate['courier_service_name'] }} (Rp {{ number_format($rate['price'], 0, ',', '.') }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endif
+
                                     <div
                                         class="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-slate-50 space-y-1.5 sm:space-y-2">
                                         <div
@@ -157,7 +176,7 @@
                                         <div
                                             class="flex justify-between text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                                             <span>Ongkos Kirim</span>
-                                            <span class="text-slate-600">Rp
+                                            <span class="text-slate-600 shipping-cost-display" data-vendor="{{ $group['vendor_id'] ?? 'default' }}">Rp
                                                 {{ number_format($group['shipping_cost'], 0, ',', '.') }}</span>
                                         </div>
                                         <div
@@ -169,7 +188,7 @@
                                         <div class="flex justify-between pt-2 sm:pt-3">
                                             <span class="text-xs font-black text-slate-800 uppercase tracking-wider">Total
                                                 Toko Ini</span>
-                                            <span class="text-xs sm:text-sm font-black text-primary">Rp
+                                            <span class="text-xs sm:text-sm font-black text-primary group-total-display" data-vendor="{{ $group['vendor_id'] ?? 'default' }}">Rp
                                                 {{ number_format($group['total'], 0, ',', '.') }}</span>
                                         </div>
                                     </div>
@@ -194,7 +213,7 @@
                                 <div class="flex justify-between items-end border-b border-white/5 pb-5 sm:pb-6">
                                     <div class="text-2xl sm:text-3xl font-black text-white tracking-tighter">
                                         <span
-                                            class="text-[10px] sm:text-xs align-top mt-1 mr-1">Rp</span>{{ number_format($grandTotal, 0, ',', '.') }}
+                                            class="text-[10px] sm:text-xs align-top mt-1 mr-1">Rp</span><span id="grand-total-display">{{ number_format($grandTotal, 0, ',', '.') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -231,4 +250,52 @@
             </form>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectors = document.querySelectorAll('.shipping-selector');
+            const formatRupiah = (number) => {
+                return new Intl.NumberFormat('id-ID', {
+                    minimumFractionDigits: 0
+                }).format(number);
+            };
+
+            const updateTotals = () => {
+                let grandTotal = 0;
+                
+                selectors.forEach(selector => {
+                    const vendorId = selector.dataset.vendor;
+                    const subtotal = parseInt(selector.dataset.subtotal);
+                    const service = parseInt(selector.dataset.service);
+                    
+                    const selectedValue = selector.value;
+                    const parts = selectedValue.split('|');
+                    const shippingPrice = parts.length === 3 ? parseInt(parts[2]) : 0;
+                    
+                    const groupTotal = subtotal + service + shippingPrice;
+                    grandTotal += groupTotal;
+                    
+                    // Update group displays
+                    document.querySelector(`.shipping-cost-display[data-vendor="${vendorId}"]`).innerText = 'Rp ' + formatRupiah(shippingPrice);
+                    document.querySelector(`.group-total-display[data-vendor="${vendorId}"]`).innerText = 'Rp ' + formatRupiah(groupTotal);
+                });
+                
+                // Update grand total
+                document.getElementById('grand-total-display').innerText = formatRupiah(grandTotal);
+            };
+
+            selectors.forEach(selector => {
+                selector.addEventListener('change', updateTotals);
+            });
+
+            // Address Change -> Reload with new rates
+            const addressRadios = document.querySelectorAll('.address-selector');
+            addressRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const url = new URL(window.location.href);
+                    url.searchParams.set('address_id', this.value);
+                    window.location.href = url.toString();
+                });
+            });
+        });
+    </script>
 </x-app-layout>

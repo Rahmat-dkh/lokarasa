@@ -76,7 +76,7 @@
                             <div>
                                 <x-input-label for="category_id" value="Kategori"
                                     class="text-[10px] uppercase tracking-widest mb-1.5" />
-                                <select id="category_id" name="category_id"
+                                <select id="category_id" name="category_id" required
                                     class="block w-full px-4 py-3 text-sm rounded-xl bg-slate-50 border-transparent focus:bg-white focus:border-primary focus:ring-primary transition-all shadow-sm">
                                     <option value="">Pilih Kategori</option>
                                     @foreach($categories as $category)
@@ -87,14 +87,26 @@
                                 <x-input-error :messages="$errors->get('category_id')" class="mt-1" />
                             </div>
 
-                            <!-- Stock -->
-                            <div>
-                                <x-input-label for="stock" value="Stok"
-                                    class="text-[10px] uppercase tracking-widest mb-1.5" />
-                                <x-text-input id="stock"
-                                    class="block w-full px-4 py-3 text-sm rounded-xl bg-slate-50 border-transparent focus:bg-white transition-all"
-                                    type="number" name="stock" :value="old('stock', $product->stock)" required />
-                                <x-input-error :messages="$errors->get('stock')" class="mt-1" />
+                            <div class="grid grid-cols-2 gap-4">
+                                <!-- Stock -->
+                                <div>
+                                    <x-input-label for="stock" value="Stok"
+                                        class="text-[10px] uppercase tracking-widest mb-1.5" />
+                                    <x-text-input id="stock"
+                                        class="block w-full px-4 py-3 text-sm rounded-xl bg-slate-50 border-transparent focus:bg-white transition-all"
+                                        type="number" name="stock" :value="old('stock', $product->stock)" required />
+                                    <x-input-error :messages="$errors->get('stock')" class="mt-1" />
+                                </div>
+
+                                <!-- Weight -->
+                                <div>
+                                    <x-input-label for="weight" value="Berat (Gram)"
+                                        class="text-[10px] uppercase tracking-widest mb-1.5" />
+                                    <x-text-input id="weight"
+                                        class="block w-full px-4 py-3 text-sm rounded-xl bg-slate-50 border-transparent focus:bg-white transition-all"
+                                        type="number" name="weight" :value="old('weight', $product->weight)" required />
+                                    <x-input-error :messages="$errors->get('weight')" class="mt-1" />
+                                </div>
                             </div>
                         </div>
 
