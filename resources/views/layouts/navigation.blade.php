@@ -318,36 +318,37 @@
 
         <!-- Header inside Drawer -->
         <div
-            class="relative px-4 pt-8 pb-4 flex flex-col items-start justify-center border-b border-white/5 bg-[#111827]">
+            class="relative px-4 pt-10 pb-5 flex flex-col items-start justify-center border-b border-white/5 bg-[#111827]">
             <button @click="open = false"
-                class="absolute top-3 right-3 w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-all active:scale-95">
+                class="absolute top-4 right-3 w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white hover:bg-[#374151] transition-all active:scale-95 shadow-lg border border-white/5">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12">
                     </path>
                 </svg>
             </button>
-            <span class="text-white font-black text-[15px] tracking-tight mt-2">LOCAL GO</span>
-            <span class="text-white/30 text-[9px] uppercase tracking-widest mt-0.5">Menu Utama</span>
+            <span class="text-[#E5E7EB] font-black text-[16px] tracking-tight mt-4">LOCAL GO</span>
+            <span class="text-[#9CA3AF] text-[9px] uppercase tracking-widest mt-0.5">Menu Utama</span>
         </div>
 
         <!-- Links -->
         <div class="flex-grow bg-[#111827] px-0">
             <nav class="flex flex-col">
                 <a href="{{ route('home') }}"
-                    class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                    class="group flex items-center px-4 py-2.5 text-[12px] font-bold text-[#E5E7EB] hover:bg-[#374151] transition-all duration-300 border-b border-white/5 {{ request()->routeIs('home') ? 'bg-[#1F2937] text-[#3B82F6]' : '' }}">
                     <span class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Home</span>
                 </a>
                 <a href="{{ route('products.index') }}"
-                    class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                    class="group flex items-center px-4 py-2.5 text-[12px] font-bold text-[#E5E7EB] hover:bg-[#374151] transition-all duration-300 border-b border-white/5 {{ request()->routeIs('products.*') ? 'bg-[#1F2937] text-[#3B82F6]' : '' }}">
                     <span class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Produk</span>
                 </a>
                 <!-- Kategori Dropdown Mobile -->
                 <div x-data="{ openKategori: false }" class="border-b border-white/5">
                     <button @click="openKategori = !openKategori"
-                        class="w-full group flex items-center justify-between px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300">
+                        class="w-full group flex items-center justify-between px-4 py-2.5 text-[12px] font-bold text-[#E5E7EB] hover:bg-[#374151] transition-all duration-300"
+                        :class="openKategori ? 'bg-[#1F2937]' : ''">
                         <span class="uppercase tracking-widest">Kategori</span>
                         <svg class="w-3.5 h-3.5 transition-transform duration-300"
-                            :class="openKategori ? 'rotate-180' : ''" fill="none" stroke="currentColor"
+                            :class="openKategori ? 'rotate-180 text-[#3B82F6]' : ''" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7">
                             </path>
@@ -355,31 +356,31 @@
                     </button>
                     <div x-show="openKategori" x-transition:enter="transition ease-out duration-300"
                         x-transition:enter-start="opacity-0 -translate-y-2"
-                        x-transition:enter-end="opacity-100 translate-y-0" class="bg-black/20 py-1">
+                        x-transition:enter-end="opacity-100 translate-y-0" class="bg-[#1F2937] py-1 shadow-inner">
                         @foreach ($categories as $category)
                             <a href="{{ route('products.index', ['category' => $category->slug]) }}"
-                                class="block px-8 py-1.5 text-[11px] font-bold text-slate-400 hover:text-white hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors uppercase tracking-widest">
+                                class="block px-8 py-2 text-[11px] font-bold text-[#9CA3AF] hover:text-[#E5E7EB] hover:bg-[#374151] border-b border-white/5 last:border-0 transition-colors uppercase tracking-widest">
                                 {{ $category->name }}
                             </a>
                         @endforeach
                         <a href="{{ route('categories.index') }}"
-                            class="block px-8 py-1.5 text-[11px] font-bold text-slate-400 hover:text-white hover:bg-white/5 transition-colors uppercase tracking-widest italic decoration-primary underline-offset-4">
+                            class="block px-8 py-2 text-[11px] font-bold text-[#9CA3AF] hover:text-[#E5E7EB] hover:bg-[#374151] transition-colors uppercase tracking-widest italic decoration-primary underline-offset-4">
                             Lihat Semua
                         </a>
                     </div>
                 </div>
                 <a href="{{ route('about') }}"
-                    class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                    class="group flex items-center px-4 py-2.5 text-[12px] font-bold text-[#E5E7EB] hover:bg-[#374151] transition-all duration-300 border-b border-white/5 {{ request()->routeIs('about') ? 'bg-[#1F2937] text-[#3B82F6]' : '' }}">
                     <span class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Tentang</span>
                 </a>
                 <a href="{{ route('contact') }}"
-                    class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                    class="group flex items-center px-4 py-2.5 text-[12px] font-bold text-[#E5E7EB] hover:bg-[#374151] transition-all duration-300 border-b border-white/5 {{ request()->routeIs('contact') ? 'bg-[#1F2937] text-[#3B82F6]' : '' }}">
                     <span class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Kontak</span>
                 </a>
 
                 @auth
                     <a href="{{ Auth::user()->isAdmin() ? route('admin.dashboard') : (Auth::user()->isSeller() ? route('vendor.dashboard') : route('dashboard')) }}"
-                        class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                        class="group flex items-center px-4 py-3 text-[12px] font-black text-[#3B82F6] bg-[#1F2937] hover:bg-[#374151] transition-all duration-300 border-y border-white/10 shadow-lg">
                         <span class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Dashboard</span>
                     </a>
                 @endauth
@@ -387,15 +388,15 @@
                 <!-- Vendor & Account Links -->
                 @auth
                     @if (Auth::user()->vendor)
-                        <div class="mt-4 pt-4 border-t border-white/10">
-                            <div class="px-4 py-2 text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">Menu Vendor
+                        <div class="mt-4 bg-[#1F2937]/50 border-t border-white/10">
+                            <div class="px-4 py-2.5 text-[10px] font-black text-[#9CA3AF] uppercase tracking-[0.2em]">Menu Vendor
                             </div>
                             <a href="{{ route('vendor.dashboard') }}"
-                                class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                                class="group flex items-center px-4 py-2.5 text-[12px] font-bold text-[#E5E7EB] hover:bg-[#374151] transition-all duration-300 border-b border-white/5">
                                 <span class="uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Dashboard Toko</span>
                             </a>
                             <a href="{{ route('shop.show', Auth::user()->vendor->slug) }}"
-                                class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                                class="group flex items-center px-4 py-2.5 text-[12px] font-bold text-[#E5E7EB] hover:bg-[#374151] transition-all duration-300 border-b border-white/5">
                                 <span class="uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Lihat Toko</span>
                             </a>
                         </div>
@@ -409,20 +410,20 @@
             <div class="mt-auto border-t border-white/10 bg-black/20 p-4">
                 <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 mb-4 group/profile">
                     <div
-                        class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm shadow-lg border border-white/10 group-hover/profile:scale-105 transition-transform">
+                        class="w-10 h-10 rounded-full bg-[#3B82F6] flex items-center justify-center text-white font-bold text-sm shadow-lg border border-white/10 group-hover/profile:scale-105 transition-transform">
                         {{ substr(Auth::user()->name, 0, 2) }}
                     </div>
                     <div>
-                        <div class="text-[12px] font-black text-white uppercase tracking-tight group-hover/profile:text-primary transition-colors">{{ Auth::user()->name }}
+                        <div class="text-[12px] font-black text-[#E5E7EB] uppercase tracking-tight group-hover/profile:text-[#3B82F6] transition-colors">{{ Auth::user()->name }}
                         </div>
-                        <div class="text-[9px] text-white/40 uppercase tracking-widest">Lihat Profil</div>
+                        <div class="text-[9px] text-[#9CA3AF] uppercase tracking-widest">Lihat Profil</div>
                     </div>
                 </a>
                 <div class="grid grid-cols-1 gap-2">
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
                         <button type="submit"
-                            class="w-full py-2 bg-red-500/80 hover:bg-red-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all">
+                            class="w-full py-2.5 bg-[#EF4444]/80 hover:bg-[#EF4444] text-white text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all shadow-lg shadow-red-500/10">
                             Keluar
                         </button>
                     </form>
