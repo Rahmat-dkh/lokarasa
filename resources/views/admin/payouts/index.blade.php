@@ -38,13 +38,24 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-[10px] text-slate-600">
                                             <div class="font-black text-slate-900">{{ $payout->vendor->bank_name }}</div>
-                                            <div>{{ $payout->vendor->bank_account_number }}</div>
-                                            <div class="italic">{{ $payout->vendor->bank_account_name }}</div>
+                                            <div class="flex items-center gap-2">
+                                                <span class="font-mono">{{ $payout->vendor->bank_account_number }}</span>
+                                                <button
+                                                    onclick="navigator.clipboard.writeText('{{ $payout->vendor->bank_account_number }}')"
+                                                    class="p-1 hover:bg-slate-100 rounded text-slate-400 hover:text-primary transition-colors"
+                                                    title="Salin Rekening">
+                                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div class="italic">a.n {{ $payout->vendor->bank_account_name }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <span
-                                                class="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest
-                                                                                {{ $payout->status == 'completed' ? 'bg-emerald-50 text-emerald-500' :
+                                            <span class="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest
+                                                                                                {{ $payout->status == 'completed' ? 'bg-emerald-50 text-emerald-500' :
                         ($payout->status == 'pending' ? 'bg-amber-50 text-amber-500' : 'bg-red-50 text-red-500') }}">
                                                 @php
                                                     $statusTranslations = [

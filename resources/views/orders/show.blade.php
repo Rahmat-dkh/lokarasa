@@ -15,7 +15,8 @@
                     <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">Detail <span
                             class="text-primary italic">Pesanan</span></h1>
                     <p class="text-slate-500 text-[10px] sm:text-xs font-medium mt-1 uppercase tracking-widest">Ref:
-                        {{ $order->payment_reference }}</p>
+                        {{ $order->payment_reference }}
+                    </p>
                 </div>
                 <div class="hidden sm:block">
                     <div class="px-4 py-2 rounded-xl font-black text-[10px] uppercase tracking-widest shadow-sm
@@ -60,7 +61,8 @@
                                 </svg>
                             </div>
                             <h3 class="font-black text-slate-800 text-sm uppercase tracking-wider">Produk dari
-                                {{ $order->vendor->shop_name ?? 'UMKM' }}</h3>
+                                {{ $order->vendor->shop_name ?? 'UMKM' }}
+                            </h3>
                         </div>
                         <div class="p-6 space-y-4">
                             @foreach($order->items as $item)
@@ -85,13 +87,16 @@
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <h4 class="font-black text-slate-800 text-xs sm:text-sm mb-1 leading-tight">
-                                            {{ $item->product->name ?? 'Produk Tidak Tersedia' }}</h4>
+                                            {{ $item->product->name ?? 'Produk Tidak Tersedia' }}
+                                        </h4>
                                         <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                                            {{ $item->quantity }} x Rp {{ number_format($item->price, 0, ',', '.') }}</p>
+                                            {{ $item->quantity }} x Rp {{ number_format($item->price, 0, ',', '.') }}
+                                        </p>
                                     </div>
                                     <div class="text-right">
                                         <div class="font-black text-slate-800 text-sm italic">Rp
-                                            {{ number_format($item->price * $item->quantity, 0, ',', '.') }}</div>
+                                            {{ number_format($item->price * $item->quantity, 0, ',', '.') }}
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -146,7 +151,8 @@
                                     class="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 inline-block px-2 py-0.5 bg-white rounded-md shadow-sm border border-slate-100">
                                     Penerima: {{ $order->user->name }}</p>
                                 <p class="text-xs sm:text-sm font-bold text-slate-700 leading-relaxed mb-3">
-                                    {{ $order->shipping_address }}</p>
+                                    {{ $order->shipping_address }}
+                                </p>
                                 <div
                                     class="flex items-center gap-2 text-primary font-black text-[10px] uppercase tracking-widest">
                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,46 +169,52 @@
 
                 <!-- Sidebar Content -->
                 <div class="space-y-6">
-                    <!-- Tracking Info (Mock/Placeholder) -->
-                    @if($order->status == 'shipped' || $order->status == 'delivered' || $order->status == 'completed')
+                    <!-- Tracking Info -->
+                    @if($order->tracking_number)
                         <div
                             class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2rem] p-8 text-white shadow-xl shadow-slate-900/10">
                             <h3 class="text-xs font-black text-white/40 uppercase tracking-[0.2em] mb-6">Lacak Pengiriman
                             </h3>
-                            <div class="space-y-6 relative">
-                                <div class="absolute left-4 top-1 bottom-1 w-px bg-white/10"></div>
-                                <div class="relative flex items-center gap-4">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-primary flex items-center justify-center border-4 border-slate-800 z-10 shadow-lg shadow-primary/20">
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p class="text-[10px] font-black uppercase text-primary tracking-widest">Diproses
-                                        </p>
-                                        <p class="text-[9px] text-white/40 italic">Pesanan mulai diproses oleh seller</p>
-                                    </div>
+
+                            <div class="space-y-4">
+                                <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                    <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Kurir</p>
+                                    <p class="text-sm font-black text-primary italic">
+                                        {{ strtoupper($order->shipping_courier) }} <span
+                                            class="text-white/40 font-bold not-italic font-sans">-
+                                            {{ strtoupper($order->shipping_service) }}</span></p>
                                 </div>
-                                <div class="relative flex items-center gap-4">
-                                    <div
-                                        class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center border-4 border-slate-800 z-10">
-                                        <div class="w-1.5 h-1.5 rounded-full bg-white/20"></div>
-                                    </div>
-                                    <div>
-                                        <p class="text-[10px] font-black uppercase text-white/40 tracking-widest">Dikirim
-                                        </p>
-                                        <p class="text-[9px] text-white/20 italic">Menunggu kurir menjemput barang</p>
+
+                                <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                    <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Nomor Resi
+                                    </p>
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-sm font-black text-white tracking-widest">
+                                            {{ $order->tracking_number }}</p>
+                                        <button onclick="navigator.clipboard.writeText('{{ $order->tracking_number }}')"
+                                            class="p-1.5 hover:bg-white/10 rounded-lg transition-colors text-white/40 hover:text-white"
+                                            title="Salin Resi">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3">
+                                                </path>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-8 pt-6 border-t border-white/5 space-y-3">
-                                <p class="text-[9px] font-black text-white/30 uppercase tracking-widest">Kurir:
-                                    {{ strtoupper($order->shipping_courier ?: 'Sedang Disiapkan') }}</p>
-                                <p class="text-[10px] font-bold text-white/60">No. Resi: <span
-                                        class="text-primary italic">#{{ $order->shipping_service ?: 'Belum Tersedia' }}</span>
-                                </p>
+
+                            <div class="mt-8 space-y-3">
+                                <a href="https://biteship.com/id/tracking/{{ $order->tracking_number }}" target="_blank"
+                                    class="flex items-center justify-center w-full py-4 bg-primary text-white font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">
+                                    Lacak Secara Real-time &rarr;
+                                </a>
+                                @if($order->shipping_label)
+                                    <a href="{{ $order->shipping_label }}" target="_blank"
+                                        class="flex items-center justify-center w-full py-4 bg-white/10 text-white/80 font-black text-[10px] uppercase tracking-widest rounded-2xl hover:bg-white/20 transition-all">
+                                        Lihat Label Pengiriman
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     @else
@@ -215,9 +227,10 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h4 class="text-sm font-black text-slate-800 mb-2 uppercase tracking-wide">Menunggu Vendor</h4>
-                            <p class="text-[10px] font-medium text-slate-400">Informasi pengiriman akan muncul secara
-                                otomatis setelah pesanan Anda mulai dikirim oleh UMKM.</p>
+                            <h4 class="text-sm font-black text-slate-800 mb-2 uppercase tracking-wide">Menunggu Pengiriman
+                            </h4>
+                            <p class="text-[10px] font-medium text-slate-400">Nomor resi akan muncul secara
+                                otomatis setelah UMKM mengirimkan paket Anda.</p>
                         </div>
                     @endif
 
@@ -228,7 +241,7 @@
                         </h4>
                         <p class="text-xs font-bold text-slate-600 mb-5 relative leading-relaxed">Punya pertanyaan
                             seputar pesanan ini? Chat langsung dengan Penjual.</p>
-                        
+
                         @php
                             $vendorPhone = $order->vendor->phone ?? '';
                             // Format for WhatsApp (remove leading 0 replace with 62)
@@ -237,8 +250,9 @@
                             }
                             $waLink = $vendorPhone ? "https://wa.me/{$vendorPhone}?text=" . urlencode("Halo Toko " . ($order->vendor->shop_name ?? '') . ", saya ingin bertanya tentang pesanan saya dengan nomor referensi #" . $order->payment_reference) : route('shop.show', $order->vendor->slug ?? '');
                         @endphp
-                        
-                        <a href="{{ $waLink }}" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-[9px] font-black uppercase tracking-widest rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 relative">
+
+                        <a href="{{ $waLink }}" target="_blank"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-[9px] font-black uppercase tracking-widest rounded-xl hover:bg-primary-dark transition-all shadow-lg shadow-primary/20 relative">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">

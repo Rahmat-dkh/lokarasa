@@ -39,7 +39,7 @@ class OrderController extends Controller
 
         foreach ($grouped as $vendorId => $vendorProducts) {
             if ($vendorId === 'default') {
-                $vendorName = 'Rasapulang (Official)';
+                $vendorName = 'LocalGo (Official)';
                 $realVendorId = null;
                 $vendor = null;
             } else {
@@ -92,10 +92,13 @@ class OrderController extends Controller
                         ];
                     }
 
+                    $couriers = $vendor->available_couriers ? implode(',', $vendor->available_couriers) : 'jne,sicepat,jnt,anteraja';
+
                     $rates = $biteship->getShippingRates(
                         ['postal_code' => $originPostalCode],
                         ['postal_code' => $userAddress->postal_code],
-                        $items
+                        $items,
+                        $couriers
                     );
 
                     if (!empty($rates)) {
@@ -163,8 +166,9 @@ class OrderController extends Controller
                 $serviceFee = 2000;
 
                 // Calculate Shipping with Biteship (Re-calculate for safety)
-                $shippingCost = 10000;
                 $vendor = $vendorProducts->first()->vendor;
+                $courierCode = 'jne';
+                $courierServiceCode = 'reg';
 
                 if ($vendor && $address) {
                     $originPostalCode = $vendor->postal_code;
@@ -185,10 +189,13 @@ class OrderController extends Controller
                             ];
                         }
 
+                        $couriers = $vendor->available_couriers ? implode(',', $vendor->available_couriers) : 'jne,sicepat,jnt,anteraja';
+
                         $rates = $biteship->getShippingRates(
                             ['postal_code' => $originPostalCode],
                             ['postal_code' => $address->postal_code],
-                            $items
+                            $items,
+                            $couriers
                         );
 
                         if (!empty($rates)) {
@@ -198,12 +205,20 @@ class OrderController extends Controller
                                 // Format: courier_code|courier_service_code|price
                                 $parts = explode('|', $selectedService);
                                 if (count($parts) === 3) {
+                                    $courierCode = $parts[0];
+                                    $courierServiceCode = $parts[1];
                                     $shippingCost = (int) $parts[2];
                                 } else {
-                                    $shippingCost = collect($rates)->min('price');
+                                    $bestRate = collect($rates)->sortBy('price')->first();
+                                    $courierCode = $bestRate['courier_code'];
+                                    $courierServiceCode = $bestRate['courier_service_code'];
+                                    $shippingCost = $bestRate['price'];
                                 }
                             } else {
-                                $shippingCost = collect($rates)->min('price');
+                                $bestRate = collect($rates)->sortBy('price')->first();
+                                $courierCode = $bestRate['courier_code'];
+                                $courierServiceCode = $bestRate['courier_service_code'];
+                                $shippingCost = $bestRate['price'];
                             }
                         }
                     } else {
@@ -226,6 +241,8 @@ class OrderController extends Controller
                     'phone' => $address->phone,
                     'service_fee' => $serviceFee,
                     'shipping_cost' => $shippingCost,
+                    'shipping_courier' => $courierCode,
+                    'shipping_service' => $courierServiceCode,
                 ]);
 
                 // Update user phone if empty

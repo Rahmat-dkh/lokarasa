@@ -21,9 +21,10 @@ class BiteshipService
      * @param array $origin Address details (postal_code is critical)
      * @param array $destination Address details (postal_code is critical)
      * @param array $items List of items (name, quantity, weight, value)
+     * @param string $couriers Comma-separated list of couriers
      * @return array List of available couriers and rates
      */
-    public function getShippingRates($origin, $destination, $items)
+    public function getShippingRates($origin, $destination, $items, $couriers = 'jne,sicepat,jnt,anteraja')
     {
         try {
             // Validate required fields
@@ -35,7 +36,7 @@ class BiteshipService
             $payload = [
                 'origin_postal_code' => $origin['postal_code'],
                 'destination_postal_code' => $destination['postal_code'],
-                'couriers' => 'jne,sicepat,jnt,anteraja', // Default couriers
+                'couriers' => $couriers,
                 'items' => array_map(function ($item) {
                     return [
                         'name' => $item['name'] ?? 'Item',
@@ -61,6 +62,75 @@ class BiteshipService
         } catch (\Exception $e) {
             Log::error('Biteship Exception: ' . $e->getMessage());
             return [];
+        }
+    }
+    /**
+     * Create a shipment in Biteship.
+     *
+     * @param array $payload Shipment details
+     * @return array Response from Biteship
+     */
+    public function createShipment($payload)
+    {
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $this->apiKey,
+                'Content-Type' => 'application/json',
+            ])->post($this->baseUrl . '/orders', $payload);
+
+            if ($response->successful()) {
+                return $response->json();
+            } else {
+                Log::error('Biteship Create Shipment Error: ' . $response->body());
+                return ['success' => false, 'message' => $response->body()];
+            }
+        } catch (\Exception $e) {
+            Log::error('Biteship Create Shipment Exception: ' . $e->getMessage());
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    /**
+     * Get shipment details from Biteship.
+     */
+    public function getShipment($shipmentId)
+    {
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $this->apiKey,
+            ])->get($this->baseUrl . '/orders/' . $shipmentId);
+
+            if ($response->successful()) {
+                return $response->json();
+            } else {
+                Log::error('Biteship Get Shipment Error: ' . $response->body());
+                return ['success' => false, 'message' => $response->body()];
+            }
+        } catch (\Exception $e) {
+            Log::error('Biteship Get Shipment Exception: ' . $e->getMessage());
+            return ['success' => false, 'message' => $e->getMessage()];
+        }
+    }
+
+    /**
+     * Get shipping label from Biteship.
+     */
+    public function getLabel($shipmentId)
+    {
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer ' . $this->apiKey,
+            ])->get($this->baseUrl . '/orders/' . $shipmentId . '/label');
+
+            if ($response->successful()) {
+                return $response->json();
+            } else {
+                Log::error('Biteship Get Label Error: ' . $response->body());
+                return ['success' => false, 'message' => $response->body()];
+            }
+        } catch (\Exception $e) {
+            Log::error('Biteship Get Label Exception: ' . $e->getMessage());
+            return ['success' => false, 'message' => $e->getMessage()];
         }
     }
 }

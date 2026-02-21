@@ -21,6 +21,9 @@ class Order extends Model
         'shipping_courier',
         'shipping_service',
         'phone',
+        'shipment_id',
+        'tracking_number',
+        'shipping_label',
     ];
 
     public function user()

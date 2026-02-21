@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $productsCount = $vendor->products()->count();
         $balance = $vendor->wallet ? $vendor->wallet->balance : 0;
 
-        $recentOrders = $vendor->orders()->with(['user', 'items.product'])->latest()->take(5)->get();
+        $recentOrders = $vendor->orders()->with(['user', 'items.product'])->latest()->take(3)->get();
 
         return view('vendor.dashboard', compact('vendor', 'ordersCount', 'productsCount', 'balance', 'recentOrders'));
     }
@@ -32,9 +32,13 @@ class DashboardController extends Controller
             'address' => 'required|string',
             'postal_code' => 'required|string|max:10',
             'phone' => 'required|string|max:20',
+            'available_couriers' => 'nullable|array',
         ]);
 
-        $vendor->update($request->only('shop_name', 'description', 'flat_shipping_cost', 'bank_name', 'bank_account_number', 'bank_account_name', 'address', 'postal_code', 'phone'));
+        $data = $request->only('shop_name', 'description', 'flat_shipping_cost', 'bank_name', 'bank_account_number', 'bank_account_name', 'address', 'postal_code', 'phone');
+        $data['available_couriers'] = $request->input('available_couriers');
+
+        $vendor->update($data);
 
         return back()->with('success', 'Shop settings updated successfully.');
     }

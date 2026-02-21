@@ -23,6 +23,11 @@ class Vendor extends Model
         'address',
         'postal_code',
         'phone',
+        'available_couriers',
+    ];
+
+    protected $casts = [
+        'available_couriers' => 'array',
     ];
 
     public function user()

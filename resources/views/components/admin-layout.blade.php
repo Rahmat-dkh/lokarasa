@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Rasapulang Admin') }}</title>
+    <title>{{ config('app.name', 'LocalGo Admin') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@
                 <!-- Logo -->
                 <div class="flex items-center justify-center h-16 border-b border-slate-700 bg-neutral-dark/50">
                     <a href="/"
-                        class="text-2xl font-black tracking-tighter text-white hover:text-primary transition-colors">Rasapulang<span
+                        class="text-2xl font-black tracking-tighter text-white hover:text-primary transition-colors">LocalGo<span
                             class="text-primary">.</span></a>
                 </div>
 

@@ -44,6 +44,12 @@ class AddToCartButton extends Component
         ]);
     }
 
+    public function buyNow()
+    {
+        $this->addToCart();
+        return redirect()->route('checkout');
+    }
+
     public function render()
     {
         return view('livewire.add-to-cart-button');

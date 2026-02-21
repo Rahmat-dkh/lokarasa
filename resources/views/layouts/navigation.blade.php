@@ -1,97 +1,124 @@
-<!-- Top Bar: Socials & Language -->
-    <div
-        class="relative z-[60] bg-[#0c4a6e] text-white text-[10px] font-bold uppercase tracking-widest py-3 border-b border-white/5">
-        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-            <!-- Left: Social Media Icons -->
-            <div class="flex items-center gap-4">
-                <span class="text-white/50 hidden sm:inline">Ikuti Kami:</span>
-                <a href="https://instagram.com" target="_blank"
-                    class="flex items-center gap-1 hover:text-cyan-400 transition-colors group">
-                    <svg class="w-3.5 h-3.5 group-hover:scale-110 transition-transform" fill="currentColor"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    </svg>
-                </a>
-                <a href="https://tiktok.com" target="_blank"
-                    class="flex items-center gap-1 hover:text-cyan-400 transition-colors group">
-                    <svg class="w-3.5 h-3.5 group-hover:scale-110 transition-transform" fill="currentColor"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 3.13-.75 6.17-2.66 8.57-2.05 2.53-5.27 3.54-8.38 2.62-3.11-.92-5.46-3.8-5.78-7.04-.32-3.23 1.55-6.28 4.47-7.65.62-.29 1.28-.5 1.95-.62v4.21c-.48.11-.95.3-1.39.58-1.51.96-1.95 2.95-1.04 4.5.91 1.54 2.89 2.05 4.46 1.16.89-.51 1.44-1.45 1.44-2.48v-17.1h2.85z" />
-                    </svg>
-                </a>
-                <a href="https://youtube.com" target="_blank"
-                    class="flex items-center gap-1 hover:text-cyan-400 transition-colors group">
-                    <svg class="w-3.5 h-3.5 group-hover:scale-110 transition-transform" fill="currentColor"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                    </svg>
-                </a>
-            </div>
+
+
+<nav
+        id="main-nav"
+        x-data="{ 
+            showHeader: true, 
+            isScrolled: false,
+            lastScroll: 0
+        }"
+        @scroll.window.throttle.50ms="
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Scrolled state for styling
+            isScrolled = currentScroll > 40;
  
-            <!-- Right: Language Switcher -->
-            <div class="flex items-center gap-3">
-                <div class="flex items-center gap-1.5 cursor-pointer hover:text-cyan-400 transition-colors">
-                    <!-- Globe Icon -->
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
- 
-                    <a href="{{ route('lang.switch', 'id') }}"
-                        class="{{ app()->getLocale() == 'id' ? 'font-black text-white' : 'font-medium text-white/50 hover:text-white' }} transition-colors">ID</a>
-                    <span class="text-white/30">|</span>
-                    <a href="{{ route('lang.switch', 'en') }}"
-                        class="{{ app()->getLocale() == 'en' ? 'font-black text-white' : 'font-medium text-white/50 hover:text-white' }} transition-colors">EN</a>
+            // Smart hide/show logic for desktop
+            if (window.innerWidth >= 1024) {
+                if (currentScroll > lastScroll && currentScroll > 200) {
+                    showHeader = false; // Scrolling down
+                } else {
+                    showHeader = true; // Scrolling up or near top
+                }
+            } else {
+                showHeader = true;
+            }
+            lastScroll = currentScroll;
+        "
+        class="sticky top-0 z-[999] transition-all duration-500 ease-in-out border-b"
+        :class="{
+            'translate-y-0': showHeader,
+            '-translate-y-full shadow-none': !showHeader,
+            'bg-primary shadow-lg border-white/10': isScrolled,
+            'bg-primary border-white/5': !isScrolled
+        }"
+        x-init="$watch('open', value => {
+            if (value) document.body.classList.add('overflow-hidden');
+            else document.body.classList.remove('overflow-hidden');
+        })">
+        
+        <!-- Top Bar: Socials & Language -->
+        <div x-show="!isScrolled" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             class="hidden md:block bg-[#0c4a6e] text-white text-[10px] font-bold uppercase tracking-widest py-[1px] border-b border-white/5">
+            <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+                <!-- Left: Social Media Icons -->
+                <div class="flex items-center gap-4">
+                    <span class="text-white/50 hidden md:inline">Ikuti Kami:</span>
+                    <a href="https://instagram.com" target="_blank"
+                        class="flex items-center gap-1 hover:text-cyan-400 transition-colors group">
+                        <svg class="w-3.5 h-3.5 group-hover:scale-110 transition-transform" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                    <a href="https://tiktok.com" target="_blank"
+                        class="flex items-center gap-1 hover:text-cyan-400 transition-colors group">
+                        <svg class="w-3.5 h-3.5 group-hover:scale-110 transition-transform" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v6.16c0 3.13-.75 6.17-2.66 8.57-2.05 2.53-5.27 3.54-8.38 2.62-3.11-.92-5.46-3.8-5.78-7.04-.32-3.23 1.55-6.28 4.47-7.65.62-.29 1.28-.5 1.95-.62v4.21c-.48.11-.95.3-1.39.58-1.51.96-1.95 2.95-1.04 4.5.91 1.54 2.89 2.05 4.46 1.16.89-.51 1.44-1.45 1.44-2.48v-17.1h2.85z" />
+                        </svg>
+                    </a>
+                    <a href="https://youtube.com" target="_blank"
+                        class="flex items-center gap-1 hover:text-cyan-400 transition-colors group">
+                        <svg class="w-3.5 h-3.5 group-hover:scale-110 transition-transform" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Right: Language Switcher -->
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1.5 cursor-pointer hover:text-cyan-400 transition-colors">
+                        <!-- Globe Icon -->
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+
+                        <a href="{{ route('lang.switch', 'id') }}"
+                            class="{{ app()->getLocale() == 'id' ? 'font-black text-white' : 'font-medium text-white/50 hover:text-white' }} transition-colors">ID</a>
+                        <span class="text-white/30">|</span>
+                        <a href="{{ route('lang.switch', 'en') }}"
+                            class="{{ app()->getLocale() == 'en' ? 'font-black text-white' : 'font-medium text-white/50 hover:text-white' }} transition-colors">EN</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
- 
-    <nav
-        x-data="{ 
-            showHeader: true, 
-            lastScroll: 0,
-            handleScroll() {
-                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-                if (currentScroll <= 60) {
-                    this.showHeader = true;
-                } else if (currentScroll > this.lastScroll) {
-                    this.showHeader = false;
-                } else {
-                    this.showHeader = true;
-                }
-                this.lastScroll = currentScroll;
-            }
-        }"
-        @scroll.window.throttle.10ms="handleScroll()"
-        class="sticky top-0 z-[999] bg-primary border-b border-white/5 shadow-xl shadow-primary/20 backdrop-blur-xl transition-all duration-500"
-        :class="showHeader ? 'translate-y-0' : '-translate-y-full'">
         <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-14 md:h-14 gap-2 md:gap-8">
+            <div class="flex items-center justify-between gap-2 md:gap-8 transition-all duration-700 ease-in-out"
+                :class="isScrolled ? 'h-12 md:h-11' : 'h-14 md:h-14'">
                 <!-- Group Left: Logo -->
                 <div class="flex-none flex items-center md:w-48">
                     <a href="/" class="flex items-center gap-1.5 md:gap-2">
-                        <img src="{{ asset('images/logo_lokarasa.png') }}" alt="Rasapulang"
-                            class="h-7 md:h-9 w-auto object-contain rounded-lg">
+                        <img src="{{ asset('images/logo_lokarasa.png') }}" alt="LocalGo"
+                            class="w-auto object-contain rounded-lg transition-all duration-500"
+                            :class="isScrolled ? 'h-7 md:h-7' : 'h-9 md:h-9'">
                         <span class="text-white font-black text-lg md:text-xl tracking-tighter hidden sm:block">
-                            Rasa<span class="text-white/80">pulang</span>
+                            Local<span class="text-white/80">Go</span>
                         </span>
                     </a>
                 </div>
  
                 <!-- Group Center: Centered Search Bar (Desktop Only) -->
-                <div class="hidden md:flex flex-grow justify-center px-4">
-                    <div class="w-full max-w-3xl">
+                <div class="hidden md:flex flex-grow justify-center px-4 pt-3">
+                    <div class="w-full max-w-xl">
                         <form action="{{ route('products.index') }}" method="GET" class="relative group w-full">
                             <div class="relative flex items-center">
                                 <input type="text" name="search" placeholder="Cari brand, produk, atau seller UMKM..."
-                                    class="w-full bg-white border-none rounded-lg pl-4 pr-12 py-2 text-sm text-neutral-dark placeholder-slate-400 focus:ring-2 focus:ring-white/50 shadow-md">
+                                    class="w-full bg-white border border-white/30 rounded-xl pl-6 pr-14 py-2 text-sm text-neutral-dark placeholder-slate-400 focus:ring-2 focus:ring-white/20 transition-all duration-300">
                                 <button type="submit"
-                                    class="absolute right-1 top-1 bottom-1 bg-primary text-white hover:bg-neutral-dark rounded-md px-3 mb-0 transition-colors duration-300">
-                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    class="absolute right-1.5 top-1.5 bottom-1.5 bg-primary text-white hover:bg-neutral-dark rounded-lg px-4 mb-0 transition-all duration-300 flex items-center justify-center">
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
@@ -183,17 +210,13 @@
                 </div>
             </div>
  
-        <!-- Mobile Search Panel -->
         <div x-show="openMobileSearch" 
-             x-transition:enter="transition ease-out duration-200"
-             x-transition:enter-start="opacity-0 -translate-y-2"
-             x-transition:enter-end="opacity-100 translate-y-0"
              class="md:hidden px-4 pb-4">
             <form action="{{ route('products.index') }}" method="GET" class="relative">
                 <input type="text" name="search" placeholder="Cari di Rasapulang..."
-                    class="w-full bg-white border-none rounded-full pl-4 pr-10 py-2 text-sm text-neutral-dark focus:ring-2 focus:ring-white/50 shadow-inner">
+                    class="w-full bg-white border border-white/30 rounded-xl pl-5 pr-10 py-2 text-sm text-neutral-dark focus:ring-2 focus:ring-white/20">
                 <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-primary">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </button>
@@ -201,7 +224,8 @@
         </div>
  
         <!-- Row 2: Navigation Links & Icons (Desktop) -->
-        <div class="hidden md:flex items-center h-14 px-4 sm:px-6 lg:px-8">
+        <div class="hidden md:flex items-center px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-in-out border-t border-white/5"
+            :class="isScrolled ? 'h-9' : 'h-11'">
             <!-- Left: Categories -->
             <div class="flex-none w-48">
                 <!-- Categories -->
@@ -240,19 +264,19 @@
             <div class="flex-grow flex justify-center px-4">
                 <div class="flex items-center gap-1 lg:gap-2">
                     <a href="{{ route('home') }}"
-                        class="relative px-4 py-1.5 text-sm font-bold text-white rounded-full transition-all duration-300 hover:bg-white/10 hover:text-cyan-300 whitespace-nowrap group {{ request()->routeIs('home') ? 'text-cyan-300' : '' }}">
+                        class="relative px-4 py-1 text-sm font-bold text-white rounded-full transition-all duration-300 hover:bg-white/10 hover:text-cyan-300 whitespace-nowrap group {{ request()->routeIs('home') ? 'text-cyan-300' : '' }}">
                         Beranda
                     </a>
                     <a href="{{ route('products.index') }}"
-                        class="relative px-4 py-1.5 text-sm font-bold text-white rounded-full transition-all duration-300 hover:bg-white/10 hover:text-cyan-300 whitespace-nowrap group {{ request()->routeIs('products.*') ? 'text-cyan-300' : '' }}">
+                        class="relative px-4 py-1 text-sm font-bold text-white rounded-full transition-all duration-300 hover:bg-white/10 hover:text-cyan-300 whitespace-nowrap group {{ request()->routeIs('products.*') ? 'text-cyan-300' : '' }}">
                         Produk
                     </a>
                     <a href="{{ route('about') }}"
-                        class="relative px-4 py-1.5 text-sm font-bold text-white rounded-full transition-all duration-300 hover:bg-white/10 hover:text-cyan-300 whitespace-nowrap group {{ request()->routeIs('about') ? 'text-cyan-300' : '' }}">
+                        class="relative px-4 py-1 text-sm font-bold text-white rounded-full transition-all duration-300 hover:bg-white/10 hover:text-cyan-300 whitespace-nowrap group {{ request()->routeIs('about') ? 'text-cyan-300' : '' }}">
                         Tentang
                     </a>
                     <a href="{{ route('contact') }}"
-                        class="relative px-4 py-1.5 text-sm font-bold text-white rounded-full transition-all duration-300 hover:bg-white/10 hover:text-cyan-300 whitespace-nowrap group {{ request()->routeIs('contact') ? 'text-cyan-300' : '' }}">
+                        class="relative px-4 py-1 text-sm font-bold text-white rounded-full transition-all duration-300 hover:bg-white/10 hover:text-cyan-300 whitespace-nowrap group {{ request()->routeIs('contact') ? 'text-cyan-300' : '' }}">
                         Kontak
                     </a>
                 </div>
@@ -271,175 +295,148 @@
     </nav>
 
 <!-- Mobile menu Drawer -->
-<div x-show="open" class="fixed inset-0 top-14 z-[60] md:hidden" style="display: none;">
-    <!-- Backdrop -->
+<div x-show="open" 
+     x-cloak
+     class="fixed inset-0 z-[100000] md:hidden pointer-events-none" 
+     style="display: none;">
+    <!-- Backdrop (Transparent as requested) -->
     <div x-show="open" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-400"
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="open = false"
-        class="absolute inset-0 bg-neutral-dark/80 backdrop-blur-sm"></div>
+        class="absolute inset-0 bg-transparent pointer-events-auto z-[99999]"></div>
 
     <!-- Drawer Content -->
     <div x-show="open" x-transition:enter="transition ease-out duration-500 transform"
         x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
         x-transition:leave="transition ease-in duration-400 transform" x-transition:leave-start="translate-x-0"
         x-transition:leave-end="translate-x-full"
-        class="fixed right-0 top-14 bottom-0 w-[60%] max-w-[220px] bg-[#111827] flex flex-col shadow-2xl z-[100] border-l border-white/5 overflow-y-auto">
+        class="absolute right-0 top-0 bottom-0 w-52 bg-[#111827] h-screen flex flex-col shadow-2xl z-[100000] border-l border-white/5 overflow-y-auto pointer-events-auto">
 
         <!-- Header inside Drawer -->
         <div
-            class="relative px-5 pt-8 pb-4 flex flex-col items-start justify-center border-b border-white/5 bg-[#111827]">
+            class="relative px-4 pt-5 pb-3 flex flex-col items-start justify-center border-b border-white/5 bg-[#111827]">
             <button @click="open = false"
-                class="absolute top-4 right-4 w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-all">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="absolute top-2.5 right-3 w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12">
                     </path>
                 </svg>
             </button>
-            <h3 class="text-white font-black text-base uppercase tracking-wider">Navigasi</h3>
-            <p class="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500 mt-1">Menu Utama</p>
+            <span class="text-white font-bold text-[14px]">LOCAL GO</span>
+            <span class="text-white/30 text-[9px] uppercase tracking-widest mt-0.5">Menu Utama</span>
         </div>
 
         <!-- Links -->
-        <div class="flex-grow bg-[#111827] px-3">
-            <nav class="flex flex-col space-y-1 mt-2">
+        <div class="flex-grow bg-[#111827] px-0">
+            <nav class="flex flex-col">
                 <a href="{{ route('home') }}"
-                    class="group flex items-center px-6 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
-                    <span
-                        class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Home</span>
+                    class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                    <span class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Home</span>
                 </a>
                 <a href="{{ route('products.index') }}"
-                    class="group flex items-center px-6 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
-                    <span
-                        class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Produk</span>
+                    class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                    <span class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Produk</span>
                 </a>
                 <!-- Kategori Dropdown Mobile -->
-                <div x-data="{ openMobileCategory: false }" class="w-full">
-                    <button @click="openMobileCategory = !openMobileCategory"
-                        class="group flex items-center justify-between w-full px-6 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5">
+                <div x-data="{ openKategori: false }" class="border-b border-white/5">
+                    <button @click="openKategori = !openKategori"
+                        class="w-full group flex items-center justify-between px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300">
                         <span class="uppercase tracking-widest">Kategori</span>
-                        <svg class="w-4 h-4 transition-transform duration-300"
-                            :class="{ 'rotate-180': openMobileCategory }" fill="none" stroke="currentColor"
+                        <svg class="w-3.5 h-3.5 transition-transform duration-300"
+                            :class="openKategori ? 'rotate-180' : ''" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
                     </button>
-
-                    <!-- Mobile Category List -->
-                    <div x-show="openMobileCategory" x-collapse
-                        class="mt-1 ml-6 space-y-0.5 border-l border-white/10 pl-4">
-                        @php
-                            $mobileCategories = cache()->remember('navbar_categories', 3600, function () {
-                                return \App\Models\Category::withCount('products')->orderBy('name')->get();
-                            });
-                        @endphp
-                        @forelse($mobileCategories as $cat)
-                            <a href="{{ route('categories.show', $cat->slug) }}"
-                                class="flex items-center justify-between py-2 text-xs text-slate-400 hover:text-white transition-all">
-                                {{ $cat->name }}
-                                <span class="text-slate-600">{{ $cat->products_count }}</span>
+                    <div x-show="openKategori" x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 -translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0" class="bg-black/20 py-1">
+                        @foreach ($categories as $category)
+                            <a href="{{ route('products.index', ['category' => $category->slug]) }}"
+                                class="block px-8 py-1.5 text-[11px] font-bold text-slate-400 hover:text-white hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors uppercase tracking-widest">
+                                {{ $category->name }}
                             </a>
-                        @empty
-                            <p class="py-2 text-xs text-slate-500">Belum ada kategori</p>
-                        @endforelse
+                        @endforeach
                         <a href="{{ route('categories.index') }}"
-                            class="flex items-center gap-1 py-2 text-xs font-bold text-primary transition-all">
-                            Lihat Semua →
+                            class="block px-8 py-1.5 text-[11px] font-bold text-slate-400 hover:text-white hover:bg-white/5 transition-colors uppercase tracking-widest italic decoration-primary underline-offset-4">
+                            Lihat Semua
                         </a>
                     </div>
                 </div>
                 <a href="{{ route('about') }}"
-                    class="group flex items-center px-6 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
-                    <span
-                        class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Tentang</span>
+                    class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                    <span class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Tentang</span>
                 </a>
                 <a href="{{ route('contact') }}"
-                    class="group flex items-center px-6 py-3 text-sm font-bold text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
-                    <span
-                        class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Kontak</span>
+                    class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                    <span class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Kontak</span>
                 </a>
 
-                @auth
-                    @if(Auth::user()->isSeller())
-                        <div class="mt-4 pt-4 border-t border-white/5">
-                            <p class="px-6 text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Menu Vendor
-                            </p>
+                <!-- Vendor & Account Links -->
+                <div class="mt-4 pt-4 border-t border-white/10">
+                    <div class="px-4 py-2 text-[10px] font-black text-white/30 uppercase tracking-[0.2em]">Menu Vendor
+                    </div>
+                    @auth
+                        @if (Auth::user()->vendor)
                             <a href="{{ route('vendor.dashboard') }}"
-                                class="group flex items-center px-6 py-3 text-sm font-bold {{ request()->routeIs('vendor.dashboard') ? 'text-primary' : 'text-slate-300' }} hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
-                                <span
-                                    class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Dashboard
-                                    Toko</span>
+                                class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                                <span class="uppercase tracking-widest">Dashboard Toko</span>
                             </a>
                             <a href="{{ route('shop.show', Auth::user()->vendor->slug) }}"
-                                class="group flex items-center px-6 py-3 text-sm font-bold {{ request()->routeIs('shop.show') ? 'text-primary' : 'text-slate-300' }} hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
-                                <span
-                                    class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Lihat
-                                    Toko</span>
+                                class="group flex items-center px-4 py-2 text-[12px] font-bold text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-300 border-b border-white/5">
+                                <span class="uppercase tracking-widest">Lihat Toko</span>
                             </a>
-                        </div>
-                    @else
-                        <div class="mt-4 pt-4 border-t border-white/5">
-                            <p class="px-6 text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Menu Akun
-                            </p>
-                            <a href="{{ route('dashboard') }}"
-                                class="group flex items-center px-6 py-3 text-sm font-bold {{ request()->routeIs('dashboard') ? 'text-primary' : 'text-slate-300' }} hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300 border border-transparent hover:border-white/5 active:scale-[0.98]">
-                                <span
-                                    class="w-full uppercase tracking-widest group-hover:translate-x-1 transition-transform inline-block">Dashboard</span>
+                        @else
+                            <a href="{{ route('vendor.register') }}"
+                                class="group flex items-center px-4 py-2 text-[12px] font-bold text-innovation hover:text-white hover:bg-innovation transition-all duration-300 border-b border-white/5">
+                                <span class="uppercase tracking-widest">Jadi Seller</span>
                             </a>
-                        </div>
-                    @endif
-                @endauth
+                        @endif
+                    @endauth
+                </div>
             </nav>
         </div>
 
-        <!-- Mobile Search Bar (Shopee Style) -->
-        <div x-show="openMobileSearch" class="relative bg-primary px-4 pb-4 md:hidden border-b border-white/5 shadow-xl"
-            x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2"
-            x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150"
-            x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
-            style="display: none;">
-            <form action="{{ route('products.index') }}" method="GET" class="relative w-full">
-                <input type="text" name="search" placeholder="Cari produk UMKM..."
-                    class="w-full bg-white border-none rounded-lg pl-4 pr-12 py-2.5 text-sm text-neutral-dark placeholder-slate-400 focus:ring-2 focus:ring-white/50 shadow-inner">
-                <button type="submit"
-                    class="absolute right-1 top-1 bottom-1 bg-primary-dark/10 text-primary rounded-md px-3">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                </button>
-            </form>
-        </div>
-
-        <!-- Profile / Auth inside Drawer -->
-        <div class="p-6 bg-[#111827] border-t border-white/5">
-            @auth
-                <div class="flex items-center gap-3 mb-6">
-                    <img src="{{ Auth::user()->avatar ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=0ea5e9&color=fff' }}"
-                        class="w-10 h-10 rounded-full border-2 border-primary/20">
-                    <div class="min-w-0">
-                        <p class="text-white font-black text-xs truncate">{{ Auth::user()->name }}</p>
-                        <a href="{{ route('profile.edit') }}"
-                            class="text-slate-500 text-[10px] font-bold uppercase tracking-widest hover:text-primary block">Profil
-                            Saya</a>
+        <!-- User Profile Section -->
+        @auth
+            <div class="mt-auto border-t border-white/10 bg-black/20 p-4">
+                <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 mb-4 group/profile">
+                    <div
+                        class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm shadow-lg border border-white/10 group-hover/profile:scale-105 transition-transform">
+                        {{ substr(Auth::user()->name, 0, 2) }}
                     </div>
-                </div>
-            @endauth
-
-            @guest
-                <a href="{{ route('login') }}"
-                    class="flex items-center justify-center w-full py-3 bg-primary text-white font-black text-sm rounded-xl shadow-xl shadow-primary/20 hover:bg-primary-dark transition-all active:scale-95">
-                    Masuk
+                    <div>
+                        <div class="text-[12px] font-black text-white uppercase tracking-tight group-hover/profile:text-primary transition-colors">{{ Auth::user()->name }}
+                        </div>
+                        <div class="text-[9px] text-white/40 uppercase tracking-widest">Lihat Profil</div>
+                    </div>
                 </a>
-            @else
-                <form method="POST" action="{{ Auth::user()->isAdmin() ? route('admin.logout') : route('logout') }}">
-                    @csrf
-                    <button type="submit"
-                        class="flex items-center justify-center w-full py-3 bg-red-500 text-white font-black text-sm rounded-xl shadow-xl shadow-red-500/20 hover:bg-neutral-dark transition-all active:scale-95">
-                        Keluar
-                    </button>
-                </form>
-            @endguest
-        </div>
+                <div class="grid grid-cols-1 gap-2">
+                    <form method="POST" action="{{ route('logout') }}" class="w-full">
+                        @csrf
+                        <button type="submit"
+                            class="w-full py-2 bg-red-500/80 hover:bg-red-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all">
+                            Keluar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        @else
+            <div class="mt-auto border-t border-white/10 bg-black/20 p-4">
+                <p class="text-[10px] text-white/40 uppercase tracking-widest mb-4 text-center italic">Masuk untuk belanja
+                    lebih seru!</p>
+                <div class="grid grid-cols-1 gap-2">
+                    <a href="{{ route('login') }}"
+                        class="w-full py-2 bg-primary hover:bg-primary-dark text-white text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all text-center shadow-lg shadow-primary/20">
+                        Login
+                    </a>
+                    <a href="{{ route('register') }}"
+                        class="w-full py-2 bg-white/5 border border-white/10 hover:bg-white/10 text-white text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all text-center">
+                        Daftar
+                    </a>
+                </div>
+            </div>
+        @endauth
     </div>
 </div>

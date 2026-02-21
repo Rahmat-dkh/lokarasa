@@ -69,7 +69,7 @@ class CartPanel extends Component
 
     public function getWaMessageProperty()
     {
-        $text = "Halo Rasapulang, saya ingin memesan:\n\n";
+        $text = "Halo LocalGo, saya ingin memesan:\n\n";
         foreach ($this->cart as $item) {
             $text .= "- " . $item['name'] . " (" . $item['quantity'] . "x) - Rp " . number_format($item['price'], 0, ',', '.') . "\n";
         }
