@@ -1,9 +1,10 @@
 <div wire:ignore.self x-data="{ isOpen: false }" x-on:open-cart-panel.window="isOpen = true" x-show="isOpen" x-cloak
-    @keydown.escape.window="isOpen = false" class="fixed inset-0 z-[1001] overflow-hidden">
+    @keydown.escape.window="isOpen = false" class="fixed inset-0 z-[9999999] overflow-hidden"
+    style="z-index: 9999999 !important;">
     <div class="absolute inset-0 bg-neutral-dark/40 backdrop-blur-sm transition-opacity" @click="isOpen = false"></div>
 
-    <div class="fixed top-24 right-4 md:right-20 z-[1002] flex flex-col w-full max-w-[80vw] sm:max-w-[320px]"
-        style="pointer-events: auto;">
+    <div class="fixed top-24 right-4 md:right-20 z-[10000000] flex flex-col w-full max-w-[80vw] sm:max-w-[320px]"
+        style="pointer-events: auto; z-index: 10000000 !important;">
         <div x-show="isOpen" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 translate-y-4 scale-95"
             x-transition:enter-end="opacity-100 translate-y-0 scale-100"

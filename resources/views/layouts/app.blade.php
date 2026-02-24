@@ -85,13 +85,14 @@
 
         @include('layouts.footer')
 
-        <!-- Global Components -->
-        <livewire:cart-panel />
-        <livewire:wishlist-panel />
-
-        <!-- Chat Widget Global -->
-        <livewire:chat-widget />
     </div>
+
+    <!-- Global Components (Outside min-h-screen to fix stacking context) -->
+    <livewire:cart-panel />
+    <livewire:wishlist-panel />
+
+    <!-- Chat Widget Global -->
+    <livewire:chat-widget />
 
     @livewireScripts
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

@@ -185,19 +185,15 @@
 
                 <!-- Mobile Icons Group (Always on Right) -->
                 <div class="flex md:hidden items-center gap-1">
-                    <!-- Search Toggle (Far Left of Group) -->
+                    <!-- Search Toggle -->
                     <button @click="openMobileSearch = !openMobileSearch"
-                        class="text-white w-11 h-11 flex items-center justify-center hover:bg-white/10 rounded-full transition-all active:scale-95 shrink-0">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                        class="text-white hover:bg-white/10 rounded-full transition-all active:scale-95 shrink-0"
+                        style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 25px; height: 25px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </button>
-
-                    <!-- Wishlist -->
-                    <div class="relative group text-white shrink-0 scale-110 px-1">
-                        <livewire:wishlist-icon />
-                    </div>
 
                     <!-- Cart -->
                     <div class="relative group text-white shrink-0 scale-110 px-1">
@@ -206,12 +202,12 @@
 
                     <!-- Menu Hamburger -->
                     <button @click="open = ! open"
-                        class="w-11 h-11 text-white hover:text-cyan-400 hover:bg-white/10 active:scale-95 transition-all duration-300 flex items-center justify-center rounded-full shrink-0">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path :class="{'hidden': open, 'inline-flex': ! open }" stroke-linecap="round"
-                                stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"></path>
-                            <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                        class="text-white hover:text-cyan-400 hover:bg-white/10 active:scale-95 transition-all duration-300 rounded-full shrink-0"
+                        style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 25px; height: 25px;">
+                            <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
@@ -360,35 +356,6 @@
                     class="group flex items-center px-6 py-5 text-base font-bold text-slate-700 hover:text-primary hover:bg-slate-50 transition-all duration-300 border-b border-slate-100 last:border-0 {{ request()->routeIs('products.*') ? 'text-primary' : '' }}">
                     <span class="uppercase tracking-widest transition-transform">Produk</span>
                 </a>
-                <!-- Kategori Dropdown Mobile -->
-                <div x-data="{ openKategori: false }" class="border-b border-slate-100 last:border-0">
-                    <button @click="openKategori = !openKategori"
-                        class="group w-full flex items-center justify-between px-6 py-5 text-base font-bold text-slate-700 hover:text-primary hover:bg-slate-50 transition-all duration-300"
-                        :class="openKategori ? 'bg-slate-50' : ''">
-                        <span class="uppercase tracking-widest">Kategori</span>
-                        <svg class="w-4 h-4 transition-transform duration-300"
-                            :class="openKategori ? 'rotate-180 text-primary' : 'text-slate-400'" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div x-show="openKategori" x-transition:enter="transition ease-out duration-300"
-                        x-transition:enter-start="opacity-0 -translate-y-2"
-                        x-transition:enter-end="opacity-100 translate-y-0"
-                        class="bg-slate-50/50 py-0.5 shadow-inner border-l-4 border-l-primary/10">
-                        @foreach ($categories as $category)
-                            <a href="{{ route('products.index', ['category' => $category->slug]) }}"
-                                class="block px-7 py-3 text-xs font-bold text-slate-500 hover:text-primary hover:bg-slate-100/50 border-b border-slate-200 last:border-0 transition-colors uppercase tracking-widest">
-                                {{ $category->name }}
-                            </a>
-                        @endforeach
-                        <a href="{{ route('categories.index') }}"
-                            class="block px-7 py-3 text-xs font-bold text-slate-400 hover:text-primary hover:bg-slate-100/50 transition-colors uppercase tracking-widest italic">
-                            Lihat Semua
-                        </a>
-                    </div>
-                </div>
                 <a href="{{ route('about') }}"
                     class="group flex items-center px-6 py-5 text-base font-bold text-slate-700 hover:text-primary hover:bg-slate-50 transition-all duration-300 border-b border-slate-100 last:border-0 {{ request()->routeIs('about') ? 'text-primary' : '' }}">
                     <span class="uppercase tracking-widest transition-transform">Tentang</span>
@@ -397,6 +364,10 @@
                     class="group flex items-center px-6 py-5 text-base font-bold text-slate-700 hover:text-primary hover:bg-slate-50 transition-all duration-300 border-b border-slate-100 last:border-0 {{ request()->routeIs('contact') ? 'text-primary' : '' }}">
                     <span class="uppercase tracking-widest transition-transform">Kontak</span>
                 </a>
+                <button @click="window.dispatchEvent(new CustomEvent('open-wishlist-panel'))"
+                    class="group w-full flex items-center px-6 py-5 text-base font-bold text-slate-700 hover:text-primary hover:bg-slate-50 transition-all duration-300 border-b border-slate-100 last:border-0 text-left">
+                    <span class="uppercase tracking-widest transition-transform">Favorit</span>
+                </button>
                 <style>
                     .py-5\.5 {
                         padding-top: 22px;

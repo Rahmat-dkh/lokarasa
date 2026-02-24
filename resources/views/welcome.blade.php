@@ -107,9 +107,46 @@
     </div>
 
 
-    <!-- Kuliner Nusantara Section -->
+    <!-- Mobile Categories Section (Below Hero) -->
+    <div class="block md:hidden bg-white border-b border-slate-100">
+        <div class="px-4 py-4" x-data="{ openMobCat: false }">
+            <button @click="openMobCat = !openMobCat"
+                class="w-full flex items-center justify-between px-5 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl group active:scale-[0.98] transition-all duration-300">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </div>
+                    <span class="text-sm font-black text-slate-800 uppercase tracking-widest">Pilih Kategori</span>
+                </div>
+                <svg class="w-4 h-4 text-slate-400 transition-transform duration-300"
+                    :class="openMobCat ? 'rotate-180 text-primary' : ''" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+
+            <div x-show="openMobCat" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
+                class="mt-3 grid grid-cols-2 gap-2 pb-2">
+                @php
+                    $categories = \App\Models\Category::all();
+                @endphp
+                @foreach($categories as $category)
+                    <a href="{{ route('categories.show', $category->slug) }}"
+                        class="flex items-center gap-2 px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl hover:border-primary/30 transition-all text-left">
+                        <span
+                            class="text-[10px] font-bold text-slate-600 uppercase tracking-wider line-clamp-1">{{ $category->name }}</span>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
     <div class="py-2 md:py-6 bg-slate-50">
-        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-screen-2xl mx-auto px-6 sm:px-6 lg:px-8">
             <!-- Product Showcase (First Priority) -->
             <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-blue-100 relative overflow-hidden">
                 <div
@@ -162,7 +199,7 @@
 
     <!-- Featured Section (Rekomendasi) -->
     <div class="py-2 md:py-6 bg-slate-50">
-        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-screen-2xl mx-auto px-6 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between mb-6">
                 <div class="flex items-center gap-2">
                     <h2 class="text-xl md:text-3xl font-black text-slate-900 tracking-tighter leading-none">Pilihan

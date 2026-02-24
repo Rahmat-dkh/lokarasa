@@ -10,6 +10,7 @@ class ProductReviews extends Component
     public $rating = 5;
     public $comment = '';
     public $showForm = false;
+    public $amount = 4;
 
     protected $rules = [
         'rating' => 'required|integer|min:1|max:5',
@@ -19,6 +20,11 @@ class ProductReviews extends Component
     public function mount($productId)
     {
         $this->productId = $productId;
+    }
+
+    public function loadMore()
+    {
+        $this->amount += 4;
     }
 
     public function save()
@@ -57,7 +63,8 @@ class ProductReviews extends Component
         $product = \App\Models\Product::with('reviews.user')->findOrFail($this->productId);
         return view('livewire.product-reviews', [
             'product' => $product,
-            'reviews' => $product->reviews()->latest()->get(),
+            'reviews' => $product->reviews()->latest()->take($this->amount)->get(),
+            'totalReviews' => $product->reviews()->count(),
         ]);
     }
 }
