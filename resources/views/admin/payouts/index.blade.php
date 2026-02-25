@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="mt-2 mb-2 md:mb-8 flex justify-between items-end">
+    <div class="mb-2 md:mb-8 flex justify-between items-end">
         <div>
             <h1 class="text-xl md:text-3xl font-black text-neutral-dark tracking-tight">Manajemen Penarikan Dana</h1>
             <p class="text-[10px] md:text-sm text-slate-500 font-medium">Kelola dan verifikasi permintaan penarikan saldo UMKM.</p>
@@ -33,7 +33,7 @@
                                             <div class="font-bold text-slate-900 text-xs md:text-sm leading-tight">{{ $payout->vendor->shop_name }}</div>
                                             <div class="text-[9px] md:text-[10px] text-slate-400">{{ $payout->vendor->user->name }}</div>
                                         </td>
-                                        <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm font-black text-primary italic">
+                                        <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm font-black text-primary">
                                             Rp {{ number_format($payout->amount, 0, ',', '.') }}
                                         </td>
                                         <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-[9px] md:text-[10px] text-slate-600 leading-snug">
@@ -51,7 +51,7 @@
                                                     </svg>
                                                 </button>
                                             </div>
-                                            <div class="italic text-[8px] md:text-[10px]">a.n {{ $payout->vendor->bank_account_name }}</div>
+                                            <div class="text-[8px] md:text-[10px]">a.n {{ $payout->vendor->bank_account_name }}</div>
                                         </td>
                                         <td class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-center">
                                             <span class="px-2 md:px-3 py-0.5 md:py-1 rounded-lg text-[9px] md:text-[10px] font-black uppercase tracking-widest
@@ -90,7 +90,7 @@
                                                 </form>
                                             @else
                                                 <span
-                                                    class="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest italic leading-tight">Paid Out</span>
+                                                    class="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest leading-tight">Paid Out</span>
                                             @endif
                                         </td>
                                     </tr>

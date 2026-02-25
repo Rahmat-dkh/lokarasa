@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <h1 class="text-xl sm:text-3xl font-black text-slate-900 tracking-tighter">
-                        Katalog <span class="text-primary italic">Produk</span>.
+                        Katalog <span class="text-primary">Produk</span>.
                     </h1>
                 </div>
                 <div class="flex items-center gap-3 w-full sm:w-auto">
@@ -139,7 +139,7 @@
                             </div>
                             
                             <div class="flex items-center justify-between pt-2 border-t border-slate-50">
-                                <div class="text-xs font-black text-primary italic">
+                                <div class="text-xs font-black text-primary">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </div>
                                 <div class="flex gap-1.5">

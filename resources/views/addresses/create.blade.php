@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="pt-24 pb-12">
+    <div class="pt-6 sm:pt-10 pb-12">
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -73,4 +73,11 @@
             </div>
         </div>
     </div>
+    <script>
+        document.querySelector('form').addEventListener('submit', function () {
+            const button = this.querySelector('button[type="submit"]');
+            button.disabled = true;
+            button.innerHTML = 'Menyimpan...';
+        });
+    </script>
 </x-app-layout>

@@ -1,9 +1,9 @@
 <x-admin-layout>
-    <div class="mb-12 flex justify-between items-end">
+    <div class="mb-6 md:mb-8 flex justify-between items-end">
         <div>
             <div class="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-4">Detail Transaksi</div>
             <h1 class="text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-none">
-                Pesanan <span class="text-primary italic">#{{ $order->id }}</span>.
+                Pesanan <span class="text-primary">#{{ $order->id }}</span>.
             </h1>
         </div>
         <a href="{{ route('admin.orders.index') }}"
@@ -36,7 +36,7 @@
                                 </p>
                             </div>
                             <div class="text-right">
-                                <span class="text-sm font-black text-slate-900 italic">
+                                <span class="text-sm font-black text-slate-900">
                                     Rp {{ number_format($item->price * $item->quantity, 0, ',', '.') }}
                                 </span>
                             </div>
@@ -60,7 +60,7 @@
                             <span>Biaya Layanan</span>
                             <span class="text-slate-600">Rp {{ number_format($order->service_fee, 0, ',', '.') }}</span>
                         </div>
-                        <div class="pt-4 flex justify-between text-lg font-black text-primary italic">
+                        <div class="pt-4 flex justify-between text-lg font-black text-primary">
                             <span>Grand Total</span>
                             <span>Rp {{ number_format($order->total_amount, 0, ',', '.') }}</span>
                         </div>
@@ -92,7 +92,7 @@
                     Alamat Pengiriman
                 </h3>
                 <div class="p-6 rounded-3xl border-2 border-dashed border-slate-100">
-                    <p class="text-slate-700 font-medium leading-relaxed italic">
+                    <p class="text-slate-700 font-medium leading-relaxed">
                         "{{ $order->shipping_address }}"
                     </p>
                 </div>

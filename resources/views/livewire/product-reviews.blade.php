@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between border-b border-neutral-dark/5 pb-3">
         <div>
             <h2 class="text-lg md:text-xl font-black text-neutral-dark tracking-tighter">Ulasan <span
-                    class="text-primary italic">Pelanggan</span></h2>
+                    class="text-primary">Pelanggan</span></h2>
             <div class="flex items-center gap-1.5 mt-1">
                 <div class="flex text-amber-400">
                     @for($i = 1; $i <= 5; $i++)
@@ -135,7 +135,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
-                <p class="text-[10px] text-neutral-dark/40 font-bold italic">Belum ada ulasan.</p>
+                <p class="text-[10px] text-neutral-dark/40 font-bold">Belum ada ulasan.</p>
             </div>
         @endforelse
     </div>

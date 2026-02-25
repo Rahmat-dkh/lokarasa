@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="mb-4 md:mb-8">
+    <div class="mb-3 md:mb-6">
         <h1 class="text-xl md:text-3xl font-black text-neutral-dark tracking-tight">Ringkasan Dashboard</h1>
         <p class="text-xs md:text-sm text-slate-500 font-medium">Selamat datang kembali, {{ Auth::user()->name }}!</p>
     </div>
@@ -209,15 +209,15 @@
                                     <td class="py-3 md:py-4 font-bold text-slate-800 text-xs md:text-sm">
                                         {{ $payout->vendor->shop_name ?? 'LocalGo' }}
                                     </td>
-                                    <td class="py-3 md:py-4 font-black text-primary italic text-xs md:text-sm">Rp
+                                    <td class="py-3 md:py-4 font-black text-primary text-xs md:text-sm">Rp
                                         {{ number_format($payout->amount, 0, ',', '.') }}
                                     </td>
                                     <td class="py-4">
                                         <span
                                             class="px-3 py-1 rounded-lg text-xs font-black uppercase
-                                                                                                            @if($payout->status == 'completed') bg-emerald-100 text-emerald-600
-                                                                                                            @elseif($payout->status == 'pending') bg-amber-100 text-amber-600
-                                                                                                            @else bg-rose-100 text-rose-600 @endif">
+                                                                                                                            @if($payout->status == 'completed') bg-emerald-100 text-emerald-600
+                                                                                                                            @elseif($payout->status == 'pending') bg-amber-100 text-amber-600
+                                                                                                                            @else bg-rose-100 text-rose-600 @endif">
                                             @php
                                                 $payoutTranslations = [
                                                     'pending' => 'Tertunda',
@@ -238,7 +238,7 @@
                 </div>
             @else
                 <div class="text-center py-10">
-                    <p class="text-slate-400 font-medium italic">Tidak ada permintaan penarikan terbaru.</p>
+                    <p class="text-slate-400 font-medium">Tidak ada permintaan penarikan terbaru.</p>
                 </div>
             @endif
         </div>

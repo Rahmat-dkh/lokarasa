@@ -56,7 +56,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-xl font-black italic tracking-tight">Kelola Tenant Kuliner Anda</h3>
+                                <h3 class="text-xl font-black tracking-tight">Kelola Tenant Kuliner Anda</h3>
                                 <p class="text-slate-400 text-sm font-medium">Buka menu dashboard khusus tenant untuk
                                     mengelola produk kuliner dan pesanan Anda.</p>
                             </div>
@@ -75,7 +75,7 @@
                 <div class="bg-blue-600 rounded-[2.5rem] p-8 mb-8 text-white relative overflow-hidden">
                     <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                         <div>
-                            <h3 class="text-xl font-black italic tracking-tight">Punya Bisnis Kuliner?</h3>
+                            <h3 class="text-xl font-black tracking-tight">Punya Bisnis Kuliner?</h3>
                             <p class="text-blue-100 text-sm font-medium">Mulai berjualan di LocalGo dan kembangkan cita
                                 rasa Anda hari ini!</p>
                         </div>

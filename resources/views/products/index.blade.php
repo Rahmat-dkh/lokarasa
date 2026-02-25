@@ -5,7 +5,7 @@
             <div class="text-center mb-8">
                 <div class="text-primary font-black uppercase tracking-[0.3em] text-xs mb-4">Eksplorasi UMKM</div>
                 <h1 class="text-3xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-none mb-6">
-                    Koleksi <span class="text-primary italic">Terbaik</span>.
+                    Koleksi <span class="text-primary">Terbaik</span>.
                 </h1>
             </div>
 

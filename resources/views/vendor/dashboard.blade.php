@@ -13,7 +13,7 @@
                 class="relative overflow-hidden bg-primary rounded-3xl p-5 sm:p-8 mb-8 text-white shadow-xl shadow-primary/10">
                 <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6">
                     <div class="text-center md:text-left">
-                        <h1 class="text-xl sm:text-3xl font-black mb-1 sm:mb-2 italic">Halo, {{ $vendor->shop_name }}!
+                        <h1 class="text-xl sm:text-3xl font-black mb-1 sm:mb-2">Halo, {{ $vendor->shop_name }}!
                         </h1>
                         <p class="text-primary-light text-[11px] sm:text-sm font-medium opacity-90 max-w-md">Senang
                             melihat Anda kembali. Mari kelola toko dan tingkatkan penjualan hari ini.</p>
@@ -180,26 +180,26 @@
                                                                                     @endif
                                                                                 </div>
                                                                                 <span
-                                                                                    class="text-[9px] font-black text-slate-400 italic lowercase">{{ $order->created_at->format('d M, H:i') }}</span>
+                                                                                    class="text-[9px] font-black text-slate-400 lowercase">{{ $order->created_at->format('d M, H:i') }}</span>
                                                                             </div>
                                                                         </td>
                                                                         <td class="px-6 py-4">
                                                                             <div class="space-y-1">
                                                                                 @foreach($order->items->take(2) as $item)
-                                                                                    <div class="text-[11px] font-medium text-slate-600 line-clamp-1 italic">
+                                                                                    <div class="text-[11px] font-medium text-slate-600 line-clamp-1">
                                                                                         {{ $item->product->name }} <span
                                                                                             class="text-[9px] font-black text-slate-300">x{{ $item->quantity }}</span>
                                                                                     </div>
                                                                                 @endforeach
                                                                                 @if($order->items->count() > 2)
-                                                                                    <div class="text-[8px] font-black text-slate-300 italic">+
+                                                                                    <div class="text-[8px] font-black text-slate-300">+
                                                                                         {{ $order->items->count() - 2 }} lainnya
                                                                                     </div>
                                                                                 @endif
                                                                             </div>
                                                                         </td>
                                                                          <td class="px-6 py-4 whitespace-nowrap">
-                                                                             <span class="text-xs font-black text-primary italic">Rp
+                                                                             <span class="text-xs font-black text-primary">Rp
                                                                                  {{ number_format($order->items->sum(fn($item) => $item->price * $item->quantity), 0, ',', '.') }}</span>
                                                                          </td>
                                                                         <td class="px-6 py-4 whitespace-nowrap text-center">
@@ -258,9 +258,9 @@
                                                             </div>
                                                             <div class="text-right">
                                                                 <div
-                                                                    class="text-[8px] font-bold text-slate-400 uppercase tracking-tight italic">
+                                                                    class="text-[8px] font-bold text-slate-400 uppercase tracking-tight">
                                                                     {{ $order->created_at->format('d M, H:i') }}</div>
-                                                                 <div class="text-xs font-black text-primary italic leading-none">Rp
+                                                                 <div class="text-xs font-black text-primary leading-none">Rp
                                                                      {{ number_format($order->items->sum(fn($item) => $item->price * $item->quantity), 0, ',', '.') }}</div>
                                                             </div>
                                                         </div>
@@ -310,7 +310,7 @@
                                     </svg>
                                 </div>
                                 <h4 class="text-slate-800 font-black mb-1">Belum Ada Pesanan</h4>
-                                <p class="text-slate-400 text-sm italic">Sabar ya, rejeki tidak akan tertukar!</p>
+                                <p class="text-slate-400 text-sm">Sabar ya, rejeki tidak akan tertukar!</p>
                             </div>
                         @endif
                     </div>

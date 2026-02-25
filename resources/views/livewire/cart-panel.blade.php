@@ -16,7 +16,7 @@
                 <div class="p-4 border-b border-neutral-dark/5 bg-white/50">
                     <div class="flex items-center justify-between">
                         <h2 class="text-lg font-black text-neutral-dark tracking-tighter">Keranjang <span
-                                class="text-primary italic">Saya</span></h2>
+                                class="text-primary">Saya</span></h2>
                         <button @click="isOpen = false"
                             class="p-1 text-neutral-dark/40 hover:text-primary transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -13,7 +13,7 @@
                         Kembali ke Riwayat
                     </a>
                     <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tighter">Detail <span
-                            class="text-primary italic">Pesanan</span></h1>
+                            class="text-primary">Pesanan</span></h1>
                     <p class="text-slate-500 text-[10px] sm:text-xs font-medium mt-1 uppercase tracking-widest">Ref:
                         {{ $order->payment_reference }}
                     </p>
@@ -62,7 +62,7 @@
                             </div>
                             <h3 class="font-black text-slate-800 text-sm sm:text-base uppercase tracking-wider">Produk
                                 dari
-                                <span class="text-primary italic">{{ $order->vendor->shop_name ?? 'UMKM' }}</span>
+                                <span class="text-primary">{{ $order->vendor->shop_name ?? 'UMKM' }}</span>
                             </h3>
                         </div>
                         <div class="p-6 space-y-4">
@@ -95,7 +95,7 @@
                                         </p>
                                     </div>
                                     <div class="text-right">
-                                        <div class="font-black text-slate-800 text-sm italic">Rp
+                                        <div class="font-black text-slate-800 text-sm">Rp
                                             {{ number_format($item->price * $item->quantity, 0, ',', '.') }}
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@
                             <div class="pt-3 mt-1 border-t border-slate-200 flex justify-between items-center">
                                 <span class="text-xs font-black text-slate-800 uppercase tracking-wider">Total
                                     Pembayaran</span>
-                                <span class="text-lg font-black text-primary italic">Rp
+                                <span class="text-lg font-black text-primary">Rp
                                     {{ number_format($order->total_amount, 0, ',', '.') }}</span>
                             </div>
                         </div>
@@ -183,7 +183,7 @@
                             <div class="space-y-4">
                                 <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
                                     <p class="text-[9px] font-black text-white/30 uppercase tracking-widest mb-1">Kurir</p>
-                                    <p class="text-sm font-black text-primary italic">
+                                    <p class="text-sm font-black text-primary">
                                         {{ strtoupper($order->shipping_courier) }} <span
                                             class="text-white/40 font-bold not-italic font-sans">-
                                             {{ strtoupper($order->shipping_service) }}</span>

@@ -15,7 +15,7 @@
                         <div class="text-primary font-black uppercase tracking-[0.3em] text-[10px]">Keuangan Toko</div>
                     </div>
                     <h1 class="text-xl sm:text-3xl font-black text-slate-900 tracking-tighter">
-                        Dompet <span class="text-primary italic">Saya</span>.
+                        Dompet <span class="text-primary">Saya</span>.
                     </h1>
                 </div>
                 <a href="{{ route('vendor.dashboard') }}"
@@ -32,7 +32,7 @@
                         <div class="relative z-10">
                             <h3 class="text-[8px] sm:text-[9px] font-black uppercase tracking-widest opacity-80 mb-1">Total Saldo
                             </h3>
-                            <div class="text-xl sm:text-2xl font-black italic mb-5 sm:mb-6">
+                            <div class="text-xl sm:text-2xl font-black mb-5 sm:mb-6">
                                 Rp {{ number_format($wallet->balance ?? 0, 0, ',', '.') }}
                             </div>
 
@@ -103,7 +103,7 @@
 
                         @if($payouts->isEmpty())
                             <div class="py-10 text-center">
-                                <p class="text-slate-400 font-bold italic text-sm">Belum ada riwayat penarikan.</p>
+                                <p class="text-slate-400 font-bold text-sm">Belum ada riwayat penarikan.</p>
                             </div>
                         @else
                             <div class="overflow-x-auto">
@@ -112,7 +112,7 @@
                                         @foreach($payouts as $payout)
                                                                     <tr class="hover:bg-slate-50/50 transition-colors">
                                                                         <td class="px-5 sm:px-8 py-3.5 sm:py-4">
-                                                                            <div class="text-xs sm:text-sm font-black text-slate-800 italic">Rp
+                                                                            <div class="text-xs sm:text-sm font-black text-slate-800">Rp
                                                                                 {{ number_format($payout->amount, 0, ',', '.') }}</div>
                                                                             <div
                                                                                 class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
@@ -145,7 +145,7 @@
 
                         @if($transactions->isEmpty())
                             <div class="py-10 text-center">
-                                <p class="text-slate-400 font-bold italic text-sm">Belum ada aktivitas.</p>
+                                <p class="text-slate-400 font-bold text-sm">Belum ada aktivitas.</p>
                             </div>
                         @else
                             <div class="overflow-x-auto">
@@ -161,7 +161,7 @@
                                                 </td>
                                                 <td class="px-5 sm:px-8 py-3.5 sm:py-4 text-right">
                                                     <div
-                                                        class="text-xs sm:text-sm font-black italic {{ $trx->type == 'credit' ? 'text-emerald-500' : 'text-red-500' }}">
+                                                        class="text-xs sm:text-sm font-black {{ $trx->type == 'credit' ? 'text-emerald-500' : 'text-red-500' }}">
                                                         {{ $trx->type == 'credit' ? '+' : '-' }} Rp
                                                         {{ number_format(abs($trx->amount), 0, ',', '.') }}
                                                     </div>

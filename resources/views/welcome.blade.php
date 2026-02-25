@@ -54,14 +54,15 @@
                                 x-transition:enter="transition ease-out delay-300 duration-500"
                                 x-transition:enter-start="opacity-0 translate-y-2"
                                 x-transition:enter-end="opacity-100 translate-y-0"
-                                class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent flex items-center px-6 md:px-12">
-                                <div class="max-w-xl text-white">
+                                class="absolute inset-0 flex items-center px-6 md:px-12"
+                                style="background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);">
+                                <div class="max-w-xl text-white" style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
                                     <span
-                                        class="inline-block px-3 py-1 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest bg-white/20 backdrop-blur-md mb-2 md:mb-4"
+                                        class="inline-block px-3 py-1 rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest bg-white/20 backdrop-blur-md mb-2 md:mb-4 border border-white/10"
                                         x-text="slide.tag"></span>
-                                    <h2 class="text-xl md:text-4xl font-black tracking-tighter leading-none mb-2 md:mb-4"
+                                    <h2 class="text-xl md:text-5xl font-black tracking-tighter leading-none mb-2 md:mb-4"
                                         x-text="slide.title"></h2>
-                                    <p class="text-[10px] md:text-base text-white/70 font-medium mb-4 md:mb-8 max-w-md leading-tight md:leading-relaxed"
+                                    <p class="text-[10px] md:text-base text-white/95 font-medium mb-4 md:mb-8 max-w-md leading-tight md:leading-relaxed"
                                         x-text="slide.subtitle"></p>
                                     <a href="{{ route('products.index') }}"
                                         class="inline-flex items-center gap-2.5 px-5 py-2.5 md:px-8 md:py-3.5 bg-white text-primary font-black rounded-xl md:rounded-2xl hover:bg-neutral-dark hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl shadow-black/10 text-[10px] md:text-base group/btn">
@@ -205,7 +206,7 @@
             <div class="flex items-center justify-between mb-6">
                 <div class="flex items-center gap-2">
                     <h2 class="text-xl md:text-3xl font-black text-slate-900 tracking-tighter leading-none">Pilihan
-                        <span class="text-primary italic">Terlaris</span>
+                        <span class="text-primary">Terlaris</span>
                     </h2>
                     <span
                         class="bg-innovation/10 text-innovation text-[8px] md:text-[10px] font-black uppercase px-2.5 py-1 rounded-lg">Paling

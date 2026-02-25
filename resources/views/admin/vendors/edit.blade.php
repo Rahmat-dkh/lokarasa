@@ -1,9 +1,9 @@
 <x-admin-layout>
-    <div class="mb-12 flex justify-between items-end">
+    <div class="mb-6 md:mb-8 flex justify-between items-end">
         <div>
             <div class="text-primary font-black uppercase tracking-[0.3em] text-xs mb-4">Manajemen UMKM</div>
             <h1 class="text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-none">
-                Edit <span class="text-primary italic">Toko</span>.
+                Edit <span class="text-primary">Toko</span>.
             </h1>
         </div>
         <a href="{{ route('admin.vendors.index') }}"

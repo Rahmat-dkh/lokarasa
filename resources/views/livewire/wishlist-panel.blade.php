@@ -17,7 +17,7 @@
                     <div class="flex items-center justify-between relative z-10">
                         <div>
                             <h2 class="text-lg font-black text-neutral-dark tracking-tighter">Favorit <span
-                                    class="text-red-500 italic">Saya</span></h2>
+                                    class="text-red-500">Saya</span></h2>
                             <p class="text-[10px] text-neutral-dark/50 font-bold mt-0.5">Simpan sekarang, beli nanti!
                             </p>
                         </div>

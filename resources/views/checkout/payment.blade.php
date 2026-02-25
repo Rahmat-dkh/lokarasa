@@ -13,7 +13,7 @@
                         {{ number_format($grandTotal, 0, ',', '.') }}</span></p>
 
                 <button id="pay-button"
-                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transform transition hover:scale-105">
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg">
                     Pay Now
                 </button>
 

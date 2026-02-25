@@ -95,9 +95,8 @@
         transition: none !important;
     }
 
-    /* Add padding to body to prevent content from going under fixed header */
-    body {
+    /* Add padding to body only when main-nav is present to prevent content from going under fixed header */
+    body:has(#main-nav) {
         padding-top: 56px;
-        /* Adjust based on your header height */
     }
 }

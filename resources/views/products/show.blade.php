@@ -10,36 +10,36 @@
 
     @push('scripts')
         <script type="application/ld+json">
-                                    {
-                                        "@context": "https://schema.org/",
-                                        "@type": "Product",
-                                        "name": "{{ $product->name }}",
-                                        "image": [
-                                            "{{ $product->image_url }}"
-                                        ],
-                                        "description": "{{ $description }}",
-                                        "sku": "{{ $product->id }}",
-                                        "brand": {
-                                            "@type": "Brand",
-                                            "name": "LocalGo UMKM"
-                                        },
-                                        "offers": {
-                                            "@type": "Offer",
-                                            "url": "{{ url()->current() }}",
-                                            "priceCurrency": "IDR",
-                                            "price": "{{ $product->price }}",
-                                            "availability": "https://schema.org/InStock",
-                                            "itemCondition": "https://schema.org/NewCondition"
-                                        }
-                                        @if($product->averageRating() > 0)
-                                            ,"aggregateRating": {
-                                                "@type": "AggregateRating",
-                                                "ratingValue": "{{ $product->averageRating() }}",
-                                                "reviewCount": "{{ $product->reviews_count ?? $product->reviews->count() }}"
+                                        {
+                                            "@context": "https://schema.org/",
+                                            "@type": "Product",
+                                            "name": "{{ $product->name }}",
+                                            "image": [
+                                                "{{ $product->image_url }}"
+                                            ],
+                                            "description": "{{ $description }}",
+                                            "sku": "{{ $product->id }}",
+                                            "brand": {
+                                                "@type": "Brand",
+                                                "name": "LocalGo UMKM"
+                                            },
+                                            "offers": {
+                                                "@type": "Offer",
+                                                "url": "{{ url()->current() }}",
+                                                "priceCurrency": "IDR",
+                                                "price": "{{ $product->price }}",
+                                                "availability": "https://schema.org/InStock",
+                                                "itemCondition": "https://schema.org/NewCondition"
                                             }
-                                        @endif
-                                    }
-                                    </script>
+                                            @if($product->averageRating() > 0)
+                                                ,"aggregateRating": {
+                                                    "@type": "AggregateRating",
+                                                    "ratingValue": "{{ $product->averageRating() }}",
+                                                    "reviewCount": "{{ $product->reviews_count ?? $product->reviews->count() }}"
+                                                }
+                                            @endif
+                                        }
+                                        </script>
     @endpush
     <div class="pt-1 pb-4 sm:pt-4 sm:pb-8 px-2 sm:px-6 lg:px-8">
         <div class="max-w-screen-2xl mx-auto">
@@ -239,7 +239,7 @@
                 <div class="mt-8">
                     <div class="flex items-end justify-between mb-4 px-1">
                         <h2 class="text-xl lg:text-3xl font-black text-neutral-dark tracking-tight">Koleksi <span
-                                class="text-primary italic">Lainnya</span></h2>
+                                class="text-primary">Lainnya</span></h2>
                         <a href="{{ route('products.index') }}"
                             class="text-xs font-bold text-primary hover:underline">Lihat
                             Semua</a>

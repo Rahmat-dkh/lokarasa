@@ -17,7 +17,11 @@ class CategoryController extends Controller
 
     public function show(string $slug)
     {
-        $category = \App\Models\Category::where('slug', $slug)->with('products')->firstOrFail();
+        $category = \App\Models\Category::where('slug', $slug)->with([
+            'products' => function ($query) {
+                $query->withAvg('reviews', 'rating')->withCount('reviews');
+            }
+        ])->firstOrFail();
         return view('categories.show', compact('category'));
     }
 

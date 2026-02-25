@@ -7,7 +7,7 @@
             <!-- Brand Column -->
             <div data-aos="fade-up" class="text-center md:text-left">
                 <a href="/" class="inline-flex items-center gap-4 mb-8 group">
-                    <img src="{{ asset('images/logo_lokarasa.png') }}" alt="LocalGo"
+                    <img src="{{ asset('images/logo_lokarasa.png') }}" alt=""
                         class="h-16 w-auto object-contain p-2 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10 group-hover:scale-105 transition-transform duration-300">
                     <span class="text-white font-black text-2xl tracking-tighter">
                         Local<span class="text-primary group-hover:text-white transition-colors duration-300">Go</span>
@@ -129,7 +129,7 @@
 
         <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
             <p class="text-slate-500 text-xs font-bold text-center md:text-left">
-                &copy; {{ date('Y') }} LocalGo.
+                &copy; {{ date('Y') }} LocalGo Commerce.
             </p>
             <div class="flex items-center justify-center md:justify-end gap-6 flex-wrap">
                 <!-- Payment SVGs (Clean & Professional) -->

@@ -19,7 +19,7 @@ class VendorMiddleware
             return redirect()->route('login');
         }
 
-        if (!auth()->user()->isSeller()) {
+        if (!auth()->user()->isSeller() && !auth()->user()->isAdmin()) {
             abort(403, 'Unauthorized action. Vendor access only.');
         }
 

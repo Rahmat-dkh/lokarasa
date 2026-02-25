@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="mt-2 mb-2 md:mb-8 flex justify-between items-end">
+    <div class="mb-2 md:mb-8 flex justify-between items-end">
         <div>
             <h1 class="text-xl md:text-3xl font-black text-neutral-dark tracking-tight">Manajemen Pesanan</h1>
             <p class="text-[10px] md:text-sm text-slate-500 font-medium">Pantau dan kelola semua transaksi pelanggan di sini.</p>
@@ -53,7 +53,7 @@
                                                 class="text-[11px] md:text-xs font-bold text-slate-600">{{ $order->vendor->shop_name ?? 'LocalGo' }}</span>
                                         </td>
                                         <td class="px-3 md:px-6 py-3 md:py-4 text-right">
-                                            <span class="text-xs md:text-sm font-black text-primary italic whitespace-nowrap">Rp
+                                            <span class="text-xs md:text-sm font-black text-primary whitespace-nowrap">Rp
                                                 {{ number_format($order->total_amount, 0, ',', '.') }}</span>
                                         </td>
                                         <td class="px-3 md:px-6 py-3 md:py-4 text-center">

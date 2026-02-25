@@ -17,17 +17,41 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        if ($order->vendor_id !== auth()->user()->vendor->id) {
-            abort(403);
+        $user = auth()->user();
+        $vendor = $user->vendor;
+
+        if (!$vendor) {
+            abort(403, 'Anda tidak memiliki profil Vendor.');
         }
+
+        // Simpler check: If user owns the vendor ID of the order
+        // Or if user is admin, allow viewing official store orders (and legacy nulls)
+        $isOwner = (int) $order->vendor_id === (int) $vendor->id;
+        $isAdminAuthorized = $user->isAdmin() && ($order->vendor_id === null || $order->vendor_id == $vendor->id);
+
+        if (!$isOwner && !$isAdminAuthorized) {
+            // For debugging if it still fails
+            abort(403, "Otorisasi Gagal: Order Vendor ID #{$order->vendor_id} vs Profil Anda #{$vendor->id}");
+        }
+
         $order->load(['items.product', 'user']);
         return view('vendor.orders.show', compact('order'));
     }
 
     public function update(Request $request, Order $order)
     {
-        if ($order->vendor_id !== auth()->user()->vendor->id) {
-            abort(403);
+        $user = auth()->user();
+        $vendor = $user->vendor;
+
+        if (!$vendor) {
+            abort(403, 'Anda tidak memiliki profil Vendor.');
+        }
+
+        $isOwner = (int) $order->vendor_id === (int) $vendor->id;
+        $isAdminAuthorized = $user->isAdmin() && ($order->vendor_id === null || $order->vendor_id == $vendor->id);
+
+        if (!$isOwner && !$isAdminAuthorized) {
+            abort(403, "Update Gagal: Otorisasi tidak valid.");
         }
 
         $request->validate([

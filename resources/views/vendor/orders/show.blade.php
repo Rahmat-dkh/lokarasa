@@ -8,8 +8,7 @@
                         Pesanan
                     </div>
                     <h1 class="text-xl sm:text-3xl font-black text-slate-900 tracking-tighter">
-                        Pesanan <span
-                            class="text-primary italic">#{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</span>.
+                        Pesanan <span class="text-primary">#{{ str_pad($order->id, 5, '0', STR_PAD_LEFT) }}</span>.
                     </h1>
                 </div>
                 <a href="{{ route('vendor.orders.index') }}"
@@ -44,7 +43,7 @@
                                         </p>
                                     </div>
                                     <div class="text-right">
-                                        <span class="text-xs sm:text-sm font-black text-slate-900 italic">
+                                        <span class="text-xs sm:text-sm font-black text-slate-900">
                                             Rp {{ number_format($item->price * $item->quantity, 0, ',', '.') }}
                                         </span>
                                     </div>
@@ -56,7 +55,7 @@
                             <span
                                 class="text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-widest">Total
                                 Pendapatan</span>
-                            <span class="text-xl sm:text-2xl font-black text-primary italic">Rp
+                            <span class="text-xl sm:text-2xl font-black text-primary">Rp
                                 {{ number_format($order->items->sum(fn($item) => $item->price * $item->quantity), 0, ',', '.') }}</span>
                         </div>
                     </div>
@@ -125,8 +124,7 @@
                                         </a>
                                     @endif
                                 </div>
-                                <p
-                                    class="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest italic">
+                                <p class="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest">
                                     @php
                                         $statusTranslations = [
                                             'pending' => 'Menunggu Pembayaran',

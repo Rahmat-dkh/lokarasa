@@ -11,7 +11,7 @@
                         <div class="text-primary font-black uppercase tracking-[0.3em] text-[10px]">Riwayat Penjualan</div>
                     </div>
                     <h1 class="text-3xl font-black text-slate-900 tracking-tighter">
-                        Pesanan <span class="text-primary italic">Masuk</span>.
+                        Pesanan <span class="text-primary">Masuk</span>.
                     </h1>
                 </div>
                 <a href="{{ route('vendor.dashboard') }}"
@@ -59,7 +59,7 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 text-right">
-                                            <span class="text-sm font-black text-primary italic">Rp {{ number_format($order->items->sum(fn($item) => $item->price * $item->quantity), 0, ',', '.') }}</span>
+                                            <span class="text-sm font-black text-primary">Rp {{ number_format($order->items->sum(fn($item) => $item->price * $item->quantity), 0, ',', '.') }}</span>
                                         </td>
                                         <td class="px-6 py-4 text-center">
                                             <span class="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest 
@@ -78,7 +78,7 @@
                                                 </div>
                                                 <div class="text-[8px] font-black text-slate-400 mt-1 uppercase tracking-widest">{{ strtoupper($order->shipping_courier) }} {{ strtoupper($order->shipping_service) }}</div>
                                             @else
-                                                <span class="text-[10px] text-slate-300 italic">Belum ada resi</span>
+                                                <span class="text-[10px] text-slate-300">Belum ada resi</span>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 text-right">
@@ -125,7 +125,7 @@
                                 <div class="flex justify-between items-center mt-3 pt-3 border-t border-slate-50">
                                     <div class="flex flex-col">
                                         <span class="text-[9px] font-bold text-slate-700">{{ $order->created_at->format('d M Y') }}, {{ $order->created_at->format('H:i') }} WIB</span>
-                                        <span class="text-xs font-black text-primary italic mt-0.5">Rp {{ number_format($order->items->sum(fn($item) => $item->price * $item->quantity), 0, ',', '.') }}</span>
+                                        <span class="text-xs font-black text-primary mt-0.5">Rp {{ number_format($order->items->sum(fn($item) => $item->price * $item->quantity), 0, ',', '.') }}</span>
                                     </div>
                                     <div class="flex items-center gap-1.5">
                                         @if($order->shipping_label)

@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="mb-4 md:mb-8 flex justify-between items-center gap-4">
+    <div class="mb-3 md:mb-6 flex justify-between items-center gap-4">
         <div>
             <h1 class="text-xl md:text-3xl font-black text-neutral-dark tracking-tight">Categories</h1>
             <p class="text-xs md:text-sm text-slate-500 font-medium">Manage product categories.</p>
@@ -49,7 +49,7 @@
                                 </div>
                             </td>
                             <td
-                                class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-[9px] md:text-sm text-slate-400 font-mono italic">
+                                class="px-3 md:px-6 py-3 md:py-4 whitespace-nowrap text-[9px] md:text-sm text-slate-400 font-mono">
                                 /{{ $category->slug }}
                             </td>
                             <td

@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="relative z-10">
-                                <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-8 italic line-clamp-3">
+                                <p class="text-slate-500 text-xs sm:text-sm leading-relaxed mb-8 line-clamp-3">
                                     {{ $address->address_line }},<br>
                                     {{ $address->city }}, {{ $address->province }}<br>
                                     {{ $address->postal_code }}

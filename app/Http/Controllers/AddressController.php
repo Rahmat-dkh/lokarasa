@@ -45,10 +45,10 @@ class AddressController extends Controller
 
     public function destroy(Address $address)
     {
-        if ($address->user_id !== auth()->id()) {
+        if ($address->user_id != auth()->id()) {
             abort(403);
         }
         $address->delete();
-        return redirect()->route('addresses.index')->with('success', 'Address deleted.');
+        return redirect()->back()->with('success', 'Alamat berhasil dihapus.');
     }
 }

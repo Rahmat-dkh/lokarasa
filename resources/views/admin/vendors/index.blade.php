@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="mt-2 mb-2 md:mb-8 flex justify-between items-end">
+    <div class="mb-2 md:mb-8 flex justify-between items-end">
         <div>
             <h1 class="text-xl md:text-3xl font-black text-neutral-dark tracking-tight">Manajemen UMKM</h1>
             <p class="text-[10px] md:text-sm text-slate-500 font-medium">Kelola status dan informasi toko UMKM yang terdaftar.</p>

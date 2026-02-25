@@ -170,7 +170,7 @@
         <div class="flex-1 flex flex-col min-w-0 overflow-hidden">
             <!-- Top Header -->
             <header
-                class="bg-white/80 backdrop-blur-md border-b border-slate-200 h-14 md:h-16 flex items-center justify-between px-4 md:px-8 z-30 sticky top-0">
+                class="bg-white/80 backdrop-blur-md border-b border-slate-200 h-12 md:h-14 flex items-center justify-between px-4 md:px-8 z-30 sticky top-0">
                 <div class="flex items-center">
                     <button @click="sidebarOpen = !sidebarOpen"
                         class="md:hidden p-2 text-slate-500 hover:text-primary mr-2 md:mr-4">
@@ -204,7 +204,7 @@
             </header>
 
             <!-- Page Content -->
-            <main class="flex-1 overflow-y-auto bg-slate-50 pt-0 px-3 pb-6 md:p-8">
+            <main class="flex-1 overflow-y-auto bg-slate-50 pt-0 px-3 pb-6 md:pt-2 md:px-8 md:pb-8">
                 {{ $slot }}
             </main>
         </div>

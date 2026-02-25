@@ -15,7 +15,7 @@
                 </div>
                 <h1 data-aos="fade-up"
                     class="text-3xl lg:text-5xl font-black text-neutral-dark tracking-tighter leading-none mb-6">
-                    Misi Kami: <span class="text-primary italic">Melestarikan</span> Rasa Nusantara.
+                    Misi Kami: <span class="text-primary">Melestarikan</span> Rasa Nusantara.
                 </h1>
                 <p data-aos="fade-up" data-aos-delay="100"
                     class="max-w-2xl mx-auto text-sm lg:text-base text-slate-500 font-medium leading-relaxed">
@@ -81,7 +81,7 @@
                     <div data-aos="fade-right">
                         <h2 class="text-2xl lg:text-4xl font-black text-white mb-4 tracking-tighter leading-tight">Visi
                             Kami 2030</h2>
-                        <p class="text-white/80 text-xs lg:text-sm font-medium mb-8 leading-relaxed italic">
+                        <p class="text-white/80 text-xs lg:text-sm font-medium mb-8 leading-relaxed">
                             "Menjadi platform kuliner nomor satu di Indonesia yang memperkenalkan kekayaan rasa
                             Nusantara
                             ke seluruh pelosok negeri dan mancanegara melalui ekosistem digital yang andal."

@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-    <div class="pt-10 sm:pt-24 pb-12 bg-slate-50 min-h-screen">
+    <div class="pt-6 sm:pt-10 pb-12 bg-slate-50 min-h-screen">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-6 sm:mb-10">
-                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight italic">Selesaikan <span
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Selesaikan <span
                         class="text-primary">Pesanan</span></h2>
                 <p class="text-slate-500 text-[10px] sm:text-sm font-medium mt-1">Periksa detail pesanan dan pilih
                     alamat pengiriman Anda.</p>
@@ -21,8 +21,7 @@
                     <div class="lg:col-span-2 space-y-6 sm:space-y-8">
 
                         <!-- Address Selection -->
-                        <div class="bg-white rounded-[1.5rem] sm:rounded-[2.5rem] shadow-sm border border-slate-100 p-5 sm:p-10"
-                            data-aos="fade-up">
+                        <div class="bg-white rounded-[1.5rem] sm:rounded-[2.5rem] shadow-sm border border-slate-100 p-5 sm:p-10">
                             <div
                                 class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sm:mb-8">
                                 <div class="flex items-center gap-3">
@@ -60,24 +59,37 @@
                             @else
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                                     @foreach($addresses as $addr)
-                                        <label
-                                            class="relative flex flex-col p-4 sm:p-6 bg-white border-2 rounded-[1.5rem] sm:rounded-[2rem] cursor-pointer hover:border-primary/20 transition-all group has-[:checked]:border-primary has-[:checked]:bg-primary/5 shadow-sm">
-                                            <input type="radio" name="address_id" value="{{ $addr->id }}"
-                                                {{ $userAddress && $userAddress->id == $addr->id ? 'checked' : '' }}
-                                                class="address-selector absolute top-4 sm:top-6 right-4 sm:right-6 h-4 w-4 sm:h-5 sm:w-5 text-primary border-slate-200 focus:ring-primary/20 transition-all">
-                                            <div class="pr-6 sm:pr-8">
-                                                <div
-                                                    class="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">
-                                                    {{ $addr->name }}</div>
-                                                <div class="text-slate-900 font-black text-xs sm:text-sm mb-1.5 sm:mb-2">
-                                                    {{ $addr->phone }}</div>
-                                                <p
-                                                    class="text-slate-500 text-[10px] sm:text-xs font-medium leading-relaxed italic line-clamp-2 sm:line-clamp-none">
-                                                    {{ $addr->address_line }}, {{ $addr->city }}, {{ $addr->province }}
-                                                    {{ $addr->postal_code }}
-                                                </p>
-                                            </div>
-                                        </label>
+                                        <div class="relative group/address">
+                                            <label
+                                                class="relative flex flex-col p-4 sm:p-6 bg-white border-2 rounded-[1.5rem] sm:rounded-[2rem] cursor-pointer hover:border-primary/20 group has-[:checked]:border-primary has-[:checked]:bg-primary/5 shadow-sm">
+                                                <input type="radio" name="address_id" value="{{ $addr->id }}"
+                                                    {{ $userAddress && $userAddress->id == $addr->id ? 'checked' : '' }}
+                                                    class="address-selector absolute top-4 sm:top-6 right-4 sm:right-6 h-4 w-4 sm:h-5 sm:w-5 text-primary border-slate-200 focus:ring-primary/20">
+                                                <div class="pr-12 sm:pr-14">
+                                                    <div
+                                                        class="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">
+                                                        {{ $addr->name }}</div>
+                                                    <div class="text-slate-900 font-black text-xs sm:text-sm mb-1.5 sm:mb-2">
+                                                        {{ $addr->phone }}</div>
+                                                    <p
+                                                        class="text-slate-500 text-[10px] sm:text-xs font-medium leading-relaxed line-clamp-2 sm:line-clamp-none">
+                                                        {{ $addr->address_line }}, {{ $addr->city }}, {{ $addr->province }}
+                                                        {{ $addr->postal_code }}
+                                                    </p>
+                                                </div>
+
+                                                <!-- Delete Button inside label -->
+                                                <button type="button" 
+                                                    onclick="event.stopPropagation(); if(confirm('Hapus alamat ini?')) { document.getElementById('delete-address-form').action = '{{ route('addresses.destroy', $addr->id) }}'; document.getElementById('delete-address-form').submit(); }"
+                                                    class="absolute bg-slate-50 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-full p-2 transition-colors shadow-sm ring-1 ring-slate-200 hover:ring-red-100 z-10"
+                                                    style="bottom: 12px; right: 12px;"
+                                                    title="Hapus Alamat">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                    </svg>
+                                                </button>
+                                            </label>
+                                        </div>
                                     @endforeach
                                 </div>
                             @endif
@@ -85,8 +97,7 @@
 
                         <!-- Order Groups -->
                         @foreach($orderGroups as $group)
-                            <div class="bg-white rounded-[1.5rem] sm:rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden"
-                                data-aos="fade-up" data-aos-delay="{{ $loop->index * 150 }}">
+                            <div class="bg-white rounded-[1.5rem] sm:rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
                                 <div
                                     class="px-5 sm:px-8 py-4 sm:py-6 bg-slate-50/50 border-b border-slate-100 flex items-center justify-between">
                                     <div class="flex items-center gap-3">
@@ -199,10 +210,9 @@
 
                     <!-- Right Column: Summary -->
                     <div class="lg:col-span-1">
-                        <div class="bg-neutral-dark rounded-[1.5rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-white shadow-2xl shadow-neutral-dark/20 sticky top-24 overflow-hidden group"
-                            data-aos="fade-up" data-aos-delay="300">
-                            <h3 class="text-lg sm:text-xl font-black italic tracking-tight mb-6 sm:mb-8">Ringkasan <span
-                                    class="text-primary italic">Belanja</span></h3>
+                        <div class="bg-neutral-dark rounded-[1.5rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-white shadow-2xl shadow-neutral-dark/20 sticky top-24 overflow-hidden group">
+                            <h3 class="text-lg sm:text-xl font-black tracking-tight mb-6 sm:mb-8">Ringkasan <span
+                                    class="text-primary">Belanja</span></h3>
 
                             <div class="space-y-3 sm:space-y-4 mb-8 sm:mb-10 relative z-10">
                                 <div
@@ -219,7 +229,7 @@
                             </div>
 
                             <button type="submit"
-                                class="w-full py-4 sm:py-5 bg-primary text-white font-black rounded-xl sm:rounded-2xl shadow-xl shadow-primary/20 hover:bg-primary-dark transition-all active:scale-95 text-[10px] sm:text-xs uppercase tracking-[0.2em] relative z-10">
+                                class="w-full py-4 sm:py-5 bg-primary text-white font-black rounded-xl sm:rounded-2xl shadow-xl shadow-primary/20 hover:bg-primary-dark transition-all text-[10px] sm:text-xs uppercase tracking-[0.2em] relative z-10">
                                 Bayar Sekarang →
                             </button>
 
@@ -298,4 +308,8 @@
             });
         });
     </script>
+    <form id="delete-address-form" action="" method="POST" style="display: none;">
+        @csrf
+        @method('DELETE')
+    </form>
 </x-app-layout>

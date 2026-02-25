@@ -86,7 +86,7 @@
     <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between gap-2 md:gap-8 transition-all duration-700 ease-in-out"
             :class="isScrolled ? 'h-16 md:h-11' : 'h-16 md:h-11'">
-            <!-- Drawer Toggle & Logo Mobile (Aligned Left) -->
+            <!-- Logo Mobile (Shown only on mobile) -->
             <div class="flex items-center gap-2.5 md:hidden">
                 <a href="{{ route('home') }}" class="flex items-center gap-2 group shrink-0">
                     <img src="{{ asset('images/logo_lokarasa.png') }}" class="h-9 w-auto rounded-lg" alt="LocalGo Logo">
@@ -99,8 +99,9 @@
                     </div>
                 </a>
             </div>
-            <!-- Group Left: Logo (Desktop) -->
-            <div class="flex-none flex items-center pr-2 hidden md:flex">
+
+            <!-- Logo Desktop (Hidden on mobile, shown on md and up) -->
+            <div class="hidden md:flex flex-none items-center pr-2">
                 <a href="/"
                     class="flex items-center gap-2 p-1.5 hover:bg-white/10 rounded-xl transition-all active:scale-95 group">
                     <img src="{{ asset('images/logo_lokarasa.png') }}" alt="LocalGo"
